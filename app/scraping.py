@@ -2,6 +2,7 @@ import urllib.parse
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import chromedriver_binary
+from album.models import UserImage
 import time
 
 SEARCH_NUM  = "20"
@@ -18,7 +19,7 @@ options.add_argument("--start-maximized")
 # DRIVER_PATH = "/usr/local/bin/chromedriver" #chromedriverの場所
 driver = webdriver.Chrome(options=options)
 
-def scraping_images(word): 
+def scraping_images(word, pk): 
 
     word_quote = urllib.parse.quote(word)
 
@@ -36,13 +37,27 @@ def scraping_images(word):
     images_links = []
 
     for image in images:
-
-        src = image.get_attribute("src")
+        src = saved_image(image.get_attribute("src"), pk)
         if not(src is None):
             if(bool(len(src) <= 200)):
                 images_links.append(src)
     
     return word, images_links
+
+def saved_image(src, pk):
+    models = UserImage
+    objects = models.objects.filter(pk=pk)
+    url = None
+    if(bool(objects.count() != 0)):
+        for object in objects:
+            if(bool(object.link != src)):
+                url = src
+            else:
+                url = None
+                break
+    else:
+        url = src
+    return url
 
 if __name__ == "__main__":
     images = scraping_images("本田翼")

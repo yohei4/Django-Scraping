@@ -7,7 +7,7 @@ from album.models import UserImage
 
 class HomeInView(LoginRequiredMixin, TemplateView):
     template_name = "app/home.html"
-    
+
     def __init__(self):
         self.params = {
             'form': SearchForm()
@@ -23,9 +23,13 @@ class HomeInView(LoginRequiredMixin, TemplateView):
         """ 
 
         if(bool( len(request.POST['search']) != 0)):
-            self.params['word'], self.params['link_list'] = scraping_images(request.POST['search'])
+            self.params['word'], self.params['link_list'] = scraping_images(request.POST['search'], request.user.id)
             self.params['form'] = SearchForm(request.POST)
         return render(request, 'app/home.html', self.params)
+
+    def saved_image(self, mylink_list, link_list):
+        pass
+
 
     def parse_search_params(self, words: str):
         search_words = words.replace('　', ' ').split()
