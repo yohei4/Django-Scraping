@@ -24,7 +24,7 @@ function csrfSafeMethod(method) {
 const csrftoken = getCookie('csrftoken');
 
 $(function () {
-    $('.save-btn').on('click', function () {
+    $('.save-btn').one('click', function () {
         var btn = $(this);
         //ボタンのvalue値を取得
         var btn_val = $(this).val();
@@ -60,6 +60,7 @@ $(function () {
             },
             success: function() {
                 btn.toggleClass('active');
+                btn.disabled = true;
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
                 console.log('失敗');
