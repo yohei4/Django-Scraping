@@ -1,0 +1,10 @@
+django
+django-cleanup
+pillow
+selenium
+mod_wsgi
+mod-wsgi-httpd
+numpy
+json5
+mysqlclient
+PyMySQL

@@ -9,16 +9,15 @@ RUN mkdir /home/django/
 WORKDIR /home/django/
 
 RUN set -x && \
-    apt update && \
-    apt upgrade -y
+    apt-get update && \
+    apt-get upgrade -y
 
 #パッケージのダウンロード
 RUN set -x && \
     apt-get install -y sudo \
     vim \
     wget \
-    python3 \
-    python3-pip \
+    git \
     init \ 
     systemd \
     apache2 \
@@ -29,6 +28,25 @@ RUN set -x && \
     unzip \
     language-pack-ja
 
+#Linuxにおいて、Pythonの実行環境を管理するツール(pyenv)
+RUN git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+
+#pyenvコマンドから設定ファイルに書き込む方法
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_aliases && \
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_aliases && \
+    echo 'eval "$(pyenv init -)"' >> ~/.bash_aliases
+
+#パスの変更を適用する
+RUN source ~/.bash_aliases
+
+#pyenvによるpython3.6.9のダウンロード
+RUN pyenv install 3.6.9
+
+RUN pyenv local 3.6.9
+
+#pythonのバージョン切替(デフォルトだと2.7系が使われているため)
+RUN sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
+
 RUN localedef -f UTF-8 -i en_US en_US.UTF-8
 
 # google-chrome
@@ -36,9 +54,6 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list && \
 apt-get update && \
 apt-get install -y google-chrome-stable
-
-#pythonのバージョン切替(デフォルトだと2.7系が使われているため)
-RUN sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
 
 #
 # インストールしたChromeとPythonのchromedriver-binaryのバージョンが合わない場合があるので、
