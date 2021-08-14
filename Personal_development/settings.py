@@ -85,14 +85,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # 変更
         'NAME': 'Personal_development', # プロジェクトで使用するデータベース名
-        'USER': 'root', # パソコンにインストールしたMySQLのユーザー名
-        'PASSWORD': '', # 同上。そのパスワード
-        'HOST': 'localhost',
+        'USER': 'django', # パソコンにインストールしたMySQLのユーザー名
+        'PASSWORD': 'django', # 同上。そのパスワード
+        'HOST': 'db',
         'PORT': '3306',
         # 追記-------------
         'STORAGE_ENGINE': 'MyISAM / INNODB / ETC',
         'OPTIONS': {
-            "init_command": "SET foreign_key_checks = 0;", #最初に子テーブルを保存してから親を保存しようとすることです。
+            'charset': 'utf8mb4',
+            "init_command": "SET foreign_key_checks = 0;" #最初に子テーブルを保存してから親を保存しようとすることです。
         },
         #-----------------
     },

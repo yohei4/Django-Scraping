@@ -1,0 +1,48 @@
+version: "3"
+volumes:
+    django-db:
+services:
+    db: 
+        image: mysql:5.7
+        container_name: mysql
+        networks:
+            - django-net
+        volumes:
+            - django-db:/var/lib/mysql
+            - ./db/mysql/initdb.d:/docker-entrypoint-initdb.d
+            - ./db/mysql/my.cnf:/etc/my.cnf
+        ports: 
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: Personal_development
+            MYSQL_USER: django
+            MYSQL_PASSWORD: django
+            TZ: Asia/Tokyo
+        restart: always
+
+    django-app:
+        depends_on: 
+            - db
+        build: .
+        container_name: app
+        networks:
+            - django-net
+        ports:
+            - "8000:8000"
+        volumes:
+            - .:/home/django
+        tty: true
+        environment:
+            DJANGO_DB_HOST: db
+            DJANGO_DB_NAME: Personal_development
+            DJANGO_DB_USER: django
+            DJANGO_DB_PASSWORD: django
+        privileged: true
+        command: /sbin/init
+
+networks: 
+    django-net:
+volumes: 
+    django-db:
+
