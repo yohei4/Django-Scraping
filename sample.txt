@@ -74,3 +74,15 @@ RUN a2enconf fqdn
 
 CMD /sbin/init
 # RUN sudo /etc/init.d/apache2 start
+
+
+
+#grep mod_wsgi -rI /etc/apache2/*
+
+vim /etc/apache2/mods-available/wsgi.load
+sudo systemctl restart apache2
+sudo systemctl status apache2
+
+sudo cat /var/log/apache2/error.log 
+
+mod_wsgi-express module-config

@@ -12,4 +12,6 @@ class SingleUploadForm(forms.Form):
         return default_storage.url(file_name)
 
 class SearchForm(forms.Form):
-    search = forms.CharField(label='search', required=False)
+    search = forms.CharField(label='search', required=False, widget=forms.TextInput(attrs={
+        'autocomplete':'off'
+    }))
