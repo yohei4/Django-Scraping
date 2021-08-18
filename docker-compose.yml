@@ -45,4 +45,3 @@ networks:
     django-net:
 volumes: 
     django-db:
-
