@@ -31,7 +31,7 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - .:/home/django
+            - ./www:/var/www/html
         tty: true
         environment:
             DJANGO_DB_HOST: db

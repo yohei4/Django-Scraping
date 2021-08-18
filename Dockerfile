@@ -5,8 +5,7 @@ ENV LANG="en_US.utf8"
 ENV LC_ALL="en_US.UTF-8"
 ENV LC_LANG="en_US.UTF-8"
 
-RUN mkdir /home/django/
-WORKDIR /home/django/
+WORKDIR /var/www/html/
 
 RUN set -x && \
     apt update && \
@@ -48,12 +47,13 @@ RUN google-chrome --version | perl -pe 's/([^0-9]+)([0-9]+\.[0-9]+).+/$2/g' > ch
 RUN pip3 install chromedriver-binary~=`cat chrome-version` && rm chrome-version
 
 #requtirements.txtに書かれているモジュールをインストール
-ADD requirements.txt /home/django/
+ADD requirements.txt /var/www/html/
 RUN pip3 install -r requirements.txt
 
 #apacheの設定
-ADD wsgi.conf /etc/apache2/sites-available/
-RUN sudo a2ensite wsgi
+ADD wsgi.conf /etc/apache2/sites-available/000-default.conf
+ADD wsgi.load /etc/apache2/mods-available/wsgi.load
+# RUN sudo a2ensite wsgi
 RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf
 RUN a2enconf fqdn
 
