@@ -1,0 +1,29 @@
+#search {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+    & form {
+        & p {
+            padding-top: 20px;
+            margin-bottom: 10px;
+        }
+        & #id_search {
+            font-size: 17px;
+            border-radius: 7px;
+            padding: 5px 10px;
+            border: 2px solid rgb(172, 172, 172);
+            margin-bottom: 7px;
+        }
+        & #submit {
+            display: block;
+            margin: 0 auto;
+            font-size: 15px;
+            padding: 2px 4px;
+        }
+    }
+}
+
+.search-results {
+    @include image-list;
+}
+

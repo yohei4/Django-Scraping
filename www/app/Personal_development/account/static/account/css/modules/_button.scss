@@ -1,0 +1,40 @@
+.ac-login_button {
+    margin-bottom: 20px;
+    margin-top: 30px;
+    & button {
+        cursor: pointer;
+        border: none;
+        width: 334px;
+        height: 39px;
+        margin: 0 auto;
+        color: #FFFFFF;
+        background-color: #57BAD1;
+        font-size: 18px;
+        transition: all .3s;
+        &:hover {
+            background-color: #3fa2b8;
+            transition: all .3s;
+        }
+    }
+}
+
+#password-view__btn {
+    border: none;
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translateY(-50%);
+    &.hide {
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #000;
+            top: 50%;
+            transform: rotate(45deg);
+            z-index: 10000;
+        }
+    }
+}
