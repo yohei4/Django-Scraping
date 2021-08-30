@@ -1,6 +1,6 @@
-# SCraping_app
+# Scraping_app
 
-"SCraping_app" is an application that you can experience scraping.
+"Scraping_app" is an application that you can experience scraping.
  
 # DEMO
  
@@ -40,6 +40,6 @@ python manage.py migrate
  
 # License
  
-"SCraping_app" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+"Scraping_app" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
  
-"SCraping_app" is Confidential.
+"Scraping_app" is Confidential.
