@@ -1,0 +1,19 @@
+.main-header {
+    background: rgb(233, 233, 233);
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    color: black;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    &__inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    &__title {
+        font-size: 24px;
+    }
+}
