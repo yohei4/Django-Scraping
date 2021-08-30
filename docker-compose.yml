@@ -29,9 +29,10 @@ services:
         networks:
             - django-net
         ports:
-            - "8000:8000"
+            - "8000:80"
         volumes:
-            - ./www:/var/www/html
+            - ./www/app:/var/www/app
+            - ./www/app/logs:/var/www/app/logs
         tty: true
         environment:
             DJANGO_DB_HOST: db
@@ -39,7 +40,8 @@ services:
             DJANGO_DB_USER: django
             DJANGO_DB_PASSWORD: django
         privileged: true
-        command: /sbin/init
+        command: /sbin/init && \ systemctl restart apache2
+        
 
 networks: 
     django-net:
