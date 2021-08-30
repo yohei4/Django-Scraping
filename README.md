@@ -12,8 +12,6 @@ You can learn how to using Django and mod-wsgi,apache2,docker.
  
 # Usage
  
-DEMOの実行方法など、"SCraping_app"の基本的な使い方を説明する
- 
 ```bash
 git clone git@github.com:yohei4/Django-Scraping.git
 cd examples
