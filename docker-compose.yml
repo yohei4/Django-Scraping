@@ -40,7 +40,6 @@ services:
             DJANGO_DB_USER: django
             DJANGO_DB_PASSWORD: django
         privileged: true
-        command: /sbin/init && \ systemctl restart apache2
     
 networks: 
     django-net:

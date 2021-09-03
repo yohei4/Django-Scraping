@@ -37,8 +37,8 @@ $(function () {
         image_items.forEach(el => {
             //.iamge_itemのidとボタンのvalueを比較
             if(el.id === btn_val){
-                var img = last_child_el(el, 1);
-                var p = last_child_el(el, 3);
+                var img = getLastChildEl(el, 1);
+                var p = getLastChildEl(el, 3);
                 img_url = img.src;
                 img_title = p.textContent;
             }
@@ -84,8 +84,8 @@ $(function () {
         image_items.forEach(el => {
             //.iamge_itemのidとボタンのvalueを比較
             if(el.id === btn_val){
-                var img = last_child_el(el, 1);
-                var p = last_child_el(el, 3);
+                var img = getLastChildEl(el, 1);
+                var p = getLastChildEl(el, 3);
                 img_url = img.src;
                 img_id = img.id;
                 img_title = p.textContent;
@@ -120,7 +120,7 @@ $(function () {
     })
 });
 
-function last_child_el(el, index) {
+function getLastChildEl(el, index) {
     while(el !== null) {
         var element = el.childNodes.item(index);
         if(element === null) {
