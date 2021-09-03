@@ -61,5 +61,6 @@ RUN echo "ServerName localhost" | tee /etc/apache2/conf-available/fqdn.conf
 RUN a2enconf fqdn
 WORKDIR /
 
-CMD /sbin/init
+CMD apachectl -D FOREGROUND
+# CMD /sbin/init
 # RUN sudo /etc/init.d/apache2 start

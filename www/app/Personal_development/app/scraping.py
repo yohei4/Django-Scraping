@@ -38,14 +38,15 @@ def scraping_images(word, pk):
     images_links = []
 
     for image in images:
-        src = saved_image(image.get_attribute("src"), pk)
+        src = check_saved_image(image.get_attribute("src"), pk)
         if not(src is None):
             if(bool(len(src) <= 200)):
                 images_links.append(src)
     
     return word, images_links
 
-def saved_image(src, pk):
+#保存してある画像か判定
+def check_saved_image(src, pk):
     models = UserImage
     objects = models.objects.filter(pk=pk)
     url = None

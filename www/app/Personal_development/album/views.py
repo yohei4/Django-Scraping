@@ -4,7 +4,6 @@ import urllib.request
 from django.core.files.base import ContentFile
 from django.views.decorators.http import require_POST
 from django.http import Http404
-from django.http import HttpResponse
 
 @require_POST
 def save_image(request):
