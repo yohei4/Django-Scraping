@@ -28,7 +28,9 @@ RUN set -x && \
     gcc \
     libmariadb-dev \
     unzip \
-    language-pack-ja
+    language-pack-ja \
+    libjpeg-dev \
+    zlib1g-dev
 
 #pythonのバージョン切替(デフォルトだと2.7系が使われているため)
 RUN sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
@@ -49,7 +51,8 @@ RUN pip3 install chromedriver-binary~=`cat chrome-version` && rm chrome-version
 
 #requtirements.txtに書かれているモジュールをインストール
 ADD requirements.txt /var/www/app/
-RUN pip3 install -r requirements.txt
+RUN pip3 install --upgrade -r requirements.txt
+RUN sudo pip install -U setuptools
 
 #apacheの設定
 ADD apache2/wsgi.conf /etc/apache2/sites-available/
