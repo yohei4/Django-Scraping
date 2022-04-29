@@ -33,8 +33,7 @@ services:
             - "8000:80"
         volumes:
             - ./src:/var/www/html
-            - ./logs:/var/www/html/logs
-            - ./.git/:/var/www/html/.git
+            - ./logs:/var/www/logs
         tty: true
         environment:
             DJANGO_DB_HOST: db
