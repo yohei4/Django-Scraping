@@ -19,20 +19,27 @@ cd examples
 
 # Installation
  
-1. Install docker
-https://www.docker.com/products/docker-desktop
+## Developer 
+1. Install [Docker](https://www.docker.com/products/docker-desktop)
+
+2. Install extensions in VS Code
+    - Extensions
+        - Remote Container
+        - Remote Development
+
+3. Start Remote Container
+
+## User
+1. Install [Docker](https://www.docker.com/products/docker-desktop)
 
 2. Command input from top to bottom
- 
-```bash
-docker-compose build
-docker-compose up -d
-docker exec -it app /bin/bash 
-```
-```In the container
-cd /var/www/app/Personal_development
-python manage.py migrate
-```
+    - bash
+        - docker-compose build
+        - docker-compose up -d
+    - In the container
+        - docker exec -it app /bin/bash 
+        - cd /var/www/html/Personal_development
+        - python manage.py migrate
  
 # Author
  

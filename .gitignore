@@ -1,0 +1,8 @@
+# logs
+./logs
+
+# django-cache
+./src/Personal_development/Personal_development/__pycache__
+./src/Personal_development/app/__pycache__
+./src/Personal_development/account/__pycache__
+./src/Personal_development/album/__pycache__

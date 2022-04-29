@@ -1,46 +1,63 @@
 version: "3"
-volumes:
-    django-db:
+
 services:
     db: 
+        container_name: django-db
         image: mysql:5.7
-        container_name: mysql
         networks:
             - django-net
         volumes:
             - django-db:/var/lib/mysql
-            - ./db/mysql/initdb.d:/docker-entrypoint-initdb.d
-            - ./db/mysql/my.cnf:/etc/my.cnf
+            - ./config/db/mysql/initdb.d:/docker-entrypoint-initdb.d
+            - ./config/db/mysql/my.cnf:/etc/my.cnf
         ports: 
             - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: Personal_development
+            MYSQL_DATABASE: django
             MYSQL_USER: django
             MYSQL_PASSWORD: django
             TZ: Asia/Tokyo
         restart: always
 
-    django-app:
+    app:
+        container_name: django-app
         depends_on: 
             - db
-        build: .
-        container_name: app
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
         networks:
             - django-net
         ports:
             - "8000:80"
         volumes:
-            - ./www/app:/var/www/app
-            - ./www/app/logs:/var/www/app/logs
+            - ./src:/var/www/html
+            - ./logs:/var/www/html/logs
+            - ./.git/:/var/www/html/.git
         tty: true
         environment:
             DJANGO_DB_HOST: db
-            DJANGO_DB_NAME: Personal_development
+            DJANGO_DB_NAME: django
             DJANGO_DB_USER: django
             DJANGO_DB_PASSWORD: django
         privileged: true
-    
+
+    phpmyadmin:
+        container_name: django-phpmyadmin
+        image: phpmyadmin/phpmyadmin
+        networks:
+            - django-net
+        environment:
+            PMA_ARBITRARY: 1
+            PMA_HOSTS: db
+            PMA_USER: root
+            PMA_PASSWORD: root
+        links:
+            - db
+        ports:
+            - "8001:80"
+
 networks: 
     django-net:
 volumes: 
