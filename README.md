@@ -40,6 +40,8 @@ cd examples
         - docker exec -it app /bin/bash 
         - cd /var/www/html/Personal_development
         - python manage.py migrate
+    - Start Apache2
+        - sudo /etc/init.d/apache2 start
  
 # Author
  
