@@ -3,6 +3,7 @@
 
 # django-cache
 /src/*/__pycache__
+/src/*/migrations/__pycache__
 
 # media
 /src/media
