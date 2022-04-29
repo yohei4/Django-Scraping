@@ -6,3 +6,6 @@
 /src/Personal_development/app/__pycache__
 /src/Personal_development/account/__pycache__
 /src/Personal_development/album/__pycache__
+/src/Personal_development/app/migrations/__pycache__
+/src/Personal_development/account/migrations/__pycache__
+/src/Personal_development/album/migrations/__pycache__
