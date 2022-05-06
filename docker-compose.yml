@@ -26,7 +26,7 @@ services:
             - db
         build:
             context: .
-            dockerfile: ./docker/Dockerfile
+            dockerfile: config/docker/Dockerfile
         networks:
             - django-net
         ports:

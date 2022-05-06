@@ -1,10 +1,7 @@
-{% extends "app/base.html" %}
+{% extends "layout/content.html" %}
 {% load static %}
-{% block title %}写真一覧{% endblock %}
-{% block content %}
-    <div id="chart-head" class="head">
-        <h2 class="head-inner">写真一覧</h2>
-    </div>
+{% block title %}写真一覧{% endblock title %}
+{% block section %}
     <div class="your-images">
         <ul class="images-list">
         {% for image in images %}
@@ -12,7 +9,7 @@
                 <div class="image-outer">
                     <div class="image">
                         <div class="img-outer">
-                            <img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" alt="">
+                            <img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" alt="" width="" height="" />
                         </div>
                         <button class="delete-btn" type="submit" value="{{ forloop.counter }}"><i class="far fa-trash-alt"></i></button>
                     </div>
@@ -22,4 +19,4 @@
         {% endfor %}
         </ul>
     </div>
-{% endblock %}
+{% endblock section %}

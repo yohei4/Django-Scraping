@@ -40,9 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 追記-------------
     'django_cleanup.apps.CleanupConfig',
+    'adminlte3',
+    'adminlte3_theme',
+    'jquery',
     'account',
     'app',
     'album',
+    # ----------------
 ]
 
 MIDDLEWARE = [
@@ -95,7 +99,7 @@ DATABASES = {
             'charset': 'utf8mb4',
             "init_command": "SET foreign_key_checks = 0;" #最初に子テーブルを保存してから親を保存しようとすることです。
         },
-        #-----------------
+        # ----------------
     },
 }
 
@@ -138,12 +142,16 @@ USE_TZ = True
 # 追記-------------
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # プロジェクト直下のdeployディレクトリを指定
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),  # プロジェクト直下のstaticディレクトリを指定
-# )
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'common'),
+]
+# ----------------
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+# 追記-------------
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+APPEND_SLASH = False
+# ----------------
 
 # 追記-------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -160,10 +168,11 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.backends.EmailAuthBackend', 
 ]
+# ----------------
 
-# 追記-------------
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),  # プロジェクト直下のstaticディレクトリを指定
+# )
 
-MEDIA_URL = '/media/'
-
-APPEND_SLASH = False
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

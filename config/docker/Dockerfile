@@ -51,7 +51,7 @@ RUN pip3 install chromedriver-binary~=`cat chrome-version` && rm chrome-version
 
 # requtirements.txtに書かれているモジュールをインストール
 RUN mkdir /var/www/html/opt
-ADD docker/requirements.txt /var/www/html/opt
+ADD config/docker/requirements.txt /var/www/html/opt
 WORKDIR /var/www/html/opt
 RUN pip3 install --upgrade -r requirements.txt
 

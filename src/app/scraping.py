@@ -20,7 +20,7 @@ options.add_argument('--no-sandbox')
 # DRIVER_PATH = "/usr/local/bin/chromedriver" #chromedriverの場所
 driver = webdriver.Chrome(options=options)
 
-def scraping_images(word, pk): 
+def scraping_images(word, pk):
 
     word_quote = urllib.parse.quote(word)
 
