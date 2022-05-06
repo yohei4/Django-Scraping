@@ -1,0 +1,25 @@
+html {
+    height: 100%;
+}
+
+//body
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    height: fit-content;
+}
+
+h1, h2, h3, h4, h5, h6 p {
+    margin: 0;
+    padding: 0;
+    line-break: 1em;
+    user-select: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}

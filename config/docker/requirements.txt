@@ -1,0 +1,13 @@
+django
+django-cleanup
+django-adminlte-3
+django-jquery
+djlint
+pillow
+selenium
+mod_wsgi
+mod-wsgi-httpd
+numpy
+json5
+mysqlclient
+PyMySQL

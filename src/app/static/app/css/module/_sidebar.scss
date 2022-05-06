@@ -1,0 +1,10 @@
+.nav-btn {
+    background-color: inherit;
+    width: 100%;
+    text-align: left;
+    border: none;
+
+    & a {
+        width: 100%;
+    }
+}

@@ -1,0 +1,22 @@
+{% extends "layout/content.html" %}
+{% load static %}
+{% block title %}写真一覧{% endblock title %}
+{% block section %}
+    <div class="your-images">
+        <ul class="images-list">
+        {% for image in images %}
+            <li id="{{ forloop.counter }}" class="image-item">
+                <div class="image-outer">
+                    <div class="image">
+                        <div class="img-outer">
+                            <img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" alt="" width="" height="" />
+                        </div>
+                        <button class="delete-btn" type="submit" value="{{ forloop.counter }}"><i class="far fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <p>{{ image.title }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock section %}
