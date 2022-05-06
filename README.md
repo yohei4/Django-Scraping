@@ -29,6 +29,12 @@ cd examples
 
 3. Start Remote Container
 
+4. Execute the following command
+    - Extensions
+        - cd src/
+        - mkdir static
+        - python manege.py collectstatic
+
 ## User
 1. Install [Docker](https://www.docker.com/products/docker-desktop)
 
