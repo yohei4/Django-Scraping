@@ -35,16 +35,19 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4" >
         {% include 'layout/sidebar.html' %}
         </aside>
-        <div class="content-wrapper">
+        <section class="content-wrapper">
             {% block content %}
             {% endblock content %}
-        </div>
+        </section>
         <footer class="main-footer">
             {% include 'layout/footer.html' %}
         </footer>
     </div>
 <!-- View Script -->
-<script> const album_url = "{% url 'album:save' %}"; </script>
+<script>
+    const album_url = "{% url 'album:save' %}";
+    const delete_url = "{% url 'album:delete' %}"; 
+</script>
 <!-- jQuery3.1.0 -->
 <script src="{% static 'js/jquery.js' %}"></script>
 <!-- Project Common.js -->

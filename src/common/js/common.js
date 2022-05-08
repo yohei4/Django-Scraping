@@ -29,3 +29,7 @@ function getLastChildEl(el, index) {
         }
     }
 }
+
+async function cmnAjax() {
+    
+}

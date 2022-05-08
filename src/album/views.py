@@ -4,6 +4,7 @@ import urllib.request
 from django.core.files.base import ContentFile
 from django.views.decorators.http import require_POST
 from django.http import Http404
+from django.http import JsonResponse
 
 @require_POST
 def save_image(request):
@@ -15,7 +16,12 @@ def save_image(request):
         image = UserImage(title=img_title, link=img_link, user=user)
         image.picture.save(img_title + ".jpg", ContentFile(mem), save=False)
         image.save()
-        return render(request, "app/base.html")
+        d = {
+            'img_title': img_title,
+            'img_link': img_link,
+            # 'user_name': user.user
+        }
+        return JsonResponse(d)
 
 @require_POST
 def delete_image(request):
@@ -25,4 +31,4 @@ def delete_image(request):
         except UserImage.DoesNotExist:
             raise Http404
         image.delete()
-        return render(request, "app/base.html")
+        return render(request, "app/home.html")

@@ -75,7 +75,7 @@ $(function () {
         //Ajax通信を開始する
         $.ajax({
             type: "POST",
-            url: album_url + '/delete/',
+            url: delete_url,
             data: { 
                 "title": img_title,
                 "url" : img_url,

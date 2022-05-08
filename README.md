@@ -33,7 +33,7 @@ cd examples
     - Extensions
         - cd src/
         - mkdir static
-        - python manege.py collectstatic
+        - python manage.py collectstatic
 
 ## User
 1. Install [Docker](https://www.docker.com/products/docker-desktop)

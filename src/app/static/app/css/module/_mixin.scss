@@ -1,16 +1,16 @@
 @mixin image-list {
     & .images-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        margin:20px 40px 35px;
+        // display: grid;
+        // grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        // margin:20px 40px 35px;
         & .image-item {
-            margin: 10px;
-            padding: 5px;
+            // margin: 10px;
+            // padding: 5px;
             & .image-outer {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 180px;
+                // height: 180px;
                 & .image {
                     position: relative;
                     width: fit-content;

@@ -11,20 +11,20 @@
         </form>
     </div>
     <div class="search-results">
-        <ul class="images-list">
+        <div class="images-list row">
         {% for link in link_list %}
-            <li id="{{ forloop.counter }}" class="image-item">
+            <div id="{{ forloop.counter }}" class="image-item col-xs-6 col-sm-4 col-md-3">
                 <div class="image-outer">
                     <div class="image">
                         <div class="img-outer">
-                            <img src="{{ link }}" alt="" width="" height="" />
+                            <img src="{{ link }}" alt="" width="200" height="" />
                         </div>
                         <button class="save-btn" type="submit" value="{{ forloop.counter }}"><i class="fas fa-save"></i></button>
                     </div>
                 </div>
                 <p>{{ word }}_{{ forloop.counter }}</p>
-            </li>
+            </div>
         {% endfor %}
-        </ul>
+        </div>
     </div>
 {% endblock section %}
