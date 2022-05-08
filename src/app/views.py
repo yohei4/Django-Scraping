@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView
-from .scraping import scraping_images
+from .scraping import ScarpingImage, scraping_images
 from .forms import SearchForm
 from album.models import UserImage
+from django.views.decorators.http import require_POST
 
 class HomeInView(LoginRequiredMixin, TemplateView):
     template_name = "app/home.html"
@@ -44,3 +45,16 @@ class ImagesList(ListView):
     def get_queryset(self):
         id = self.request.user.id
         return self.models.objects.filter(user = id)
+
+# @require_POST
+# def scraping_images(request):
+#     if request.method == 'POST':  # POSTの処理
+#         # 変数定義
+#         params = {}
+#         scraping = ScarpingImage()
+
+#         # スクレイピング実行
+#         scraping.exec(params, request.POST['search'], request.user.id)
+#         params['form'] = SearchForm(request.POST)
+
+#     return render(request, 'app/home.html', params)

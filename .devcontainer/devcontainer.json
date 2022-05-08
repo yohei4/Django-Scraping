@@ -28,7 +28,12 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-azuretools.vscode-docker",
-        "ms-python.python"
+		"ms-python.python",
+		"syler.sass-indented",
+		"ritwickdey.live-sass",
+		"batisteo.vscode-django",
+		"oderwat.indent-rainbow",
+		"PKief.material-icon-theme"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

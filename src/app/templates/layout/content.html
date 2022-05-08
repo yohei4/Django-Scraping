@@ -1,7 +1,7 @@
 {% extends "layout/layout.html" %}
 {% load static %}
 {% block content %}
-    <section class="content-header">
+    <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -15,7 +15,9 @@
                 </div>
             </div>
         </div>
-    </section>
-    {% block section %}
-    {% endblock section %}
+    </div>
+    <div class="content-body">
+        {% block section %}
+        {% endblock section %}
+    </div>
 {% endblock content %}
