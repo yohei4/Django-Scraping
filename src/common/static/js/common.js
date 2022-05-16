@@ -31,5 +31,5 @@ function getLastChildEl(el, index) {
 }
 
 async function cmnAjax() {
-    
+    console.log('aaaaa')
 }

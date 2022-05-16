@@ -11,3 +11,5 @@ numpy
 json5
 mysqlclient
 PyMySQL
+scikit-build
+opencv-python

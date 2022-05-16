@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}スクレイピング{% endblock title %}
 {% block section %}
+<div class="serach-box">
     <div id="search" class="search-form">
         <form action="" method="post">
         {% csrf_token %}
@@ -10,10 +11,10 @@
             <input id="submit" type="submit" name="submit" value="スクレイピング実行" />
         </form>
     </div>
-    <div class="search-results">
+    <div class="images-result">
         <div class="images-list row">
         {% for link in link_list %}
-            <div id="{{ forloop.counter }}" class="image-item col-xs-6 col-sm-4 col-md-3">
+            <div id="{{ forloop.counter }}" class="image-item col-sm-6 col-md-3 col-xl-2">
                 <div class="image-outer">
                     <div class="image">
                         <div class="img-outer">
@@ -27,4 +28,5 @@
         {% endfor %}
         </div>
     </div>
+</div>
 {% endblock section %}

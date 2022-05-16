@@ -144,7 +144,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # プロジェクト直下のdeployディレクトリを指定
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'common'),
+    os.path.join(BASE_DIR, 'common/static'),
 ]
 # ----------------
 

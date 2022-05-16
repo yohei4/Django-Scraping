@@ -8,6 +8,8 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <title>{% block title %}{% endblock title %}</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/icon.png' %}">
     <!-- Font Awesome -->
     <link href="{% static 'admin-lte/plugins/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
     <!-- Tempusdominus Bbootstrap 4 -->
@@ -27,7 +29,7 @@
     <!-- Project Style.css -->
     <link href="{% static 'app/css/style.css' %}" rel="stylesheet" />
 </head>
-<body>
+<body class="layout-fixed sidebar-mini">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         {% include 'layout/navbar.html' %}
@@ -50,6 +52,8 @@
 </script>
 <!-- jQuery3.1.0 -->
 <script src="{% static 'js/jquery.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'admin-lte/dist/js/adminlte.min.js' %}"></script>
 <!-- Project Common.js -->
 <script src="{% static 'js/common.js' %}"></script>
 <!-- Project app.js -->
