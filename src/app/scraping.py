@@ -13,8 +13,10 @@ TIMEOUT     = .5
 options = Options()
 options.add_argument('--headless')
 options.add_argument('--no-sandbox')
-# options.add_argument("--disable-gpu")
-# options.add_argument("--disable-extensions")
+options.add_argument("--disable-gpu")
+options.add_argument("--window-size=800,600")
+options.add_argument("--disable-extensions")
+options.add_argument("--disable-dev-shm-usage")
 # options.add_argument('--proxy-server="direct://"')
 # options.add_argument("--proxy-bypass-list=*")
 # options.add_argument("--start-maximized")
@@ -25,8 +27,10 @@ class ScarpingImage():
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
-    # options.add_argument("--disable-gpu")
-    # options.add_argument("--disable-extensions")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=800,600")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-dev-shm-usage")
     # options.add_argument('--proxy-server="direct://"')
     # options.add_argument("--proxy-bypass-list=*")
     # options.add_argument("--start-maximized")
@@ -37,6 +41,7 @@ class ScarpingImage():
         self.options = options
         self.driver = webdriver.Chrome(options=options)
     
+    @classmethod
     def exec(self, params, word, pk):
         """スクレイピング実行
 
@@ -87,6 +92,8 @@ class ScarpingImage():
         except :
             result = False
 
+        self.driver.quit()
+
         return result
     
     @classmethod
@@ -131,6 +138,8 @@ def scraping_images(word, pk):
         if not(src is None):
             if(bool(len(src) <= 200)):
                 images_links.append(src)
+
+    driver.quit()
     
     return word, images_links
 
@@ -153,4 +162,3 @@ def check_saved_image(src, pk):
 if __name__ == "__main__":
     scraping = ScarpingImage()
     images = scraping.exec("本田翼")
-    print(images)

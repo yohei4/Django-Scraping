@@ -1,5 +1,6 @@
 html {
     height: 100%;
+    overscroll-behavior: none;
 }
 
 //body
@@ -7,6 +8,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
     height: fit-content;
+    overscroll-behavior-y: contain;
 }
 
 h1, h2, h3, h4, h5, h6 p {

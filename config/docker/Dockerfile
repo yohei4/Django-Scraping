@@ -53,6 +53,7 @@ RUN pip3 install chromedriver-binary~=`cat chrome-version` && rm chrome-version
 RUN mkdir /var/www/html/opt
 ADD config/docker/requirements.txt /var/www/html/opt
 WORKDIR /var/www/html/opt
+RUN pip3 install --upgrade pip setuptools
 RUN pip3 install --upgrade -r requirements.txt
 
 # apacheの設定

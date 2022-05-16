@@ -2,8 +2,6 @@
 
 $(function () {
     const csrftoken = getCookie('csrftoken');
-    
-    console.log(album_url);
 
     $('.save-btn').one('click', function () {
         var btn = $(this);
@@ -89,7 +87,7 @@ $(function () {
                 }
             },
             success: function() {
-                btn.parents('li').remove();
+                btn.parents('.image-item').remove();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
                 console.log('失敗');
