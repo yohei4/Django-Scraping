@@ -6,6 +6,14 @@ from .forms import SearchForm
 from album.models import UserImage
 from django.views.decorators.http import require_POST
 
+#テスト用
+def index(request):
+    for_range = [i for i in range(10)]
+    context = {
+        'for_range': for_range,
+    }
+    return render(request, "app/home.html", context)
+
 class HomeInView(LoginRequiredMixin, TemplateView):
     template_name = "app/home.html"
 
@@ -23,8 +31,8 @@ class HomeInView(LoginRequiredMixin, TemplateView):
             **kwargs: 複数のキーワード引数を辞書として受け取る
         """ 
 
-        if(bool( len(request.POST['search']) != 0)):
-            self.params['word'], self.params['link_list'] = scraping_images(request.POST['search'], request.user.id)
+        if(bool( len(request.POST['keyword']) != 0)):
+            self.params['word'], self.params['link_list'] = scraping_images(request.POST['keyword'], request.user.id)
             self.params['form'] = SearchForm(request.POST)
         return render(request, 'app/home.html', self.params)
 
