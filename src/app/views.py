@@ -8,7 +8,7 @@ from django.views.decorators.http import require_POST
 
 #テスト用
 def index(request):
-    for_range = [i for i in range(10)]
+    for_range = [i for i in range(30)]
     context = {
         'for_range': for_range,
     }

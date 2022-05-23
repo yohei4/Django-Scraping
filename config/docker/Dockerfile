@@ -31,7 +31,7 @@ RUN set -x && \
     libjpeg-dev \
     zlib1g-dev \
     openssh-server \
-    openssh-client 
+    openssh-client
 
 # pythonのバージョン切替(デフォルトだと2.7系が使われているため)
 RUN sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1

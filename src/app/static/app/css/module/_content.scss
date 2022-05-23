@@ -61,15 +61,17 @@
 // 共通スタイル
 .images-box {
     display: flex;
+    position: relative;
+    height: fit-content;
     & .images-left {
-        @include sm('min') {
-            width: 80%;
-        }
+        width: 75%;
+        height: 100%;
+
         & .images-list {
             margin:0 auto;
             padding: 0;
             & .image-item {
-                padding: 0 20px;
+                padding: 0 10px;
                 margin-bottom: 15px;
                 @include sm('min') {
                     & .image-outer {
@@ -104,9 +106,12 @@
     }
 
     & .images-right {
-        width: 20%;
+        width: 25%;
         margin-bottom: 24px;
 
+        position: sticky;
+        bottom: 0;
+        height: calc(100% - (124px + 56px));
         // 将来的には、jsで制御するかも??
         @include sm('max') {
             display: none;
@@ -128,7 +133,6 @@
         }
 
         & .preview__box {
-
             // 将来的には、jsで制御するかも??
             @include md('min') {
                 & img {
