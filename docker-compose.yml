@@ -41,6 +41,8 @@ services:
             DJANGO_DB_USER: django
             DJANGO_DB_PASSWORD: django
         privileged: true
+        command:
+            export PYTHONPATH=/var/www/html/common
 
     phpmyadmin:
         container_name: django-phpmyadmin

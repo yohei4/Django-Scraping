@@ -42,6 +42,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    
+    class Meta:
+        db_table = 'users'
+
     # カスタムユーザーモデル
     username_validator = UnicodeUsernameValidator()
 
@@ -60,6 +64,8 @@ class User(AbstractBaseUser):
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    created_at = models.DateTimeField('作成日時', auto_now_add=True, null=True)
+    updated_at = models.DateTimeField('更新日時', auto_now=True, null=True)
 
     objects = UserManager()
 

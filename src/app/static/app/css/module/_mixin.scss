@@ -13,7 +13,7 @@
         }
     }
 }
-@mixin md {
+@mixin md($type) {
     $px: 768px;
     @if ($type == 'max')
     {
@@ -28,7 +28,7 @@
         }
     }
 }
-@mixin lg {
+@mixin lg($type) {
     $px: 992px;
     @if ($type == 'max')
     {
@@ -43,7 +43,7 @@
         }
     }
 }
-@mixin xl {
+@mixin xl($type) {
     $px: 1200px;
     @if ($type == 'max')
     {

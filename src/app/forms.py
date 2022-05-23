@@ -13,7 +13,7 @@ class SingleUploadForm(forms.Form):
 
 class SearchForm(forms.Form):
     
-    search = forms.CharField(label='search', required=False, widget=forms.TextInput(attrs={
+    keyword = forms.CharField(label='keyword', required=False, widget=forms.TextInput(attrs={
         'autocomplete': 'off',
         'class': 'test'
     }))
