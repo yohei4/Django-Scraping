@@ -1,74 +1,53 @@
 "use strict";
-
 $(function () {
+    // サムネイル関係
+    var thumbnailsList = new Swiper('.thumbnails-list', {
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        spaceBetween: 10,
+        slideToClickedSlide: true,
+    });
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        centeredSlides: true,
+    });
+    swiper.controller.control = thumbnailsList;
+    thumbnailsList.controller.control = swiper;
+
+    $('.image-checkbox').change(function (e) {
+        if($(e.target).prop('checked')) {
+            $(e.target).val();
+        }
+    });
+
+    // 保存ボタン
     $('.save-btn').one('click', function () {
-        var btn = $(this);
-
-        //ボタンのvalue値を取得
-        var btn_val = $(this).val();
-
-        //.image-itemの全てを取得
-        var image_items = document.querySelectorAll('.image-item');
-
-        //POST送信するための変数指定
-        var img_url;
-
-        //.iamge_itemを繰り返し処理
-        image_items.forEach(el => {
-            //.iamge_itemのidとボタンのvalueを比較
-            if(el.id === btn_val){
-                var img = getLastChildEl(el, 1);
-                img_url = img.src;
-            }
-        });
-        
-        // ajaxに送信する用のデータ
-        var data = {
-            "keyword": $('input[name="keyword"]').val(),
-            "url" : img_url
-        };
-
-        //Ajax通信を開始する
-        cmnPost(album_url, data, 'json')
-        .done(function() {
-            btn.toggleClass('active');
-            btn.disabled = true;
+        cmnPost(
+            album_url,
+            {
+                "keyword": $('input[name="keyword"]').val(),
+                "url" : $(this).parent().children('.image').children('img').attr('src')
+            },
+            'json',
+            this
+        ).done(function() {
+            $(this).addClass('active');
+            $(this).disabled = true;
         });
     });
     
+    // 削除ボタン
     $('.delete-btn').on('click', function () {
-        //POST送信するための変数指定
-        var img_url, img_id, img_title;
-
-        var btn = $(this);
-        //ボタンのvalue値を取得
-        var btn_val = $(this).val();
-        //.image-itemの全てを取得
-        var image_items = document.querySelectorAll('.image-item');
-
-        //.iamge_itemを繰り返し処理
-        image_items.forEach(el => {
-            //.iamge_itemのidとボタンのvalueを比較
-            if(el.id === btn_val){
-                var img = getLastChildEl(el, 1);
-                var p = getLastChildEl(el, 3);
-                img_url = img.src;
-                img_id = img.id;
-                img_title = p.textContent;
-            }
+        cmnPost(
+            delete_url,
+            {
+                "url" : $(this).parent().children('.image').children('img').attr('src'),
+                "id": $(this).parent().children('.image').children('img').attr('id'),
+            },
+            'json',
+            this
+        ).done(function() {
+            $(this).parents('.image-item').remove();
         });
-
-        // ajaxに送信する用のデータ
-        var data = { 
-            "title": img_title,
-            "url" : img_url,
-            "id": img_id,
-        };
-
-        //Ajax通信を開始する
-        cmnPost(delete_url, data, 'text')
-        .done(function() {
-            btn.parents('.image-item').remove();
-        });
-    })
+    });
 });

@@ -1,0 +1,26 @@
+<div class="images-list row">
+    {% comment %} {% for link in link_list %}
+        <div id="{{ forloop.counter }}" class="image-item col-sm-7 col-md-3 col-xl-2">
+            <div class="image-outer">
+                <div class="image">
+                    <img src="{{ link }}" alt="" width="200" height="" />
+                </div>
+                <input id="chekcbox-{{ forloop.counter }}" type="checkbox" class="image-checkbox" value="{{ forloop.counter }}"/>
+                <button class="image-btn save-btn" type="submit" value="{{ forloop.counter }}"><i class="fas fa-save"></i></button>
+            </div>
+            <p>{{ word }}_{{ forloop.counter }}</p>
+        </div>
+    {% endfor %} {% endcomment %}
+
+    {% for serve in for_range %}
+        <div id="{{ forloop.counter }}" class="image-item col-sm-6 col-md-3 col-xl-2">
+            <div class="image-outer">
+                <div class="image">
+                    <img src="/media/user_3/ヴェノム_1.jpg" alt="" width="" height="" />
+                </div>
+                <input id="chekcbox-{{ forloop.counter }}" type="checkbox" class="image-checkbox" value="{{ forloop.counter }}"/>
+                <button class="image-btn save-btn" type="submit" value="{{ forloop.counter }}"><i class="fas fa-save"></i></button>
+            </div>
+        </div>
+    {% endfor %}
+    </div>

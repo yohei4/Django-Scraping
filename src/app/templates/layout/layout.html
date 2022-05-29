@@ -9,7 +9,7 @@
     <meta name="description" content="" />
     <title>{% block title %}{% endblock title %}</title>
     <!-- Favicon -->
-    <link rel="icon" href="{% static 'images/icon.png' %}">
+    <link rel="icon" href="{% static 'common/images/icon.png' %}">
     <!-- Font Awesome -->
     <link href="{% static 'admin-lte/plugins/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
     <!-- Tempusdominus Bbootstrap 4 -->
@@ -20,7 +20,7 @@
     <link href="{% static 'admin-lte/plugins/jqvmap/jqvmap.min.css' %}" rel="stylesheet" />
     <!-- Admin LTE3 Theme style -->
     <link href="{% static 'admin-lte/dist/css/adminlte.min.css' %}" rel="stylesheet" />
-    <!-- Swiper style -->
+    <!-- Swiper -->
     <link href="{% static 'swiper/css/swiper-bundle.min.css' %}" rel="stylesheet" />
     <!-- overlayScrollbars -->
     <link href="{% static 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}" rel="stylesheet" />
@@ -53,14 +53,14 @@
     const delete_url = "{% url 'album:delete' %}"; 
 </script>
 <!-- jQuery3.1.0 -->
-<script src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <!-- AdminLTE App -->
-<script src="{% static 'admin-lte/dist/js/adminlte.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'admin-lte/dist/js/adminlte.min.js' %}"></script>
 <!-- Swiper -->
-<script src="{% static 'swiper/js/swiper-bundle.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'swiper/js/swiper-bundle.min.js' %}"></script>
 <!-- Project Common.js -->
-<script src="{% static 'common/js/common.js' %}"></script>
+<script type="text/javascript" src="{% static 'common/js/common.js' %}"></script>
 <!-- Project app.js -->
-<script src="{% static 'app/js/app.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/js/app.js' %}"></script>
 </body>
 </html>
