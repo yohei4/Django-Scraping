@@ -1,5 +1,5 @@
 <div class="images-list row">
-    {% comment %} {% for link in link_list %}
+    {% for link in link_list %}
         <div id="{{ forloop.counter }}" class="image-item col-sm-7 col-md-3 col-xl-2">
             <div class="image-outer">
                 <div class="image">
@@ -10,9 +10,9 @@
             </div>
             <p>{{ word }}_{{ forloop.counter }}</p>
         </div>
-    {% endfor %} {% endcomment %}
+    {% endfor %}
 
-    {% for serve in for_range %}
+    {% comment %} {% for serve in for_range %}
         <div id="{{ forloop.counter }}" class="image-item col-sm-6 col-md-3 col-xl-2">
             <div class="image-outer">
                 <div class="image">
@@ -22,5 +22,5 @@
                 <button class="image-btn save-btn" type="submit" value="{{ forloop.counter }}"><i class="fas fa-save"></i></button>
             </div>
         </div>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
     </div>
