@@ -1,6 +1,6 @@
 "use strict";
 // 画像配列
-const thumbs = [];
+let thumbs = [];
 
 $(function () {
 
@@ -43,10 +43,46 @@ $(function () {
         }
     });
 
+    // 複数選択
+    $('.select-table').selectable({
+        filter: '.image-outer',
+        selected: function(e, ui) {
+            if ($(ui.selected).children('.image-checkbox').prop('checked')) {
+                $(ui.selected).children('.image-checkbox').prop('checked', false).trigger("change");
+            } else {
+                $(ui.selected).children('.image-checkbox').prop('checked', true).trigger("change");
+            }
+        }
+    });
+
+    // 一括保存ボタン
+    $('.images-btn__save').on('click', function() {
+        cmnPost(
+            all_save_url,
+            {
+                "keyword" : $('input[name="keyword"]').val(),
+                "thumbs": JSON.stringify(thumbs),
+            },
+            'json',
+            this
+        ).done(function() {
+            $(this).addClass('active');
+            $(this).disabled = true;
+        });
+    });
+
+    // リセットボタン
+    $('.images-btn__reset').on('click', function() {
+        thumbs = new Array();
+        swiper.removeAllSlides();
+        thumbnailsList.removeAllSlides();
+        $('.image-checkbox').prop('checked', false);
+    });
+
     // 保存ボタン
     $('.save-btn').one('click', function () {
         cmnPost(
-            album_url,
+            save_url,
             {
                 "keyword": $('input[name="keyword"]').val(),
                 "url" : $(this).parent().children('.image').children('img').attr('src')

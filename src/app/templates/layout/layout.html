@@ -22,6 +22,8 @@
     <link href="{% static 'admin-lte/dist/css/adminlte.min.css' %}" rel="stylesheet" />
     <!-- Swiper -->
     <link href="{% static 'swiper/css/swiper-bundle.min.css' %}" rel="stylesheet" />
+    <!-- Swiper -->
+    <link href="{% static 'jquery-ui-1.13.1.custom/jquery-ui.min.css' %}" rel="stylesheet" />
     <!-- overlayScrollbars -->
     <link href="{% static 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}" rel="stylesheet" />
     <!-- Daterange picker -->
@@ -49,11 +51,14 @@
     </div>
 <!-- View Script -->
 <script>
-    const album_url = "{% url 'album:save' %}";
+    const save_url = "{% url 'album:save' %}";
+    const all_save_url = "{% url 'album:all-save' %}";
     const delete_url = "{% url 'album:delete' %}"; 
 </script>
 <!-- jQuery3.1.0 -->
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<!-- jquery-ui-1.13.1.custom -->
+<script type="text/javascript" src="{% static 'jquery-ui-1.13.1.custom/jquery-ui.min.js' %}"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="{% static 'admin-lte/dist/js/adminlte.min.js' %}"></script>
 <!-- Swiper -->

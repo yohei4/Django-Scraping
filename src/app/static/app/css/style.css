@@ -91,6 +91,11 @@ input[type=checkbox]:checked::after {
   color: #fff;
 }
 
+.ui-selectable-helper {
+  border: none;
+  background: rgba(1, 179, 202, 0.5);
+}
+
 .navbar {
   padding: 0.5rem 0.5rem;
 }
@@ -230,6 +235,16 @@ input[type=checkbox]:checked::after {
     background: #ebebeb;
     position: relative;
   }
+  .images-box .images-left .images-list .image-item .image-outer.ui-selecting::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(9, 202, 1, 0.5);
+    width: 100%;
+    height: 100%;
+  }
   .images-box .images-left .images-list .image-item .image-outer .image {
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -318,6 +333,7 @@ input[type=checkbox]:checked::after {
   border-radius: 5px;
   padding: 10px 20px;
   color: white;
+  outline: none;
 }
 
 .images-box .images-right .images-btn__group {
@@ -409,9 +425,8 @@ input[type=checkbox]:checked::after {
 
 .images-box .images-right .thumbnails-list .swiper-wrapper .swiper-slide img {
   display: block;
-  max-width: 100%;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
 }

@@ -9,8 +9,8 @@
         {% csrf_token %}
         <!-- テスト用 -->
         <div class="search-box__inputWrap">
-                {% comment %} {{ form.keyword }} {% endcomment %}
-                <input type="text" name="keyword" autocomplete="off" class="test" id="id_keyword">
+                {{ form.keyword }}
+                {% comment %} <input type="text" name="keyword" autocomplete="off" class="test" id="id_keyword"> {% endcomment %}
             </div>
             {% comment %} <button id="submit" type="submit" class="search-box__btn"><i class="search-box__btn__icon fas fa-search"></i><span class="search-box__btn__text">検索</span></button> {% endcomment %}
             <button id="submit" type="submit" class="search-box__btn"><i class="search-box__btn__icon fas fa-search"></i></button>
@@ -18,9 +18,7 @@
     </div>
     <div class="images-box">
         <div class="images-left">
-            <div class="images-list row">
-                {% include 'utility/images-left.html' %}
-            </div>
+            {% include 'utility/images-left.html' %}
         </div>
         <div class="images-right">
             {% include 'utility/images-right.html' %}
