@@ -71,6 +71,21 @@ $(function () {
         });
     });
 
+    // 一括削除ボタン
+    $('.images-btn__delete').on('click', function() {
+        cmnPost(
+            all_delete_url,
+            {
+                "thumbs": JSON.stringify(thumbs),
+            },
+            'json',
+            this
+        ).done(function() {
+            $(this).addClass('active');
+            $(this).disabled = true;
+        });
+    });
+
     // リセットボタン
     $('.images-btn__reset').on('click', function() {
         thumbs = new Array();

@@ -1,39 +1,45 @@
-import json
+import json, urllib.request
 from .models import UserImage
-import urllib.request
-from django.core.files.base import ContentFile
-from django.views.decorators.http import require_POST
-from django.http import Http404, JsonResponse
-from common.common import random_string, resJson
 from django.db import IntegrityError, transaction, DatabaseError
+from django.http import JsonResponse
+from django.http.request import HttpRequest
+from django.core.files.base import ContentFile
+from django.conf import settings
+from django.views.decorators.http import require_POST
+from common.common import resJson, random_string
 
 @require_POST
-def save_image(request):
-    if request.method == 'POST':  # POSTの処理
-        keyword = request.POST.get("keyword")  # POSTで渡された値
+def save_image(request: HttpRequest):
+    responce = resJson() # 変数定義
+
+    if request.method == 'POST':
+        user = request.user
         img_link = request.POST.get("url")
+        keyword = request.POST.get("keyword")
         file_name = random_string(15)
-
-        user = request.user
         mem = urllib.request.urlopen(img_link).read()
-        image = UserImage(name=file_name, link=img_link, keyword=keyword, user=user)
-        image.picture.save(file_name + ".jpg", ContentFile(mem), save=False)
-        image.save()
-        d = {
-            'file_name': file_name,
-            'img_link': img_link,
-            'keyword': keyword
-        }
-        return JsonResponse(d)
+
+        try:
+            with transaction.atomic():
+                image = UserImage(name=file_name, link=img_link, keyword=keyword, user=user)
+                image.picture.save(file_name + ".jpg", ContentFile(mem), save=False)
+                image.save()
+        except (Exception, DatabaseError, IntegrityError) as e:
+            responce.update(reslut=1, message=settings.MESSAGE['INS_FAILED'])
+    else:
+        responce.update(reslut=1, message=settings.MESSAGE['NOT_POST'])
+
+    return JsonResponse(responce.output())
 
 @require_POST
-def all_save_image(request):
-    responce = resJson()
+def all_save_image(request: HttpRequest):
+    responce = resJson() # 変数定義
 
-    if request.method == 'POST':  # POSTの処理
-        keyword = request.POST.get("keyword")  # POSTで渡された値
-        thumbs = json.loads(request.POST.get("thumbs"))
+    if request.method == 'POST':
         user = request.user
+        keyword = request.POST.get("keyword")
+        thumbs = json.loads(request.POST.get("thumbs"))
+
         try:
             with transaction.atomic():
                 for thumb in thumbs:
@@ -43,20 +49,47 @@ def all_save_image(request):
                     image.picture.save(file_name + ".jpg", ContentFile(mem), save=False)
                     image.save()
         except (Exception, DatabaseError, IntegrityError) as e:
-            responce.update(reslut=1, message=e)
+            responce.update(reslut=1, message=settings.MESSAGE['INS_FAILED'])
     else:
-        responce.update(reslut=1, message='postではありません。')
+        responce.update(reslut=1, message=settings.MESSAGE['NOT_POST'])
+
     return JsonResponse(responce.output())
 
 @require_POST
-def delete_image(request):
+def all_delete_image(request: HttpRequest):
+    responce = resJson() # 変数定義
+
+    if request.method == 'POST':
+        thumbs = json.loads(request.POST.get("thumbs"))
+
+        try:
+            with transaction.atomic():
+                for thumb in thumbs:
+                    image = UserImage.objects.get(pk=thumb['img-id'], user=request.user)
+                    image.delete()
+        except UserImage.DoesNotExist as e:
+            responce.update(reslut=1, message=e.message)
+        except (Exception, DatabaseError, IntegrityError) as e:
+            responce.update(reslut=1, message=settings.MESSAGE['DEL_FAILED'])
+    else:
+        responce.update(reslut=1, message=settings.MESSAGE['NOT_POST'])
+        
+    return JsonResponse(responce.output())
+
+@require_POST
+def delete_image(request: HttpRequest):
+    responce = resJson() # 変数定義
+
     if request.method == "POST":
         try:
-            image = UserImage.objects.get(pk=request.POST.get('id'), user=request.user)
-        except UserImage.DoesNotExist:
-            raise Http404
-        image.delete()
-        d = {
-            'id': request.POST.get('id')
-        }
-        return JsonResponse(d)
+            with transaction.atomic():
+                image = UserImage.objects.get(pk=request.POST.get('id'), user=request.user)
+                image.delete()
+        except UserImage.DoesNotExist as e:
+            responce.update(reslut=1, message=e.message)
+        except (Exception, DatabaseError, IntegrityError) as e:
+            responce.update(reslut=1, message=settings.MESSAGE['DEL_FAILED'])
+    else:
+        responce.update(reslut=1, message=settings.MESSAGE['NOT_POST'])
+
+    return JsonResponse(responce.output())

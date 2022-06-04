@@ -18,7 +18,7 @@
                     <div class="image">
                         <img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" alt="" width="" height="" />
                     </div>
-                    <input id="chekcbox-{{ forloop.counter }}" type="checkbox" class="image-checkbox" value="{{ forloop.counter }}" />
+                    <input id="chekcbox-{{ forloop.counter }}" type="checkbox" class="image-checkbox" value="{{ image.id }}" />
                     <button class="image-btn delete-btn" type="submit" value="{{ forloop.counter }}"><i class="far fa-trash-alt"></i></button>
                 </div>
             </div>
