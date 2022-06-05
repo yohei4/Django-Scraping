@@ -16,7 +16,8 @@
             <div id="{{ forloop.counter }}" class="image-item ui-widget-content col-sm-6 col-md-3 col-xl-2">
                 <div class="image-outer">
                     <div class="image">
-                        <img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" alt="" width="" height="" />
+                        {% comment %} <img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" alt="" width="" height="" /> {% endcomment %}
+                        <img id="{{ image.id }}" src="{% url 'album:show' image.name %}" alt="" width="" height="" />
                     </div>
                     <input id="chekcbox-{{ forloop.counter }}" type="checkbox" class="image-checkbox" value="{{ image.id }}" />
                     <button class="image-btn delete-btn" type="submit" value="{{ forloop.counter }}"><i class="far fa-trash-alt"></i></button>

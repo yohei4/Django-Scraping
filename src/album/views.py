@@ -1,12 +1,24 @@
-import json, urllib.request
+import json, urllib.request, base64
 from .models import UserImage
 from django.db import IntegrityError, transaction, DatabaseError
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.http.request import HttpRequest
 from django.core.files.base import ContentFile
 from django.conf import settings
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from common.common import resJson, random_string
+
+@require_GET
+def image(request: HttpRequest, token: str):
+    src = '' # 変数定義
+    if request.method == 'GET':
+        try:
+            user = request.user
+            image = UserImage.objects.get(user=user, name=token)
+            src = settings.BASE_DIR._str + image.picture.url
+        except (Exception, DatabaseError, IntegrityError, UserImage.DoesNotExist):
+            pass
+    return src
 
 @require_POST
 def save_image(request: HttpRequest):
