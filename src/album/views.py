@@ -1,4 +1,4 @@
-import json, urllib.request, base64
+import json, urllib.request
 from .models import UserImage
 from django.db import IntegrityError, transaction, DatabaseError
 from django.http import JsonResponse, HttpResponse
@@ -10,19 +10,20 @@ from common.common import resJson, random_string
 
 @require_GET
 def image(request: HttpRequest, token: str):
-    src = '' # 変数定義
+    src = ''
     if request.method == 'GET':
         try:
             user = request.user
             image = UserImage.objects.get(user=user, name=token)
-            src = settings.BASE_DIR._str + image.picture.url
+            src = image.picture.file
         except (Exception, DatabaseError, IntegrityError, UserImage.DoesNotExist):
             pass
-    return src
+
+    return HttpResponse(src)
 
 @require_POST
 def save_image(request: HttpRequest):
-    responce = resJson() # 変数定義
+    responce = resJson()
 
     if request.method == 'POST':
         user = request.user
@@ -45,7 +46,7 @@ def save_image(request: HttpRequest):
 
 @require_POST
 def all_save_image(request: HttpRequest):
-    responce = resJson() # 変数定義
+    responce = resJson()
 
     if request.method == 'POST':
         user = request.user
@@ -69,7 +70,7 @@ def all_save_image(request: HttpRequest):
 
 @require_POST
 def all_delete_image(request: HttpRequest):
-    responce = resJson() # 変数定義
+    responce = resJson()
 
     if request.method == 'POST':
         thumbs = json.loads(request.POST.get("thumbs"))
@@ -90,7 +91,7 @@ def all_delete_image(request: HttpRequest):
 
 @require_POST
 def delete_image(request: HttpRequest):
-    responce = resJson() # 変数定義
+    responce = resJson()
 
     if request.method == "POST":
         try:
