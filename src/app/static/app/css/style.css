@@ -274,7 +274,7 @@ input[type=checkbox]:checked::after {
   .images-box .images-left .images-list .image-item .image-outer .save-btn {
     background: rgba(11, 72, 204, 0.7);
   }
-  .images-box .images-left .images-list .image-item .image-outer .save-btn.active {
+  .images-box .images-left .images-list .image-item .image-outer .save-btn.clicked {
     background: rgba(255, 0, 0, 0.705);
   }
   .images-box .images-left .images-list .image-item .image-outer .delete-btn {

@@ -65,9 +65,10 @@ $(function () {
             },
             'json',
             this
-        ).done(function() {
-            $(this).addClass('active');
-            $(this).disabled = true;
+        ).done(function(data) {
+            if (data.result == 0) {
+                allDestory();
+            }
         });
     });
 
@@ -80,22 +81,23 @@ $(function () {
             },
             'json',
             this
-        ).done(function() {
-            $(this).addClass('active');
-            $(this).disabled = true;
+        ).done(function(data) {
+            if (data.result == 0) {
+                thumbs.forEach(el => {
+                    $('.image-item[data-img-id="' + el['img-id'] + '"]').remove();
+                });
+                allDestory();
+            }
         });
     });
 
     // リセットボタン
     $('.images-btn__reset').on('click', function() {
-        thumbs = new Array();
-        swiper.removeAllSlides();
-        thumbnailsList.removeAllSlides();
-        $('.image-checkbox').prop('checked', false);
+        allDestory();
     });
 
     // 保存ボタン
-    $('.save-btn').one('click', function () {
+    $('.save-btn').on('click', function () {
         cmnPost(
             save_url,
             {
@@ -105,8 +107,6 @@ $(function () {
             'json',
             this
         ).done(function() {
-            $(this).addClass('active');
-            $(this).disabled = true;
         });
     });
     
@@ -130,6 +130,13 @@ $(function () {
         const slides = '<li class="swiper-slide" data-img-id=' + val['img-id'] + '><img src="' + val['src'] + '" width="" height="" /></li>';
         swiper.appendSlide(slides);
         thumbnailsList.appendSlide(slides);
+    }
+
+    function allDestory() {
+        thumbs = new Array();
+        swiper.removeAllSlides();
+        thumbnailsList.removeAllSlides();
+        $('.image-checkbox').prop('checked', false);
     }
 
 });

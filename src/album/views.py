@@ -38,9 +38,9 @@ def save_image(request: HttpRequest):
                 image.picture.save(file_name + ".jpg", ContentFile(mem), save=False)
                 image.save()
         except (Exception, DatabaseError, IntegrityError) as e:
-            responce.update(reslut=1, message=settings.MESSAGE['INS_FAILED'])
+            responce.update(result=1, message=settings.MESSAGE['INS_FAILED'])
     else:
-        responce.update(reslut=1, message=settings.MESSAGE['NOT_POST'])
+        responce.update(result=1, message=settings.MESSAGE['NOT_POST'])
 
     return JsonResponse(responce.output())
 
@@ -62,9 +62,9 @@ def all_save_image(request: HttpRequest):
                     image.picture.save(file_name + ".jpg", ContentFile(mem), save=False)
                     image.save()
         except (Exception, DatabaseError, IntegrityError) as e:
-            responce.update(reslut=1, message=settings.MESSAGE['INS_FAILED'])
+            responce.update(result=1, message=settings.MESSAGE['INS_FAILED'])
     else:
-        responce.update(reslut=1, message=settings.MESSAGE['NOT_POST'])
+        responce.update(result=1, message=settings.MESSAGE['NOT_POST'])
 
     return JsonResponse(responce.output())
 
@@ -81,11 +81,11 @@ def all_delete_image(request: HttpRequest):
                     image = UserImage.objects.get(pk=thumb['img-id'], user=request.user)
                     image.delete()
         except UserImage.DoesNotExist as e:
-            responce.update(reslut=1, message=e.message)
+            responce.update(result=1, message=e.message)
         except (Exception, DatabaseError, IntegrityError) as e:
-            responce.update(reslut=1, message=settings.MESSAGE['DEL_FAILED'])
+            responce.update(result=1, message=settings.MESSAGE['DEL_FAILED'])
     else:
-        responce.update(reslut=1, message=settings.MESSAGE['NOT_POST'])
+        responce.update(result=1, message=settings.MESSAGE['NOT_POST'])
         
     return JsonResponse(responce.output())
 
@@ -99,10 +99,10 @@ def delete_image(request: HttpRequest):
                 image = UserImage.objects.get(pk=request.POST.get('id'), user=request.user)
                 image.delete()
         except UserImage.DoesNotExist as e:
-            responce.update(reslut=1, message=e.message)
+            responce.update(result=1, message=e.message)
         except (Exception, DatabaseError, IntegrityError) as e:
-            responce.update(reslut=1, message=settings.MESSAGE['DEL_FAILED'])
+            responce.update(result=1, message=settings.MESSAGE['DEL_FAILED'])
     else:
-        responce.update(reslut=1, message=settings.MESSAGE['NOT_POST'])
+        responce.update(result=1, message=settings.MESSAGE['NOT_POST'])
 
     return JsonResponse(responce.output())
