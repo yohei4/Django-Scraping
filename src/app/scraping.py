@@ -31,6 +31,7 @@ class ScarpingImage():
     options.add_argument("--window-size=800,600")
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-dev-shm-usage")
+    options.binary_location = "/usr/local/bin/chromedriver"
     # options.add_argument('--proxy-server="direct://"')
     # options.add_argument("--proxy-bypass-list=*")
     # options.add_argument("--start-maximized")
@@ -39,7 +40,7 @@ class ScarpingImage():
         self.search_num = search_num
         self.timeout = timeout
         self.options = options
-        self.driver = webdriver.Chrome(options=options)
+        self.driver: webdriver.Chrome = webdriver.Chrome(options=options)
     
     @classmethod
     def exec(self, params, word, pk):

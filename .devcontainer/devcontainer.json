@@ -33,7 +33,8 @@
 		"ritwickdey.live-sass",
 		"batisteo.vscode-django",
 		"oderwat.indent-rainbow",
-		"PKief.material-icon-theme"
+		"PKief.material-icon-theme",
+		"donjayamanne.jquerysnippets"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

@@ -47,13 +47,14 @@ function getLastChildEl(el, index) {
  * @param dataType データ属性
  * @return {jqXHR}
  */
-function cmnPost(url, data, dataType) {
+function cmnPost(url, data, dataType, context = undefined) {
     return $.ajax({
         type: "POST",
         url: url,
         data: data,
         dataType: dataType,
         crossDomain: false,
+        context: context === undefined ? this : context,
         beforeSend: function(xhr, settings) {
             if (!csrfSafeMethod(settings.type)) {
                 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));

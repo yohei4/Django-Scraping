@@ -5,25 +5,10 @@
 <div class="content-body__inner">
     <div class="images-box">
         <div class="images-left">
-            <div class="images-list row">
-            {% for image in images %}
-                <div id="{{ forloop.counter }}" class="image-item col-sm-6 col-md-3 col-xl-2">
-                    <div class="image-outer">
-                        <div class="image">
-                            <div class="img-outer">
-                                <img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" alt="" width="" height="" />
-                            </div>
-                            <button class="delete-btn" type="submit" value="{{ forloop.counter }}"><i class="far fa-trash-alt"></i></button>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-            </div>
+            {% include 'utility/images-left.html' %}
         </div>
         <div class="images-right">
-            <div class="images-dragAndDrop">
-                <span class="images-dragAndDrop__text">ドラッグ&ドロップ</span>
-            </div>
+            {% include 'utility/images-right.html' %}
         </div>
     </div>
 </div>

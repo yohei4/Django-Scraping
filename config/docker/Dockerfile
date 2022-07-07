@@ -46,7 +46,15 @@ apt-get install -y google-chrome-stable
 
 # インストールしたChromeとPythonのchromedriver-binaryのバージョンが合わない場合があるので、
 # google-chromeのバージョン情報から バージョンの近いものを pip installする
-RUN google-chrome --version | perl -pe 's/([^0-9]+)([0-9]+\.[0-9]+).+/$2/g' > chrome-version
+RUN google-chrome --version | perl -pe 's/([^0-9]+)(.+)./$2/g' > chrome-version
+
+# chromedriver
+RUN wget https://chromedriver.storage.googleapis.com/`cat chrome-version`/chromedriver_linux64.zip && \
+unzip chromedriver_linux64.zip && \
+sudo mv chromedriver /usr/local/bin/ && \
+rm chromedriver_linux64.zip
+
+# RUN google-chrome --version | perl -pe 's/([^0-9]+)([0-9]+\.[0-9]+).+/$2/g' > chrome-version
 RUN pip3 install chromedriver-binary~=`cat chrome-version` && rm chrome-version
 
 # requtirements.txtに書かれているモジュールをインストール

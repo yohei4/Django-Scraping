@@ -58,28 +58,3 @@
         }
     }
 }
-
-//ボタンのmixinです。
-@mixin btn($color: rgba(11, 72, 204, 0.7), $color2: rgba(255, 0, 0, 0.705)) {
-    border: none;
-    background: $color;
-    width: 27px;
-    height: 27px;
-    border-radius: 100px;
-    position: absolute;
-    top: 90%;
-    right: 3%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    & .fa-save, & .fa-trash-alt {
-        font-size: 15px;
-        color: white;
-    }
-    & .fa-trash-alt {
-        font-size: 15px;
-        color: white;
-    }
-    &.active {
-        background: $color2;
-    }
-}

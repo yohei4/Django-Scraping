@@ -171,6 +171,16 @@ AUTHENTICATION_BACKENDS = [
 ]
 # ----------------
 
+# 追記-------------
+MESSAGE = {
+    'INS_FAILED': '登録に失敗しました。',
+    'UPD_FAILED': '更新に失敗しました。',
+    'DEL_FAILED': '削除に失敗しました。',
+    'NOT_POST': 'POST通信のみ、対応しています。',
+    'NOT_GET': 'GET通信のみ、対応しています。',
+}
+# ----------------
+
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),  # プロジェクト直下のstaticディレクトリを指定
 # )
