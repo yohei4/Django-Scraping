@@ -2,12 +2,12 @@ import urllib.parse
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import chromedriver_binary
-from album.models import UserImage
+# from album.models import UserImage
 import time
 
 # 定数定義
 SEARCH_NUM  = "20"
-TIMEOUT     = .5
+TIMEOUT     = .2
 
 # オプション設定
 options = Options()
@@ -82,7 +82,7 @@ class ScarpingImage():
             for image in images:
                 src = self.check_saved_image(image.get_attribute("src"), pk)
                 if not(src is None):
-                    if(bool(len(src) <= 200)):
+                    if(bool(len(src) <= 100)):
                         images_links.append(src)
             
             params['word'] = word
@@ -97,24 +97,24 @@ class ScarpingImage():
 
         return result
     
-    @classmethod
-    def check_saved_image(src, pk):
-        models = UserImage
-        objects = models.objects.filter(pk=pk)
-        url = None
-        if(bool(objects.count() != 0)):
-            for object in objects:
-                if(bool(object.link != src)):
-                    url = src
-                else:
-                    url = None
-                    break
-        else:
-            url = src
-        return url
+    # @classmethod
+    # def check_saved_image(src, pk):
+    #     models = UserImage
+    #     objects = models.objects.filter(pk=pk)
+    #     url = None
+    #     if(bool(objects.count() != 0)):
+    #         for object in objects:
+    #             if(bool(object.link != src)):
+    #                 url = src
+    #             else:
+    #                 url = None
+    #                 break
+    #     else:
+    #         url = src
+    #     return url
         
 
-def scraping_images(word, pk):
+def scraping_images(word):
 
     # DRIVER_PATH = "/usr/local/bin/chromedriver" #chromedriverの場所
     driver = webdriver.Chrome(options=options)
@@ -125,7 +125,7 @@ def scraping_images(word, pk):
 
     driver.get(url) #指定のURLでブラウザ（Chrome)へアクセス
 
-    #適当に下までスクロールしてる--
+    # 適当に下までスクロールしてる
     for t in range(10):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(TIMEOUT) #サーバーの負荷を軽減するためのもの
@@ -135,31 +135,16 @@ def scraping_images(word, pk):
     images_links = []
 
     for image in images:
-        src = check_saved_image(image.get_attribute("src"), pk)
-        if not(src is None):
-            if(bool(len(src) <= 200)):
-                images_links.append(src)
+        src = image.get_attribute("src")
+        if src is not None and len(src) <= 100:
+            images_links.append(src)
 
     driver.quit()
     
     return word, images_links
 
-#保存してある画像か判定
-def check_saved_image(src, pk):
-    models = UserImage
-    objects = models.objects.filter(pk=pk)
-    url = None
-    if(bool(objects.count() != 0)):
-        for object in objects:
-            if(bool(object.link != src)):
-                url = src
-            else:
-                url = None
-                break
-    else:
-        url = src
-    return url
-
 if __name__ == "__main__":
-    scraping = ScarpingImage()
-    images = scraping.exec("本田翼")
+    images = scraping_images('カービィ')
+    print(images)
+    # scraping = ScarpingImage()
+    # images = scraping.exec("本田翼")

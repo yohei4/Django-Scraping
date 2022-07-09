@@ -32,7 +32,7 @@ class HomeInView(LoginRequiredMixin, TemplateView):
         """ 
 
         if(bool( len(request.POST['keyword']) != 0)):
-            self.params['word'], self.params['link_list'] = scraping_images(request.POST['keyword'], request.user.id)
+            self.params['word'], self.params['link_list'] = scraping_images(request.POST['keyword'])
             self.params['form'] = SearchForm(request.POST)
         return render(request, 'app/home.html', self.params)
 
