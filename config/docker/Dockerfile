@@ -87,7 +87,7 @@ RUN pip3 install --upgrade -r requirements.txt
 
 # apacheの設定
 ADD config/apache2/wsgi.conf /etc/apache2/sites-available/
-ADD config/apache2/envvars /etc/apache2/envvars
+# ADD config/apache2/envvars /etc/apache2/envvars/
 RUN sudo a2ensite wsgi
 RUN sudo a2enmod wsgi
 RUN sudo a2dissite 000-default.conf
