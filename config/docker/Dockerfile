@@ -9,7 +9,8 @@ ENV LC_LANG="en_US.UTF-8"
 
 RUN set -x && \
     apt-get update && \
-    apt-get upgrade -y
+    apt-get upgrade -y && \
+    apt-get clean
 
 # パッケージのダウンロード
 RUN set -x && \
@@ -17,10 +18,9 @@ RUN set -x && \
     vim \
     wget \
     git \
-    init \ 
+    init \
+    curl \
     systemd \
-    python3 \
-    python3-pip \
     apache2 \
     apache2-dev \
     libapache2-mod-wsgi-py3 \
@@ -33,10 +33,30 @@ RUN set -x && \
     openssh-server \
     openssh-client
 
+RUN sudo apt-get update && \
+    sudo apt-get install --no-install-recommends -y build-essential software-properties-common && \
+    sudo add-apt-repository -y ppa:deadsnakes/ppa && \
+    sudo apt-get install -y python3.7 \
+    python3.7-dev \
+    python3.7-distutils && \
+    sudo apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 # pythonのバージョン切替(デフォルトだと2.7系が使われているため)
 RUN sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6 1
+RUN sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
+
+RUN sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 1
+RUN sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 2
+
+RUN sudo update-alternatives --set python /usr/bin/python3.7
 
 RUN localedef -f UTF-8 -i en_US en_US.UTF-8
+
+# Upgrade pip to latest version
+RUN curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3 get-pip.py --force-reinstall && \
+    rm get-pip.py
 
 # google-chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add && \
@@ -49,13 +69,14 @@ apt-get install -y google-chrome-stable
 RUN google-chrome --version | perl -pe 's/([^0-9]+)(.+)./$2/g' > chrome-version
 
 # chromedriver
-RUN wget https://chromedriver.storage.googleapis.com/`cat chrome-version`/chromedriver_linux64.zip && \
+RUN wget https://chromedriver.storage.googleapis.com/103.0.5060.53/chromedriver_linux64.zip && \
 unzip chromedriver_linux64.zip && \
 sudo mv chromedriver /usr/local/bin/ && \
 rm chromedriver_linux64.zip
 
 # RUN google-chrome --version | perl -pe 's/([^0-9]+)([0-9]+\.[0-9]+).+/$2/g' > chrome-version
-RUN pip3 install chromedriver-binary~=`cat chrome-version` && rm chrome-version
+RUN pip3 install chromedriver-binary~=103.0.5060.53
+RUN rm chrome-version
 
 # requtirements.txtに書かれているモジュールをインストール
 RUN mkdir /var/www/html/opt

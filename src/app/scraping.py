@@ -2,6 +2,7 @@ import urllib.parse
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import chromedriver_binary
+from selenium.webdriver.common.by import By
 # from album.models import UserImage
 import time
 
@@ -77,7 +78,7 @@ class ScarpingImage():
                 #サーバーの負荷を軽減するためのもの
                 time.sleep(self.timeout)
 
-            images = self.driver.find_elements_by_xpath('//a[@class="wXeWr islib nfEiy"]/div/img')
+            images = self.driver.find_elements(by=By.XPATH, value='//a[@class="wXeWr islib nfEiy"]/div/img')
 
             for image in images:
                 src = self.check_saved_image(image.get_attribute("src"), pk)
@@ -130,7 +131,7 @@ def scraping_images(word):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
         time.sleep(TIMEOUT) #サーバーの負荷を軽減するためのもの
 
-    images = driver.find_elements_by_xpath('//a[@class="wXeWr islib nfEiy"]/div/img')
+    images = driver.find_elements(by=By.XPATH, value='//a[@class="wXeWr islib nfEiy"]/div/img')
 
     images_links = []
 
