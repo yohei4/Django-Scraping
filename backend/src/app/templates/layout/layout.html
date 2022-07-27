@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja" >
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>{% block title %}{% endblock title %}</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'common/images/icon.png' %}">
+    <!-- Font Awesome -->
+    <link href="{% static 'admin-lte/plugins/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link href="{% static 'admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+    <!-- iCheck -->
+    <link href="{% static 'admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}" rel="stylesheet" />
+    <!-- JQVMap -->
+    <link href="{% static 'admin-lte/plugins/jqvmap/jqvmap.min.css' %}" rel="stylesheet" />
+    <!-- Admin LTE3 Theme style -->
+    <link href="{% static 'admin-lte/dist/css/adminlte.min.css' %}" rel="stylesheet" />
+    <!-- Swiper -->
+    <link href="{% static 'swiper/css/swiper-bundle.min.css' %}" rel="stylesheet" />
+    <!-- Swiper -->
+    <link href="{% static 'jquery-ui-1.13.1.custom/jquery-ui.min.css' %}" rel="stylesheet" />
+    <!-- overlayScrollbars -->
+    <link href="{% static 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}" rel="stylesheet" />
+    <!-- Daterange picker -->
+    <link href="{% static 'admin-lte/plugins/daterangepicker/daterangepicker.css' %}" rel="stylesheet" />
+    <!-- summernote -->
+    <link href="{% static 'admin-lte/plugins/summernote/summernote-bs4.css' %}" rel="stylesheet" />
+    <!-- Project Style.css -->
+    <link href="{% static 'app/css/style.css' %}" rel="stylesheet" />
+</head>
+<body class="layout-fixed sidebar-mini">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        {% include 'layout/navbar.html' %}
+        </nav>
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" >
+        {% include 'layout/sidebar.html' %}
+        </aside>
+        <section class="content-wrapper">
+            {% block content %}
+            {% endblock content %}
+        </section>
+        <footer class="main-footer">
+            {% include 'layout/footer.html' %}
+        </footer>
+    </div>
+<!-- View Script -->
+<script>
+    const save_url = "{% url 'album:save' %}";
+    const delete_url = "{% url 'album:delete' %}";
+    const all_save_url = "{% url 'album:all-save' %}";
+    const all_delete_url = "{% url 'album:all-delete' %}";
+</script>
+<!-- jQuery3.1.0 -->
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<!-- jquery-ui-1.13.1.custom -->
+<script type="text/javascript" src="{% static 'jquery-ui-1.13.1.custom/jquery-ui.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script type="text/javascript" src="{% static 'admin-lte/dist/js/adminlte.min.js' %}"></script>
+<!-- Swiper -->
+<script type="text/javascript" src="{% static 'swiper/js/swiper-bundle.min.js' %}"></script>
+<!-- Project Common.js -->
+<script type="text/javascript" src="{% static 'common/js/common.js' %}"></script>
+<!-- Project app.js -->
+<script type="text/javascript" src="{% static 'app/js/app.js' %}"></script>
+</body>
+</html>

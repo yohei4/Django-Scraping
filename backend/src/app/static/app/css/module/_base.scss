@@ -1,0 +1,86 @@
+html {
+    height: 100%;
+    overscroll-behavior: none;
+}
+
+//body
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    height: fit-content;
+    overscroll-behavior-y: contain;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, li {
+    margin: 0;
+    padding: 0;
+    line-break: 1em;
+    user-select: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.red-btn {
+    background: rgb(229, 43, 43);
+}
+
+.blue-btn {
+    background: rgb(11, 72, 204);
+}
+
+.green-btn {
+    background: rgb(47, 232, 41);
+}
+
+input[type=checkbox] {
+    appearance: none;
+    border: 2px solid rgb(9, 202, 1);
+    border-radius: 4px;
+    background: inherit;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+    height: 1.2rem;
+    outline: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 1.2rem;
+    min-width: 1.2rem;
+    position: relative;
+    overflow: hidden;
+    &:checked {
+        border: none;
+        &::before {
+            content: '';
+            width: 101%;
+            height: 101%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgb(9, 202, 1);
+        }
+        &::after {
+            content: url('data:image/svg+xml;charset=utf8,<svg id="check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 405.03 399.22"><path fill="%23fff" d="M475,50.68c-4.07,6.67-75.5,75.7-107.89,116.57-10.2,12.87-27.94,38-36.3,52.16C294.27,281.2,195,448.36,195,448.36h-3.94l-59.9-107.79c-17.63-39.84-44.5-57.74-61.21-50.34,0,0,10.11-19.92,21.8-26.68,11.23-6.5,22.55-5.05,32.29-.83,3.18,1.38,16.25,12.8,26.54,23,0,0,24.88,28.44,42.45,56.93,10.82-19.42,51.09-86.7,57.49-93.93s37.08-55.84,43.46-63.09c38.45-46.5,58.85-66.67,82.83-83.85,32.47-23.28,87.77-49.65,90.5-52.67Z" transform="translate(-69.96 -49.14)"/></svg>');
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+        }
+    }
+}
+
+.ui-selectable-helper {
+    border: none;
+    background: rgba(1, 179, 202, 0.5);
+}

@@ -1,0 +1,15 @@
+{% extends "layout/content.html" %}
+{% load static %}
+{% block title %}写真一覧{% endblock title %}
+{% block section %}
+<div class="content-body__inner">
+    <div class="images-box">
+        <div class="images-left">
+            {% include 'utility/images-left.html' %}
+        </div>
+        <div class="images-right">
+            {% include 'utility/images-right.html' %}
+        </div>
+    </div>
+</div>
+{% endblock section %}

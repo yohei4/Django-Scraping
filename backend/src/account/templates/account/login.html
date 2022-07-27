@@ -1,0 +1,48 @@
+{% extends "account/base.html" %}
+{% block title %}ログイン画面{% endblock %}
+{% block content %}
+<main id="login-page">
+    <div class="login-page__inner">
+        <div class="screen-title__wrap">
+            <h1 class="title">ログイン画面</h1>
+        </div>
+        <div class="create-account__wrap">
+            <div class="form-title">
+                <h2>メールアドレスでログイン</h2>
+            </div>
+            <form action="{% url 'account:login' %}" id="login" method="POST">
+            {% csrf_token %}
+                <div class="email-outer">
+                    <div class="input-wrap">
+                        <i_right class="fas fa-envelope"></i_right>
+                        {{ form.email }}
+                        {% comment %} <input id="email" name="email" type="email" placeholder="メールアドレス"> {% endcomment %}
+                    </div>
+                </div>
+                <div class="password-outer">
+                    <div class="input-wrap">
+                        <i_right class="fas fa-key"></i_right>
+                        {{ form.password }}
+                        {% comment %} <input id="id_password" name="password" type="password" placeholder="パスワード"> {% endcomment %}
+                        <button id="password-view__btn"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
+                {% if form.errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="error">※{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+                <div class="ac-login_button">
+                    <button type="submit" form="login">
+                        <span>ログインする</span>
+                    </button>
+                </div>
+            </form>
+            <div class="login-page__move">
+                <p>新規アカウントの作成は<a href="{% url 'account:account' %}">こちら</a></p>
+            </div>
+            <h1>{{ sample }}</h1>
+        </div>
+    </div>
+</main>
+{% endblock %}

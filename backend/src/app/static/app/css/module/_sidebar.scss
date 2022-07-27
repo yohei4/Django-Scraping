@@ -1,0 +1,17 @@
+.main-sidebar {
+    background-color: #056c02;
+    & .brand-link {
+        border-bottom: 1px solid #09ca01;
+    }
+}
+
+.nav-btn {
+    background-color: inherit;
+    width: 100%;
+    text-align: left;
+    border: none;
+
+    & a {
+        width: 100%;
+    }
+}

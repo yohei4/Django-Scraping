@@ -1,0 +1,16 @@
+<div class="images-btn__group">
+    {% if request.path == '/app/' %}
+    <button type="button" class="images-right__btn images-btn__save blue-btn">一括保存</button>
+    {% else %}
+    <button type="button" class="images-right__btn images-btn__delete red-btn">一括削除</button>
+    {% endif %}
+    <button type="button" class="images-right__btn images-btn__reset red-btn">リセット</button>
+</div>
+<div class="preview-box swiper-container">
+    <ul class="preview-box__area swiper-wrapper">
+    </ul>
+</div>
+<div class="thumbnails-list">
+    <ul class="swiper-wrapper">
+    </ul>
+</div>

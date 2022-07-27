@@ -18,22 +18,22 @@ services:
             MYSQL_USER: django
             MYSQL_PASSWORD: django
             TZ: Asia/Tokyo
-        restart: always
+        tty: true   
 
-    app:
-        container_name: django-app
+    backend:
+        container_name: django-backend
         depends_on: 
             - db
         build:
             context: .
-            dockerfile: config/docker/Dockerfile
+            dockerfile: backend/config/docker/Dockerfile
         networks:
             - django-net
         ports:
             - "8000:80"
         volumes:
-            - ./src:/var/www/html
-            - ./logs:/var/www/logs
+            - ./backend/src:/var/www/html
+            - ./backend/logs:/var/www/logs
         tty: true
         environment:
             DJANGO_DB_HOST: db
@@ -43,6 +43,22 @@ services:
         privileged: true
         command:
             export PYTHONPATH=/var/www/html/common
+
+    frontend:
+        container_name: django-frontend
+        depends_on: 
+            - backend
+        build:
+            context: .
+            dockerfile: frontend/config/docker/Dockerfile
+        networks:
+            - django-net
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./frontend/src:/usr/src/app
+        tty: true
+        privileged: true
 
     phpmyadmin:
         container_name: django-phpmyadmin
