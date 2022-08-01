@@ -1,6 +1,7 @@
-const path = require('path');
+import path from 'path';
+import { Configuration } from 'webpack';
 
-module.exports = {
+const config: Configuration = {
     mode: 'development',
     entry: './src/index.tsx',
     output: {
@@ -14,12 +15,14 @@ module.exports = {
             use: [
             {
                 loader: 'babel-loader',
-                options: { presets: ['@babel/preset-env', '@babel/react'] },
+                options: { 
+                    presets: ['@babel/preset-env', '@babel/react']
+                },
             },
             {
                 loader: 'ts-loader',
                 options: {
-                configFile: path.resolve(__dirname, 'tsconfig.json'),
+                    configFile: path.resolve(__dirname, 'tsconfig.json'),
                 },
             },
             ],
@@ -30,9 +33,16 @@ module.exports = {
         },
         ],
     },
-    devServer,
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
     },
+    devtool: "inline-source-map",
+    devServer: {
+        contentBase: path.join(__dirname, 'static'),
+        open: true,
+        port: 3000,
+    },
     target: 'web',
 };
+
+export default config;
