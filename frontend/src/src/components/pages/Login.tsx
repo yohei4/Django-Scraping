@@ -27,7 +27,7 @@ function Login() {
                                 <FontAwesomeIcon icon={faKey} />
                                 {/* {{ form.password }} */}
                                 {/* <input id="password" name="password" type="password" placeholder="パスワード"> */}
-                                <button id="password-view__btn"><FontAwesomeIcon icon={faEye} className="right" /></button>
+                                <button id="password-view__btn" type="button"><FontAwesomeIcon icon={faEye} className="right" /></button>
                             </div>
                         </div>
                         {/* {% if form.errors %}
