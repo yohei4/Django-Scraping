@@ -1,0 +1,20 @@
+//body
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F0F0F0;
+    text-align: center;
+    overflow: hidden;
+}
+
+//全て適用
+* {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    letter-spacing: 0px;
+}
+
+.error {
+    font-size: 14px;
+    color: red;
+}

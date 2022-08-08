@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-  import { faEnvelope, faEye, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faEye, faKey } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 
 function Login() {
@@ -18,7 +18,7 @@ function Login() {
                     <form action="" id="login" method="post">
                         <div className="email-outer">
                             <div className="input-wrap">
-                                <FontAwesomeIcon icon={faEnvelope} />
+                                <FontAwesomeIcon icon={faEnvelope} className="right" />
                                 {/* <input id="email" name="email" type="email" placeholder="メールアドレス"> */}
                             </div>
                         </div>
@@ -27,7 +27,7 @@ function Login() {
                                 <FontAwesomeIcon icon={faKey} />
                                 {/* {{ form.password }} */}
                                 {/* <input id="password" name="password" type="password" placeholder="パスワード"> */}
-                                <button id="password-view__btn"><FontAwesomeIcon icon={faEye} /></button>
+                                <button id="password-view__btn"><FontAwesomeIcon icon={faEye} className="right" /></button>
                             </div>
                         </div>
                         {/* {% if form.errors %}
