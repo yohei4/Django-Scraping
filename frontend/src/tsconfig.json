@@ -105,8 +105,8 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "src"
-, "tsconfig.paths.json"  ],
+    "src",
+    "tsconfig.paths.json"  ],
   "exclude": [
     "node_modules"
   ],
