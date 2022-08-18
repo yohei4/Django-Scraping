@@ -1,0 +1,11 @@
+//footer
+footer {
+    width: 100%;
+    padding: 60px 0;
+    position: absolute;
+    bottom: 0;
+    background-color: #FFFFFF;
+    & p {
+        color: #747474;
+    }
+}

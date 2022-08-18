@@ -106,9 +106,10 @@
   },
   "include": [
     "src",
-    "tsconfig.paths.json"  ],
+    "tsconfig.paths.json"
+  ],
   "exclude": [
-    "node_modules"
+    "./node_modules"
   ],
   "extends": "./tsconfig.paths.json"
 }

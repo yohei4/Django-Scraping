@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
+        "moduleResolution": "Node",
+        "sourceMap": true,
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
         }
-        }
     }
+}

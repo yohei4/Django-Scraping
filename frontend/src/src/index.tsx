@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import './sass/style.scss';
+import '@/assets/sass/style.scss';
 import ReactDOM from 'react-dom/client';
-import Login from './components/pages/Login';
+import Login from '@/components/Login/Login';
 import reportWebVitals from './reportWebVitals';
 import { Route, BrowserRouter } from "react-router-dom";
 

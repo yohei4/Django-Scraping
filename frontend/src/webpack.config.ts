@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import 'webpack-dev-server';
+import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 
 
 const config: webpack.Configuration = {
@@ -37,6 +38,7 @@ const config: webpack.Configuration = {
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json'],
+        plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })]
     },
     devtool: "inline-source-map",
     devServer: {
