@@ -43,9 +43,15 @@ const config: webpack.Configuration = {
     devtool: "inline-source-map",
     devServer: {
         open: true,
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
     },
     target: 'web',
+
+    watchOptions: {
+        // 監視除外ファイルの指定
+        ignored: /node_modules/
+    },
 };
 
 export default config;
