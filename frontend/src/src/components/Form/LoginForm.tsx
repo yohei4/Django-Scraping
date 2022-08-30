@@ -10,7 +10,7 @@ const FormBox = styled(Box<"form">)({
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-}
+};
 
 export default function LoginForm() {
     return (

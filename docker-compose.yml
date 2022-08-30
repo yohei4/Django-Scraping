@@ -14,9 +14,9 @@ services:
             - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: django
-            MYSQL_USER: django
-            MYSQL_PASSWORD: django
+            MYSQL_DATABASE: issa
+            MYSQL_USER: issa
+            MYSQL_PASSWORD: issa
             TZ: Asia/Tokyo
         tty: true   
 
