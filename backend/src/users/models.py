@@ -5,23 +5,23 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, password=None):
+    def create_user(self, request_data):
         """
         Creates and saves a User with the given email, date of
         birth and password.
         """
-        if not username: 
+        if not request_data['username']: 
             raise ValueError('username is requied')
 
-        if not email:
+        if not request_data['email']:
             raise ValueError('Users must have an email address')
 
         user = self.model(
-            username=username,
-            email=self.normalize_email(email),
+            username=request_data['username'],
+            email=self.normalize_email(request_data['email']),
         )
 
-        user.set_password(password)
+        user.set_password(request_data['password'])
         user.save(using=self._db)
         return user
 
@@ -30,10 +30,14 @@ class UserManager(BaseUserManager):
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
+        request_data = {
+            'username': username,
+            'email': email,
+            'password': password
+        }
+
         user = self.create_user(
-            username,
-            email,
-            password=password,
+            request_data=request_data
         )
 
         user.is_admin = True
@@ -71,10 +75,10 @@ class User(AbstractBaseUser):
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return self.username
+        return self.email
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
