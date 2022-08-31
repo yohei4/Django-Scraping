@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     # 追加ライブラリのインストール
     'django_cleanup.apps.CleanupConfig',    # 画像の自動削除
     'rest_framework',                       # Rest API
-    'rest_framework.authtoken',             # RestAPI
+    'rest_framework.authtoken',             # Rest API
     'djoser',
     # プロジェクトアプリのインストール
     'users.apps.UsersConfig',
@@ -148,6 +149,7 @@ AUTH_USER_MODEL = 'users.User'
 
 # Rest Api setting parmater
 # https://www.django-rest-framework.org/api-guide/settings/
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -157,5 +159,31 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+}
+
+# Json web token options
+# https://jpadilla.github.io/django-rest-framework-jwt/
+
+# JWT_AUTH = {
+#     'JWT_VERIFY_EXPIRATION': False,
+# }
+
+# Simple json web token options
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/index.html
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': False,
+    #暗号のアルゴリズム設定
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
