@@ -4,7 +4,7 @@ django-cors-headers
 # markdown==3.3.4
 django-filter
 djangorestframework
-djangorestframework-jwt
+djangorestframework_simplejwt
 djlint
 pillow
 selenium
