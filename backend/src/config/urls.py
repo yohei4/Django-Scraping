@@ -16,15 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from users.views import LoginView, UserViewSet
-# from rest_framework_simplejwt.views import TokenObtainPairView
-
-router = routers.DefaultRouter()
-router.register('users', UserViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),                                # 管理者画面
-    path('api/',include(router.urls)),                              # REST API画面
-    path('login/', LoginView.as_view(), name='login'),              # ログイン処理
-    # path('login', TokenObtainPairView.as_view(), name='login'),
+    path('admin/', admin.site.urls),                     # 管理者画面
+    path('api/v1/',include('v1.urls')),                  # REST API画面
 ]

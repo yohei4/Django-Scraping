@@ -38,13 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 追加ライブラリのインストール
-    'django_cleanup.apps.CleanupConfig',    # 画像の自動削除
+    # Install libraly
+    'django_cleanup.apps.CleanupConfig',    # Images auto delete
     'rest_framework',                       # Rest API
     'rest_framework.authtoken',             # Rest API
     'djoser',
-    # プロジェクトアプリのインストール
-    'users.apps.UsersConfig',
+    # Install project app
+    'v1.account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',   # 変更
-        'NAME': 'issa',                         # プロジェクトで使用するデータベース名
-        'USER': 'issa',                         # パソコンにインストールしたMySQLのユーザー名
-        'PASSWORD': 'issa',                     # 同上。そのパスワード
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'issa',
+        'USER': 'issa',
+        'PASSWORD': 'issa',
         'HOST': 'db',
         'PORT': '3306',
         # 追記-------------
@@ -109,6 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 8}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -145,7 +146,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authnication custom user model
 # https://docs.djangoproject.com/en/4.1/topics/auth/customizing/
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'account.User'
 
 # Rest Api setting parmater
 # https://www.django-rest-framework.org/api-guide/settings/
@@ -176,7 +177,6 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': False,
-    #暗号のアルゴリズム設定
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
