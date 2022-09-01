@@ -11,14 +11,20 @@ class UserManager(BaseUserManager):
         birth and password.
         """
         if not request_data['username']: 
-            raise ValueError('username is requied')
+            raise ValueError('username is requied.')
 
         if not request_data['email']:
-            raise ValueError('Users must have an email address')
+            raise ValueError('Users must have an email address.')
+
+        # if not request_data['password']:
+        #     raise ValueError('Users must have an email password.')
+        # elif len(request_data['password']) < 8: # 文字数チェック
+        #     raise ValueError('Password must be at least 8 characters.')
 
         user = self.model(
             username=request_data['username'],
             email=self.normalize_email(request_data['email']),
+            is_active=True
         )
 
         user.set_password(request_data['password'])
@@ -78,7 +84,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
