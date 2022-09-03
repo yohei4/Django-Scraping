@@ -10,26 +10,15 @@ import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import { InputProps } from "@mui/material";
 
-interface State {
-    password: string;
-    showPassword: boolean;
+interface PasswordFiledProps extends InputProps {
+    value?: string;
 }
 
-export default function PasswordFiled(props: InputProps) {
-    const [values, setValues] = React.useState<State>({
-        password: '',
-        showPassword: false
-    });
-
-    const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+export default function PasswordFiled(props: PasswordFiledProps) {
+    const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
     const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword,
-        });
+        setShowPassword(!showPassword);
     };
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,10 +33,10 @@ export default function PasswordFiled(props: InputProps) {
                 <Input
                     id="password"
                     name="password"
-                    type={values.showPassword ? 'text' : 'password'}
-                    value={values.password}
+                    type={showPassword ? 'text' : 'password'}
+                    value={props.value}
                     required={props.required}
-                    onChange={handleChange('password')}
+                    onChange={props.onChange}
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
@@ -55,7 +44,7 @@ export default function PasswordFiled(props: InputProps) {
                                 onClick={handleClickShowPassword}
                                 onMouseDown={handleMouseDownPassword}
                             >
-                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                         </InputAdornment>
                     }

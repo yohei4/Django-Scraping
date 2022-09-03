@@ -7,17 +7,12 @@ import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 interface TextFieldProps extends InputProps {
+    value?: string;
     label?: string;
     muiName: keyof typeof Icons;
 }
 
 export default function BaseTextField(props: TextFieldProps) {
-    const [value, setVaue] = React.useState('');
-    
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setVaue(event.target.value);
-    };
-
     // アイコンを動的に指定可能にする
     const Icon: OverridableComponent<SvgIconTypeMap> & { muiName: string } = Icons[props.muiName];
 
@@ -31,8 +26,8 @@ export default function BaseTextField(props: TextFieldProps) {
                 label={props.label}
                 required={props.required}
                 placeholder={props.placeholder}
-                onChange={handleChange}
-                value={value}
+                onChange={props.onChange}
+                value={props.value}
                 variant="standard"
             />
         </Box>
