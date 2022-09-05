@@ -2,9 +2,9 @@ import axios from 'axios';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { APP_URL } from '@/config/constants';
 import { EmailField, PasswordField } from './TextFields';
 import { SubmitButton } from './Button';
+import { fetchToken } from '@/util/api';
 
 const FormBox = styled(Box<"form">)({
     marginTop: '20px',
@@ -31,12 +31,12 @@ export default function LoginForm() {
         data.append('email', email);
         data.append('password', password);
 
-        const url = axios.post(APP_URL + '/token', data)
-        .then((res) => {
-            console.log(res)
+        const client = fetchToken(data)
+        .then(response => {
+            console.log(response);
         })
-        .catch((err) => {
-        console.log("err:", err);
+        .catch(error => {
+            console.log(error);
         });
     }
 
