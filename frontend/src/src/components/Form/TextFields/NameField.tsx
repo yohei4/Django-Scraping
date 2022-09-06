@@ -1,7 +1,11 @@
 import { InputProps } from "@mui/material";
 import BaseTextField from "./BaseTextField";
 
-export default function NameFiled(props: InputProps) {
+interface NameFiledProps extends InputProps {
+    value?: string;
+}
+
+export default function NameFiled(props: NameFiledProps) {
     return (
         <BaseTextField
             id="name"
@@ -10,6 +14,8 @@ export default function NameFiled(props: InputProps) {
             placeholder="name"
             label="name"
             // required={true}
+            value={props.value}
+            onChange={props.onChange}
             muiName="AccountCircle"
             sx={props.sx}
         />

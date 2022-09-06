@@ -8,7 +8,7 @@ const Main = styled(Box<"main">)({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: "100px",
+    marginTop: "60px",
     height: "100%",
     width: "100%",
     "& .page-content": {
@@ -36,9 +36,9 @@ export default function Login() {
     return (
         <Main component="main" id="main">
             <Box component='div' className="page-content">
-                <Box component='div' className="screen-title__wrap">
-                <Typography variant="h1" className="title">ログイン画面</Typography>
-                </Box>
+                {/* <Box component='div' className="screen-title__wrap">
+                    <Typography variant="h1" className="title">ログイン画面</Typography>
+                </Box> */}
                 <Box component='div' className="content-wrap">
                     <Box component='div' className="form-title">
                         <Typography variant="h2">メールアドレスでログイン</Typography>
