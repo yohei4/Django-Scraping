@@ -18,6 +18,6 @@ from django.urls import path, include
 from rest_framework import routers
 
 urlpatterns = [
-    path('admin/', admin.site.urls),                     # 管理者画面
-    path('api/v1/',include('v1.urls')),                  # REST API画面
+    path('admin/', admin.site.urls),        # 管理者画面
+    path('api/', include('v1.urls')),       # REST API画面
 ]

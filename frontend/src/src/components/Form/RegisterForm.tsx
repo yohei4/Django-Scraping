@@ -17,8 +17,8 @@ export default function LoginForm() {
             <Box>
                 <NameField sx={{justifyContent: 'center', marginBottom: '15px', '& input': {width: '242px'}}}/>
                 <EmailField sx={{justifyContent: 'center', marginBottom: '15px', '& input': {width: '242px'}}}/>
-                <PasswordField sx={{justifyContent: 'center', marginBottom: '15px'}} />
                 <PasswordField sx={{justifyContent: 'center'}} />
+                {/* <PasswordField sx={{justifyContent: 'center'}} /> */}
                 <SubmitButton text="アカウント作成" />
             </Box>
         </FormBox>
