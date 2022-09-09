@@ -11,9 +11,9 @@ const config: AxiosRequestConfig = {
 const client = axios.create(config);
 
 export const fetchToken = (data: any) => {
-    return client.post('/token', data);
+    return client.post('/token/', data);
 };
 
 export const register = (data: any) => {
-    return client.post('/register', data);
+    return client.post('/register/', data);
 };

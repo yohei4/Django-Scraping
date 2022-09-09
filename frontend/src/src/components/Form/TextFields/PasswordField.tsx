@@ -12,6 +12,7 @@ import { InputProps } from "@mui/material";
 
 interface PasswordFiledProps extends InputProps {
     value?: string;
+    label?: string;
 }
 
 export default function PasswordFiled(props: PasswordFiledProps) {
@@ -29,10 +30,10 @@ export default function PasswordFiled(props: PasswordFiledProps) {
         <Box sx={{...{ display: 'flex', alignItems: 'flex-end' }, ...props.sx}}>
             <Key sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
             <FormControl variant="standard">
-                <InputLabel htmlFor="password">Password</InputLabel>
+                <InputLabel htmlFor="password">{props.label ? props.label : 'Password'}</InputLabel>
                 <Input
-                    id="password"
-                    name="password"
+                    id={props.id ? props.id : 'password'}
+                    name={props.name ? props.name : 'password'}
                     type={showPassword ? 'text' : 'password'}
                     value={props.value}
                     required={props.required}
