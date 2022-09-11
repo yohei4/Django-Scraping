@@ -17,8 +17,8 @@ export default function LoginForm() {
             <Box>
                 <NameField sx={{justifyContent: 'center', marginBottom: '15px', '& input': {width: '242px'}}}/>
                 <EmailField sx={{justifyContent: 'center', marginBottom: '15px', '& input': {width: '242px'}}}/>
-                <PasswordField sx={{justifyContent: 'center'}} />
-                {/* <PasswordField sx={{justifyContent: 'center'}} /> */}
+                <PasswordField id='password' name="password" sx={{justifyContent: 'center', marginBottom: '15px'}} />
+                <PasswordField id='confirmation_password' name='confirmation_password' label='Confirmation Password' sx={{justifyContent: 'center'}} />
                 <SubmitButton text="アカウント作成" />
             </Box>
         </FormBox>
