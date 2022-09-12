@@ -8,14 +8,14 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
-import { InputProps } from "@mui/material";
+import { BaseTextFieldProps, FormHelperText, FormLabel, FormLabelClasses } from "@mui/material";
 
-interface PasswordFiledProps extends InputProps {
-    value?: string;
-    label?: string;
+
+interface PasswordFiledProps extends BaseTextFieldProps {
+    onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
 }
 
-export default function PasswordFiled(props: PasswordFiledProps) {
+export const PasswordFiled = (props: PasswordFiledProps) => {
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
     const handleClickShowPassword = () => {
@@ -27,17 +27,22 @@ export default function PasswordFiled(props: PasswordFiledProps) {
     };
 
     return (
-        <Box sx={{...{ display: 'flex', alignItems: 'flex-end' }, ...props.sx}}>
-            <Key sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+        <Box sx={{...{ display: 'flex', alignItems: 'flex-start' }, ...props.sx}}>
+            <Key sx={{ color: 'action.active', mr: 1, mb: 0.5, mt: 2.5 }} />
             <FormControl variant="standard">
-                <InputLabel htmlFor="password">{props.label ? props.label : 'Password'}</InputLabel>
+                <InputLabel htmlFor="password" required={props.required} error={props.error}>
+                    {props.label ? props.label : 'Password'}
+                </InputLabel>
                 <Input
                     id={props.id ? props.id : 'password'}
                     name={props.name ? props.name : 'password'}
                     type={showPassword ? 'text' : 'password'}
-                    value={props.value}
                     required={props.required}
                     onChange={props.onChange}
+                    error={props.error}
+                    inputProps={props.inputProps}
+                    inputRef={props.inputRef}
+                    defaultValue={props.defaultValue}
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
@@ -50,6 +55,10 @@ export default function PasswordFiled(props: PasswordFiledProps) {
                         </InputAdornment>
                     }
                 />
+                { props.helperText ?
+                    <FormHelperText id={props.name ? props.name + '-helper-text' : 'password-helper-text'} error={props.error} filled={true}>{props.helperText}</FormHelperText> :
+                    ''
+                }
             </FormControl>
         </Box>
     );
