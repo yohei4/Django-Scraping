@@ -6,7 +6,7 @@ router = routers.DefaultRouter()
 router.register('users', ListUserViewSet)
 
 urlpatterns = [
-    path('',include(router.urls)),                                                  # REST API画面
-    path('account-api/', AccountAPIView.as_view(), name='account-api'),             # アカウント情報を取得
-    path('register/', RegisterView.as_view(), name='register'),                     # アカウント登録処理
+    path('',include(router.urls)),                                                          # REST API画面
+    path('account-api/', AccountAPIView.as_view(), name='account-api'),                     # アカウント情報を取得
+    path('register/', RegisterView.as_view(), name='register'),                             # アカウント登録処理
 ]

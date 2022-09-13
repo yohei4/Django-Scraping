@@ -1,11 +1,11 @@
-import { InputProps } from "@mui/material";
-import BaseTextField from "./BaseTextField";
+import { BaseTextFieldProps } from '@mui/material/TextField';
+import { BaseTextField } from "./";
 
-interface NameFiledProps extends InputProps {
-    value?: string;
+interface NameFiledProps extends BaseTextFieldProps {
+    onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-export default function NameFiled(props: NameFiledProps) {
+export const NameFiled = (props: NameFiledProps) => {
     return (
         <BaseTextField
             id="name"
@@ -13,11 +13,15 @@ export default function NameFiled(props: NameFiledProps) {
             type="text"
             placeholder="name"
             label="name"
-            // required={true}
+            required={props.required}
             value={props.value}
             onChange={props.onChange}
             muiName="AccountCircle"
             sx={props.sx}
+            inputRef={props.inputRef}
+            error={props.error}
+            inputProps={props.inputProps}
+            helperText={props.helperText}
         />
     );
 }

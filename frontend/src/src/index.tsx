@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import '@/assets/sass/style.scss';
 import ReactDOM from 'react-dom/client';
-import { Home, Login, Register } from '@/components/Pages';
+// import { Home, Login, Register } from '@/components/Pages';
 import reportWebVitals from './reportWebVitals';
 import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Router } from '@/routes/Router';
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -12,12 +13,8 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="register" element={<Register />} />
-				<Route path="/login" element={<Login />} />
-			</Routes>
-    </BrowserRouter>
+			<Router />
+		</BrowserRouter>
 	</React.StrictMode>
 );
 
