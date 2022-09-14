@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import '@/assets/sass/style.scss';
 import ReactDOM from 'react-dom/client';
-// import { Home, Login, Register } from '@/components/Pages';
 import reportWebVitals from './reportWebVitals';
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Router } from '@/routes/Router';
 
 const root = ReactDOM.createRoot(

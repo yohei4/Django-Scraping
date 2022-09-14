@@ -11,11 +11,11 @@ import Input from '@mui/material/Input';
 import { BaseTextFieldProps, FormHelperText, FormLabel, FormLabelClasses } from "@mui/material";
 
 
-interface PasswordFiledProps extends BaseTextFieldProps {
+interface PasswordFieldProps extends BaseTextFieldProps {
     onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
 }
 
-export const PasswordFiled = (props: PasswordFiledProps) => {
+export const PasswordField = (props: PasswordFieldProps) => {
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
     const handleClickShowPassword = () => {

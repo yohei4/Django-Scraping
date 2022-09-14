@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import { FormButton } from '@/components/Pages/Account/style';
 
 interface ButtonProps {
@@ -9,6 +7,6 @@ interface ButtonProps {
 
 export const SubmitButton = (props: ButtonProps) => {
     return (
-        <FormButtonton type="submit">{props.text}</FormButton>
+        <FormButton type="submit">{props.text}</FormButton>
     );
 }

@@ -5,7 +5,7 @@ interface EmailFiledProps extends BaseTextFieldProps {
     onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-export const EmailFiled = (props: EmailFiledProps) => {
+export const EmailField = (props: EmailFiledProps) => {
     return (
         <BaseTextField
             id="email"

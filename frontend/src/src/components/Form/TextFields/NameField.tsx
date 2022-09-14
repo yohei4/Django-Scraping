@@ -5,7 +5,7 @@ interface NameFiledProps extends BaseTextFieldProps {
     onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
-export const NameFiled = (props: NameFiledProps) => {
+export const NameField = (props: NameFiledProps) => {
     return (
         <BaseTextField
             id="name"
