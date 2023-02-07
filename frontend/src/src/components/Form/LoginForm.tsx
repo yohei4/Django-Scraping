@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import { useCookies } from 'react-cookie';
 import Box from '@mui/material/Box';
 import { EmailField, PasswordField } from './TextFields';
 import { SubmitButton } from './Button';
@@ -8,6 +8,9 @@ import { InputErrorParams } from '@/util/interface';
 import { FormBox } from '@/components/Pages/Account';
 
 export const LoginForm = () => {
+
+    // cookie
+    const [cookies, setCookie] = useCookies();
     
     // Setting email filed
     const EmailRef = React.useRef<HTMLInputElement | HTMLTextAreaElement>(null);
@@ -57,7 +60,9 @@ export const LoginForm = () => {
         // action api (url: /api/token/).
         const client = fetchToken(data)
         .then(response => {
-            console.log(response);
+            console.log(response.data);
+            setCookie('accesstoken', response.data.access, { path: '/',  httpOnly: true });
+            setCookie('refreshtoken', response.data.refresh, { path: '/', httpOnly: true });
         })
         .catch(error => {
             console.log(error);

@@ -10,7 +10,7 @@ const config: AxiosRequestConfig = {
 
 const client = axios.create(config);
 
-export const fetchToken = (data: any) => {
+export const  fetchToken = (data: any) => {
     return client.post('token/', data);
 };
 
