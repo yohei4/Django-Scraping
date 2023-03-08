@@ -1,7 +1,10 @@
 django
 django-cleanup
-django-adminlte-3
-django-jquery
+django-cors-headers
+# markdown==3.3.4
+django-filter
+djangorestframework
+djangorestframework-jwt
 djlint
 pillow
 selenium
@@ -13,3 +16,6 @@ mysqlclient
 PyMySQL
 scikit-build
 opencv-python
+djoser
+# django-adminlte-3
+# django-jquery

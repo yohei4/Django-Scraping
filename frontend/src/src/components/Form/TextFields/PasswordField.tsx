@@ -8,28 +8,18 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
-import { InputProps } from "@mui/material";
+import { BaseTextFieldProps, FormHelperText, FormLabel, FormLabelClasses } from "@mui/material";
 
-interface State {
-    password: string;
-    showPassword: boolean;
+
+interface PasswordFieldProps extends BaseTextFieldProps {
+    onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
 }
 
-export default function PasswordFiled(props: InputProps) {
-    const [values, setValues] = React.useState<State>({
-        password: '',
-        showPassword: false
-    });
-
-    const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+export const PasswordField = (props: PasswordFieldProps) => {
+    const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
     const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword,
-        });
+        setShowPassword(!showPassword);
     };
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,17 +27,22 @@ export default function PasswordFiled(props: InputProps) {
     };
 
     return (
-        <Box sx={{...{ display: 'flex', alignItems: 'flex-end' }, ...props.sx}}>
-            <Key sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+        <Box sx={{...{ display: 'flex', alignItems: 'flex-start' }, ...props.sx}}>
+            <Key sx={{ color: 'action.active', mr: 1, mb: 0.5, mt: 2.5 }} />
             <FormControl variant="standard">
-                <InputLabel htmlFor="password">Password</InputLabel>
+                <InputLabel htmlFor="password" required={props.required} error={props.error}>
+                    {props.label ? props.label : 'Password'}
+                </InputLabel>
                 <Input
-                    id="password"
-                    name="password"
-                    type={values.showPassword ? 'text' : 'password'}
-                    value={values.password}
+                    id={props.id ? props.id : 'password'}
+                    name={props.name ? props.name : 'password'}
+                    type={showPassword ? 'text' : 'password'}
                     required={props.required}
-                    onChange={handleChange('password')}
+                    onChange={props.onChange}
+                    error={props.error}
+                    inputProps={props.inputProps}
+                    inputRef={props.inputRef}
+                    defaultValue={props.defaultValue}
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
@@ -55,11 +50,15 @@ export default function PasswordFiled(props: InputProps) {
                                 onClick={handleClickShowPassword}
                                 onMouseDown={handleMouseDownPassword}
                             >
-                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                         </InputAdornment>
                     }
                 />
+                { props.helperText ?
+                    <FormHelperText id={props.name ? props.name + '-helper-text' : 'password-helper-text'} error={props.error} filled={true}>{props.helperText}</FormHelperText> :
+                    ''
+                }
             </FormControl>
         </Box>
     );

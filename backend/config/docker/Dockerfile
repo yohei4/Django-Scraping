@@ -80,7 +80,7 @@ RUN rm chrome-version
 
 # requtirements.txtに書かれているモジュールをインストール
 RUN mkdir /var/www/html/opt
-ADD config/docker/requirements.txt /var/www/html/opt
+ADD backend/config/docker/requirements.txt /var/www/html/opt
 WORKDIR /var/www/html/opt
 RUN pip3 install --upgrade pip setuptools
 RUN pip3 install --upgrade -r requirements.txt

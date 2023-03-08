@@ -1,17 +1,27 @@
-import { InputProps } from "@mui/material";
-import BaseTextField from "./BaseTextField";
+import { BaseTextField } from "./";
+import { BaseTextFieldProps } from '@mui/material/TextField';
 
-export default function EmailFiled(props: InputProps) {
+interface EmailFiledProps extends BaseTextFieldProps {
+    onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+}
+
+export const EmailField = (props: EmailFiledProps) => {
     return (
         <BaseTextField
             id="email"
             name="email"
             type="email"
             label="email"
-            // required={true}
+            required={props.required}
             placeholder="email"
             muiName="Email"
+            onChange={props.onChange}
             sx={props.sx}
+            inputRef={props.inputRef}
+            error={props.error}
+            inputProps={props.inputProps}
+            helperText={props.helperText}
+            defaultValue={props.defaultValue}
         />
     );
 }
