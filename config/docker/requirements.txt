@@ -1,7 +1,6 @@
 django
 django-cleanup
 django-cors-headers
-# markdown==3.3.4
 django-filter
 djangorestframework
 djangorestframework-jwt
@@ -17,5 +16,3 @@ PyMySQL
 scikit-build
 opencv-python
 djoser
-# django-adminlte-3
-# django-jquery

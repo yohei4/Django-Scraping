@@ -1,79 +1,79 @@
-version: "3"
+version: "3.9"
 
 services:
-    db: 
-        container_name: django-db
-        image: mysql:5.7
-        networks:
-            - django-net
-        volumes:
-            - django-db:/var/lib/mysql
-            - ./config/db/mysql/initdb.d:/docker-entrypoint-initdb.d
-            - ./config/db/mysql/my.cnf:/etc/my.cnf
-        ports: 
-            - "3306:3306"
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: issa
-            MYSQL_USER: issa
-            MYSQL_PASSWORD: issa
-            TZ: Asia/Tokyo
-        tty: true   
+    # db:
+    #     container_name: django-db
+    #     image: mysql:5.7
+    #     networks:
+    #         - django-net
+    #     volumes:
+    #         - django-db:/var/lib/mysql
+    #         - ./config/db/mysql/initdb.d:/docker-entrypoint-initdb.d
+    #         - ./config/db/mysql/my.cnf:/etc/my.cnf
+    #     ports: 
+    #         - "3306:3306"
+    #     environment:
+    #         MYSQL_ROOT_PASSWORD: root
+    #         MYSQL_DATABASE: issa
+    #         MYSQL_USER: issa
+    #         MYSQL_PASSWORD: issa
+    #         TZ: Asia/Tokyo
+    #     tty: true
 
     backend:
         container_name: django-backend
-        depends_on: 
-            - db
+        # depends_on:
+        #     - db
         build:
             context: .
             dockerfile: backend/config/docker/Dockerfile
         networks:
             - django-net
-        ports:
-            - "8000:80"
-        volumes:
-            - ./backend/src:/var/www/html
-            - ./backend/logs:/var/www/logs
-        tty: true
-        environment:
-            DJANGO_DB_HOST: db
-            DJANGO_DB_NAME: django
-            DJANGO_DB_USER: django
-            DJANGO_DB_PASSWORD: django
-        privileged: true
-        command:
-            export PYTHONPATH=/var/www/html/common
+        # ports:
+        #     - "8000:80"
+        # volumes:
+        #     - ./backend/src:/var/www/html
+        #     - ./backend/logs:/var/www/logs
+        # tty: true
+        # environment:
+        #     DJANGO_DB_HOST: db
+        #     DJANGO_DB_NAME: django
+        #     DJANGO_DB_USER: django
+        #     DJANGO_DB_PASSWORD: django
+        # privileged: true
+        # command:
+        #     export PYTHONPATH=/var/www/html/common
 
-    frontend:
-        container_name: django-frontend
-        depends_on: 
-            - backend
-        build:
-            context: .
-            dockerfile: frontend/config/docker/Dockerfile
-        networks:
-            - django-net
-        ports:
-            - "3000:3000"
-        volumes:
-            - ./frontend/src:/usr/src/app
-        tty: true
-        privileged: true
+    # frontend:
+    #     container_name: django-frontend
+    #     depends_on: 
+    #         - backend
+    #     build:
+    #         context: .
+    #         dockerfile: frontend/config/docker/Dockerfile
+    #     networks:
+    #         - django-net
+    #     ports:
+    #         - "3000:3000"
+    #     volumes:
+    #         - ./frontend/src:/usr/src/app
+    #     tty: true
+    #     privileged: true
 
-    phpmyadmin:
-        container_name: django-phpmyadmin
-        image: phpmyadmin/phpmyadmin
-        networks:
-            - django-net
-        environment:
-            PMA_ARBITRARY: 1
-            PMA_HOSTS: db
-            PMA_USER: root
-            PMA_PASSWORD: root
-        links:
-            - db
-        ports:
-            - "8001:80"
+    # phpmyadmin:
+    #     container_name: django-phpmyadmin
+    #     image: phpmyadmin/phpmyadmin
+    #     networks:
+    #         - django-net
+    #     environment:
+    #         PMA_ARBITRARY: 1
+    #         PMA_HOSTS: db
+    #         PMA_USER: root
+    #         PMA_PASSWORD: root
+    #     links:
+    #         - db
+    #     ports:
+    #         - "8001:80"
 
 networks: 
     django-net:

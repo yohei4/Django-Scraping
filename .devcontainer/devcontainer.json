@@ -19,23 +19,29 @@
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
 	"workspaceFolder": "/workspace/",
 
-	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		// "editor.tabSize": 4,
-        // "terminal.integrated.shell.linux": "/bin/bash"
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				// "editor.tabSize": 4,
+				// "terminal.integrated.shell.linux": "/bin/bash"
+			},
+			
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"syler.sass-indented",
+				"ritwickdey.live-sass",
+				"batisteo.vscode-django",
+				"oderwat.indent-rainbow",
+				"PKief.material-icon-theme",
+				"donjayamanne.jquerysnippets"
+			],
+		}
 	},
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"ms-azuretools.vscode-docker",
-		"ms-python.python",
-		"syler.sass-indented",
-		"ritwickdey.live-sass",
-		"batisteo.vscode-django",
-		"oderwat.indent-rainbow",
-		"PKief.material-icon-theme",
-		"donjayamanne.jquerysnippets"
-	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
