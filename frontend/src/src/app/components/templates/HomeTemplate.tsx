@@ -1,7 +1,6 @@
 import React from "react";
-import { AppLayout } from "@app/admin/layout/AppLayout";
-import { PageTitle } from "@app/admin/components/molecules/PageTitle";
-import { CardLinks, CardLinksProps } from "@app/admin/components/molecules/CardLinks";
+import { PageTitle } from "@components/molecules/PageTitle";
+import { CardLinks, CardLinksProps } from "@components/molecules/CardLinks";
 
 export interface HomeTemplateProps extends CardLinksProps {
 };

@@ -1,24 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IUser } from '@app/admin/interfaces//IUser';
+import { IUser } from '@app/interfaces//IUser';
 
 const initialState: IUser = {
-    UserCd: undefined,
-    UserNameSei: undefined,
-    UserNameMei: undefined,
-    UserKanaSei: undefined,
-    UserKanaMei: undefined,
-    KinoAuthGroupNo: undefined,
-    CarrierCd: undefined,
-    Password: undefined,
-    InvalidKbn: undefined,
-    InsDateTime: undefined,
-    InsKinoCd: undefined,
-    InsUserCd: undefined,
-    InsUserName: undefined,
-    UpdDateTime: undefined,
-    UpdKinoCd: undefined,
-    UpdUserCd: undefined,
-    UpdUserName: undefined,
+    id: undefined,
+    password: undefined,
+    last_login: undefined,
+    username: undefined,
+    email: undefined,
+    is_active: undefined,
+    is_admin: undefined,
+    created_at: undefined,
+    updated_at: undefined,
 };
 
 const userSlice = createSlice({

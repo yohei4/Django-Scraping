@@ -71,20 +71,20 @@ const customTheme = createTheme({
         width: 240,
         open: false,
         backgroundColor: '#595959',
-        title: '荷役時間管理',
+        title: 'ISSA',
         icon: 'Alarm',
         header: {
-            backgroundColor: '#17375E',
+            backgroundColor: '#056c02',
         }
     },
     appBar: {
-        title: '荷役管理システム',
-        backgroundColor: '#17375E',
+        title: 'ISSA',
+        backgroundColor: '#056c02',
     },
     dialog: {
         default: {
             header: {
-                backgroundColor: '#17375E',
+                backgroundColor: '#056c02',
                 color: '#FFF',
             }
         },
@@ -99,11 +99,13 @@ const customTheme = createTheme({
         danger: {
             main: '#C00000',
             light: '#C00000',
+            dark: '#C00000',
             contrastText: '#FFF',
         },
         default: {
-            main: '#17375E',
-            light: '#17375E',
+            main: '#056c02',
+            light: '#056c02',
+            dark: '#056c02',
             contrastText: '#FFF',
         },
     },

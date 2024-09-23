@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { IUser } from "@app/admin/interfaces/IUser";
-import { selectUser } from "@app/admin/features/user/user.selectors";
-import { resetUser as resetUserState, setUser } from "@app/admin/features/user/user.slice";
+import { IUser } from "@app/interfaces/IUser";
+import { selectUser } from "@app/features/user/user.selectors";
+import { resetUser as resetUserState, setUser } from "@app/features/user/user.slice";
 
 type UseUserResult = {
     user: IUser;

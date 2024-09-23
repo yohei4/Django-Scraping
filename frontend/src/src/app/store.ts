@@ -13,7 +13,7 @@ import {
   } from "redux-persist";
 
 const persistConfig = {
-    key: 'logisics.admin',
+    key: 'issa',
     storage,
     blacklist: ['_persist', 'loading'],
 };

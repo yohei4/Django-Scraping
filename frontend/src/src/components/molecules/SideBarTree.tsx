@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { SideBarTreeItem, SideBarTreeItemProps } from "../atoms/SideBarTreeItem";
 import { Link } from "react-router-dom";
+import { SideBarTreeItem, SideBarTreeItemProps } from "@components/atoms/SideBarTreeItem";
 
 export interface SideBarTreeProps extends SideBarTreeItemProps {
 }
@@ -10,7 +10,7 @@ export const SideBarTree = (props: SideBarTreeProps) => {
     const [isExpandable, setIsExpandable] = useState(false);
     const [open, setOpen] = useState(false);
 
-    const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    const handleClick: React.MouseEventHandler<HTMLDivElement> = () => {
         setOpen(!open);
     };
 

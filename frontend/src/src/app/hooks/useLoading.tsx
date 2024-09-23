@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { selectLoading } from "@app/admin/features/loading/loading.selectors";
+import { selectLoading } from "@app/features/loading/loading.selectors";
 import { resetLoading as resetLoadingState, setLoading } from "@features/loading/loading.slice";
 
 type UseLoadingResult = {

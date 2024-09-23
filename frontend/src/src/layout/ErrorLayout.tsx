@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Box, CssBaseline, ThemeProvider, Toolbar, Typography } from "@mui/material";
-import { theme } from "@/theme/Theme";
+import { theme } from "@theme/Theme";
 
 export interface ErrorLayoutProps {
     children?: React.ReactNode;

@@ -5,26 +5,10 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, Pass
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password', 'created_at', 'updated_at')
-
-    def create(self, validated_data):
-        return User.objects.create_user(validated_data)
-
-class LoginSerializer(TokenObtainPairSerializer):
-    pass
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-
-    #     self.fields["email"] = serializers.EmailField()
-    #     self.fields["password"] = PasswordField()
-
-    # def validate(self, attrs):
-    #     data = super().validate(attrs)
-
-    #     if api_settings.UPDATE_LAST_LOGIN:
-    #         update_last_login(None, self.user)
-
-    #     return data
+        fields = ('id', 'username', 'email', 'password', 'is_active', 'is_admin', 'created_at', 'updated_at')
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,13 +18,17 @@ class RegisterSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.fields["email"] = serializers.EmailField()
-        self.fields["password"] = PasswordField()
+        self.fields['username'] = serializers.CharField(required=True, max_length=150)
+        self.fields['email'] = serializers.EmailField(required=True, max_length=255)
+        self.fields['password'] = serializers.CharField(required=True, write_only=True, max_length=128, min_length=8)
 
     def create(self, validated_data):
-        return User.objects.create_user(validated_data) 
+        return User.objects.create_user(validated_data)
     
-    def validate_password(self, value):
-        if len(value) < 8:
-            raise serializers.ValidationError('Password must be at least 8 characters.')
+    def validate_email(self, value):
+        '''
+            メールアドレスのバリデーション
+        '''
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError('このメールアドレスは既に使用されています。')
         return value

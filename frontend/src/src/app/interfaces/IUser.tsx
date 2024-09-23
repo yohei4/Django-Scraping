@@ -1,8 +1,4 @@
-import { AdminAuthKbn } from "@enums/AdminAuthKbn";
-import { MUser } from "@interfaces/MUser";
+import { User } from "@interfaces/User";
 
-export interface IUser extends MUser {
-    UserName?: string;
-    UserKana?: string;
-    AdminAuthKbn?: AdminAuthKbn;
+export interface IUser extends User {
 }

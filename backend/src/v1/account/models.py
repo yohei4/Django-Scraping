@@ -6,10 +6,10 @@ from django.utils.translation import gettext_lazy as _
 # Create your models here.
 class UserManager(BaseUserManager):
     def create_user(self, request_data):
-        """
+        '''
         Creates and saves a User with the given email, date of
         birth and password.
-        """
+        '''
         if not request_data['username']: 
             raise ValueError('username is requied.')
 
@@ -32,10 +32,10 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, username, email, password=None):
-        """
+        '''
         Creates and saves a superuser with the given email, date of
         birth and password.
-        """
+        '''
         request_data = {
             'username': username,
             'email': email,
@@ -50,7 +50,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
 class User(AbstractBaseUser):
     
     class Meta:
@@ -60,14 +59,14 @@ class User(AbstractBaseUser):
     username_validator = UnicodeUsernameValidator()
 
     username = models.CharField(
-        _('username'),
+        _('ユーザー名'),
         max_length=150, 
         unique=False,
         validators=[username_validator],
     )
 
     email = models.EmailField(
-        _('email address'),
+        _('メールアドレス'),
         max_length=255,
         unique=True,
     )
@@ -87,17 +86,17 @@ class User(AbstractBaseUser):
         return self.username
 
     def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
+        'Does the user have a specific permission?'
         # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
+        'Does the user have permissions to view the app `app_label`?'
         # Simplest possible answer: Yes, always
         return True
     
     @property
     def is_staff(self):
-        "Is the user a member of staff?"
+        'Is the user a member of staff?'
         # Simplest possible answer: All admins are staff
         return self.is_admin

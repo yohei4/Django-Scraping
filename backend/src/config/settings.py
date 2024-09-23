@@ -33,6 +33,19 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_HEADERS = [
+#     'accept',
+#     'accept-encoding',
+#     'authorization',
+#     'content-type',
+#     'dnt',
+#     'origin',
+#     'user-agent',
+#     'x-csrftoken',
+#     'x-requested-with',
+#     'access-control-allow-origin'
+# ]
 
 
 # Application definition%
@@ -52,6 +65,7 @@ INSTALLED_APPS = [
     'djoser',
     # Install project app
     'v1.account.apps.AccountConfig',
+    'v1.album.apps.AlbumConfig',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +115,7 @@ DATABASES = {
         'STORAGE_ENGINE': 'MyISAM / INNODB / ETC',
         'OPTIONS': {
             'charset': 'utf8mb4',
-            "init_command": "SET foreign_key_checks = 0;" #最初に子テーブルを保存してから親を保存しようとすることです。
+            "init_command": "SET foreign_key_checks = 0;" #最初に子テーブルを保存してから親を保存する
         },
         # ----------------
     },
@@ -194,16 +208,3 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
-
-# CORS_ALLOW_HEADERS = (
-#     'accept',
-#     'accept-encoding',
-#     'authorization',
-#     'content-type',
-#     'dnt',
-#     'origin',
-#     'user-agent',
-#     'x-csrftoken',
-#     'x-requested-with',
-#     'access-control-allow-origin',
-# )

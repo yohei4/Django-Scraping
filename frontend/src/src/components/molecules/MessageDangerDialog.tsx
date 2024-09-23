@@ -1,8 +1,7 @@
-import { Button } from "@components/atoms/Button";
+import React from "react";
+import { Box } from "@mui/material";
 import { DangerButton } from "@components/atoms/DangerButton";
 import { DangerDialog, DangerDialogProps } from "@components/atoms/DangerDialog";
-import { Box } from "@mui/material";
-import React from "react";
 
 export interface MessageDangerDialogProps extends DangerDialogProps {
     message?: React.ReactNode;

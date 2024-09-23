@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { HttpStatusCode } from "axios";
-import { ErrorTemplate } from "@app/admin/components/templates/ErrorTemplate";
+import { ErrorTemplate } from "@app/components/templates/ErrorTemplate";
 
 interface IParams extends Record<string, string> {
     status: string;

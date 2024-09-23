@@ -1,46 +1,63 @@
-import React, { useEffect, useLayoutEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import React, { useLayoutEffect } from "react";
+import { Cookies } from "react-cookie";
+import { Outlet, useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { Backdrop, CircularProgress, Typography } from "@mui/material";
+import { get } from "@utils";
 import { Layout } from "@layout/Layout";
 import { useClient } from "@hooks/useClient";
-import { useLoading, useMenu, useSystem, useUser } from "@app/admin/hooks";
-import { AccountIconMenu } from "@app/admin/components/organisms/AccountIconMenu";
-import { FETCH_MENU_ITEMS, FETCH_SYSTEM, FETCH_USER, LOGOUT } from "@app/admin/constants/ApiUrls";
+import { useLoading, useUser } from "@app/hooks";
+import { AccountIconMenu } from "@components/organisms/AccountIconMenu";
+import { FETCH_USER_INFO, LOGOUT } from "@app/constants/ApiUrls";
+import { IUser } from "@app/interfaces/IUser";
 
-interface AppLayoutProps {
+export const AppLayoutLoader = async (): Promise<IUser> => {
+    const cookies = new Cookies();
+    const access = cookies.get('access');
+    return (await get<IUser>(FETCH_USER_INFO, {
+        headers: {
+            Authorization: `JWT ${access}`
+        }
+    })).data;
 }
 
-export const AppLayout: React.FC<AppLayoutProps> = (props) => {
+export const AppLayout: React.FC = () => {
+    const data = useLoaderData() as IUser;
     const location = useLocation();
     const navigate = useNavigate();
-    const { get, post } = useClient(false);
     const { loading } = useLoading();
     const { user, updateUser } = useUser();
-    const { system, updateSystem } = useSystem();
-    const { sidebar, updateMenu } = useMenu();
 
+    // 初期表示処理
     useLayoutEffect(() => {
         (async () => {
-            updateUser((await get(FETCH_USER)).data);
-            updateSystem((await get(FETCH_SYSTEM)).data);
-            updateMenu((await get(FETCH_MENU_ITEMS)).data);
+            updateUser(data);
         })();
-    }, [location]);
-
-    // ログアウト処理
-    const handleResetPassword = async () => {
-        navigate('/reset-password');
-    };
+    }, [location, data]);
 
     // ログアウト処理
     const handleLogout = async () => {
-        await post(LOGOUT);
         navigate('/login');
     };
     
     return (
         <Layout
-            sideBarTree={sidebar}
+            sideBarTree={[
+                {
+                    text: 'ホーム',
+                    path: '/',
+                    icon: 'Home',
+                },
+                {
+                    text: '写真一覧',
+                    path: '/',
+                    icon: 'PhotoLibrary',
+                },
+                {
+                    text: 'スクレイピング',
+                    path: '/',
+                    icon: 'ImageSearch',
+                },
+            ]}
             appBarRightToolbar={
                 <AccountIconMenu
                     items={[
@@ -52,13 +69,9 @@ export const AppLayout: React.FC<AppLayoutProps> = (props) => {
                                     textOverflow: 'ellipsis',
                                     textAlign: 'center'
                                 }}>
-                                    {user.UserName}
+                                    {user.username}
                                 </Typography>
                             ),
-                        },
-                        {
-                            children: 'パスワード変更',
-                            onClick: handleResetPassword,
                         },
                         {
                             children: 'ログアウト',

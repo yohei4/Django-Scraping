@@ -14,6 +14,7 @@ django-cors-headers
 django-filter
 djangorestframework
 djangorestframework_simplejwt
+chromedriver-binary
 # markdown==3.3.4
 # mod_wsgi
 # mod-wsgi-httpd

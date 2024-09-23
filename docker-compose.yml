@@ -52,6 +52,7 @@ services:
             - django-net
         ports:
             - "3000:3000"
+            - "5173:5173"
         volumes:
             - ./frontend/src:/home/${USER}/app/src
         tty: true

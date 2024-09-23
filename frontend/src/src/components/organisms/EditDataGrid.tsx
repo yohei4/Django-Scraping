@@ -1,11 +1,9 @@
-import React, { EventHandler, MouseEventHandler, useState } from "react";
-import { DataGrid, DataGridProps, GridFooter, GridFooterContainer, GridRenderCellParams, GridRenderEditCellParams, GridRowId, GridTreeNodeWithRender, GridValidRowModel, useGridApiRef } from "@mui/x-data-grid";
+import React, { MouseEventHandler } from "react";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { DataGrid, DataGridProps, GridFooterContainer, GridRenderCellParams, GridRenderEditCellParams, GridTreeNodeWithRender, GridValidRowModel, useGridApiRef } from "@mui/x-data-grid";
+import { Box, Button } from "@mui/material";
 import { GridBaseColDef, GridSlotsComponentsProps } from "@mui/x-data-grid/internals";
 import { DynamicFormControl, DynamicFormControlProps } from "./DynamicFormControl";
-import { Box, Button } from "@mui/material";
-import { useFieldArray, useFormContext } from "react-hook-form";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { DangerButton } from "@components/atoms/DangerButton";
 
 export type EditGridColDef<R extends GridValidRowModel = any, V = any, F = V> = GridBaseColDef<R, V, F> & {
     formControl?: DynamicFormControlProps;
@@ -33,7 +31,7 @@ declare module '@mui/x-data-grid' {
     }
 }
 
-const A = (props: NonNullable<GridSlotsComponentsProps['footer']>) => {
+const footer = (props: NonNullable<GridSlotsComponentsProps['footer']>) => {
     return (
         <GridFooterContainer>
             <Box>
@@ -60,7 +58,7 @@ export const EditDataGrid = (props: EditDataGridProps) => {
     const control = useFormContext();
     const apiRef = useGridApiRef();
 
-    const { fields, append, remove, update } = useFieldArray({
+    const { fields, append, remove } = useFieldArray({
         control: control.control,
         name: props.name,
     });
@@ -148,7 +146,7 @@ export const EditDataGrid = (props: EditDataGridProps) => {
                 ...props.sx,
             }}
             slots={{
-                footer: A,
+                footer: footer,
             }}
             slotProps={{
                 footer: { onAppendRowClick: handleAppendRow, onDeleteRowClick: handleDeleteRow }

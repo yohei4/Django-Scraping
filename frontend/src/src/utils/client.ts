@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { API_BASE_URL } from "@/constants";
+import { API_BASE_URL } from "@constants";
 
 const config: AxiosRequestConfig = {
     baseURL: API_BASE_URL,
@@ -10,21 +10,11 @@ const config: AxiosRequestConfig = {
 
 export const client = axios.create(config);
 
-
 /**
- * fetch token.
+ * exec get.
  * @returns 
  */
-export const fetchToken = async (data?: any) => {
-    return client.post('token/', data);
-};
-
-/**
- * exec post.
- * @returns 
- */
-export const get = async <T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<any>): Promise<R> => {
-    await fetchToken();
+export const get = async <T = any, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig<any>): Promise<R> => {
     return client.get<T, R>(url, config);
 };
 
@@ -33,6 +23,5 @@ export const get = async <T = any, R = AxiosResponse<T>, D = any>(url: string, c
  * @returns 
  */
 export const post = async <T = any, R = AxiosResponse<T>, D = any>(url: string, data?: D, config?: AxiosRequestConfig<any>): Promise<R> => {
-    await fetchToken();
     return client.post<T, R>(url, data, config);
 };

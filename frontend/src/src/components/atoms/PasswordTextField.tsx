@@ -1,7 +1,7 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { BaseTextFieldProps, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { Controller, ControllerProps, UseControllerProps, useFormContext } from "react-hook-form";
+import { Controller, UseControllerProps, useFormContext } from "react-hook-form";
 
 export type PasswordTextFieldProps = BaseTextFieldProps & UseControllerProps & {
     onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;

@@ -1,11 +1,11 @@
-import { Button, ButtonProps } from './Button';
+import { DefaultButton, DefaultButtonProps } from "@components/atoms/DefaultButton";
 
-interface DefaultButtonProps extends ButtonProps {
+
+interface SearchButtonProps extends DefaultButtonProps {
 }
 
-export const SearchButton : React.FC<DefaultButtonProps> = (props: DefaultButtonProps) => {
-    
+export const SearchButton : React.FC<SearchButtonProps> = (props: SearchButtonProps) => {
     return (
-        <Button {...props} color='default'>{props.children}</Button>
+        <DefaultButton {...props} startIconName='Search'>{props.children}</DefaultButton>
     );
 }

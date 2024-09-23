@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/material";
 import { DataGrid as MuiDataGrid, DataGridProps as MuiDataGridProps } from "@mui/x-data-grid";
 import { jaJP } from "@mui/x-data-grid/locales";
 import { GridPagination } from "@components/molecules/GridPagination";
@@ -39,4 +38,4 @@ export const DataGrid = (props: DataGridProps) => {
             localeText={jaJP.components.MuiDataGrid.defaultProps.localeText}
         />
     );
-  }
+};
