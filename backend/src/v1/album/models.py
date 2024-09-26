@@ -9,7 +9,7 @@ class UserImage(models.Model):
     '''
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False, blank=True)
     path = models.ImageField(upload_to='user_images/', null=True, blank=True, unique=True)
-    filename = models.CharField(max_length=255, null=True)
+    filename = models.CharField(max_length=255, null=True, unique=True)
     origin_link = models.URLField(null=True)
     created_at = models.DateTimeField('作成日時', auto_now_add=True, null=True)
     updated_at = models.DateTimeField('更新日時', auto_now=True, null=True)
