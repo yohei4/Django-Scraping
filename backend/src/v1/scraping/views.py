@@ -5,7 +5,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from .serializer import ScrapingSerializer, ScrapingHistorySerializer
 from .models import ScrapingHistory
-from .services import scraping_images
+from .services import ScarpingImage
 
 # Create your views here.
 
@@ -20,6 +20,7 @@ class ScrapingView(APIView):
     @transaction.atomic
     def post(self, request: Request, format=None):
         serializer = ScrapingSerializer(data=request.data)
-        link = scraping_images('羽咲みはる')
+        service = ScarpingImage(safe=False)
+        result, links = service.exec(request.data.get('keyword'), 1)
         
-        return Response(link, status=status.HTTP_200_OK)
+        return Response(links, status=status.HTTP_200_OK)
