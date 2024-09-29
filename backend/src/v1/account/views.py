@@ -2,6 +2,7 @@ import jwt
 from django.db import transaction
 from rest_framework import viewsets, status, permissions
 from rest_framework.views import APIView
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
@@ -37,7 +38,7 @@ class RegisterView(APIView):
     serializer_class = RegisterSerializer
 
     @transaction.atomic
-    def post(self, request, format=None):
+    def post(self, request: Request, format=None):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()

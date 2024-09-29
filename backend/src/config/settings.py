@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -66,6 +67,7 @@ INSTALLED_APPS = [
     # Install project app
     'v1.account.apps.AccountConfig',
     'v1.album.apps.AlbumConfig',
+    'v1.scraping.apps.ScrapingConfig',
 ]
 
 MIDDLEWARE = [
@@ -208,3 +210,7 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+APPEND_SLASH = False
