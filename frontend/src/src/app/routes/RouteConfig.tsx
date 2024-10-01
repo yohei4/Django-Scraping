@@ -5,6 +5,7 @@ import { Error } from "@app/pages/Error";
 import { ErrorHandle } from "@app/pages/ErrorHandle";
 import { AppLayout, AppLayoutLoader } from "@app/layout/AppLayout";
 import { Home, HomeLoader } from "@app/pages/Home";
+import { Scraping } from "@app/pages/Scraping";
 
 /**
  * ルート定義
@@ -51,11 +52,20 @@ export const routes: RouteObject[] = [
                 index: true,
                 element: <Home />,
                 meta: {
-                    text: 'アカウント登録',
+                    text: 'ホーム',
                     icon: 'Home',
                 },
                 loader: HomeLoader,
-            }
+            },
+            {
+                id: 'Scraping',
+                path: '/scraping',
+                element: <Scraping />,
+                meta: {
+                    text: 'スクレイピング',
+                    icon: 'Home',
+                },
+            },
         ]
     },
 ];

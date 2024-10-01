@@ -11,7 +11,7 @@ export const HomeLoader = async ({ params }: LoaderFunctionArgs): Promise<CardLi
         },
         {
             text: 'スクレイピング',
-            path: '',
+            path: '/scraping',
             icon: 'ImageSearch',
         },
     ];

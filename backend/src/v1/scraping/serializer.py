@@ -9,12 +9,12 @@ class ScrapingHistorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ScrapingHistory
-        fields = ('url', 'keyword')
+        fields = ("url", "keyword")
 
 class ScrapingSerializer(serializers.Serializer):
 
     keyword = serializers.CharField()
 
     class Meta:
-        fields = ('keyword')
+        fields = ("keyword")
 

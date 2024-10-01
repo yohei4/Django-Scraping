@@ -10,3 +10,6 @@ export const REGISTER: string = '/api/account/register/';
 
 /** アカウント情報取得 */
 export const FETCH_USER_INFO: string = '/api/account/info/';
+
+/** スクレイピング履歴取得 */
+export const FETCH_SCRAPING_HISTORY: string = '/api/scraping/scraping-history/';

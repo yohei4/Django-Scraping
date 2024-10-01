@@ -1,9 +1,9 @@
-import { Autocomplete, AutocompleteChangeDetails, AutocompleteChangeReason, AutocompleteProps, MenuItemProps, TextField, TextFieldProps, useFormControl } from "@mui/material";
+import { Autocomplete, AutocompleteChangeDetails, AutocompleteChangeReason, MenuItemProps, TextField, TextFieldProps } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
-import { ControllerProps, UseControllerProps } from "react-hook-form";
+import { UseControllerProps } from "react-hook-form";
 
 export type FreeSoloProps = TextFieldProps & UseControllerProps & {
-    options: MenuItemProps[];
+    options?: MenuItemProps[];
 }
 
 export const FreeSolo = (props: FreeSoloProps) => {
@@ -28,7 +28,7 @@ export const FreeSolo = (props: FreeSoloProps) => {
         <Autocomplete
             freeSolo
             id={props.id}
-            options={props.options.map((option) => option.children)}
+            options={props.options?.map((option) => option.children) ?? []}
             onChange={handleChange}
             disabled={props.disabled}
             renderInput={(params) =>

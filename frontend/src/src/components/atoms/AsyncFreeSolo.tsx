@@ -5,12 +5,11 @@ import { FreeSoloProps } from "./FreeSolo";
 import { Controller, useFormContext } from "react-hook-form";
 
 export type AsyncFreeSoloProps = FreeSoloProps & {
-    type: 'async-free-solo';
+    type?: 'async-free-solo';
     url?: string;
     readOnly?: boolean;
 }
 
-// TODO: ajaxで取得できるように修正する
 export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
     const control = useFormContext();
     const [open, setOpen] = useState(false);
@@ -26,7 +25,7 @@ export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
         }
     
         if (props.url) {
-            get(props.url).then(({ data }) => {
+            get(props.url, true).then(({ data }) => {
                 setOptions((data as MenuItemProps[]).map((option) => option.children as string));
             });
         }
