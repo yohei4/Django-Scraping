@@ -6,6 +6,6 @@ router = routers.DefaultRouter()
 router.register("scraping-history", ScrapingHistoryViewSet, basename="scraping-history")
 
 urlpatterns = [
-    path("", include(router.urls)),
     path("", ScrapingView.as_view(), name="scraping"),
+    path("", include(router.urls)),
 ]

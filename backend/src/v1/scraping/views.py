@@ -1,4 +1,5 @@
 from django.db import transaction
+from django.db.models import F
 from rest_framework.views import APIView
 from rest_framework import viewsets, status, permissions
 from rest_framework.request import Request
@@ -35,4 +36,4 @@ class ScrapingHistoryViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return self.models.objects.filter(user=user)
+        return self.models.objects.filter(user=user).annotate(children=F('keyword'))

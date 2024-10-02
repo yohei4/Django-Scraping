@@ -68,8 +68,8 @@ export const useClient = (errorPage: boolean = false): UseClientResult => {
      */
     const get = useCallback(
         async <T = any, R = AxiosResponse<T>>(url: string, showLoading?: boolean, config?: AxiosRequestConfig<any>): Promise<R> => {
-            if (showLoading) dispatch(setLoading(true));
             await _refreshToken();
+            if (showLoading) dispatch(setLoading(true));
             return clientGet(
                 url,
                 cookies.access ? { 
@@ -88,8 +88,8 @@ export const useClient = (errorPage: boolean = false): UseClientResult => {
      */
     const post = useCallback(
         async <T = any, R = AxiosResponse<T>, D = any>(url: string, data?: D, showLoading?: boolean, config?: AxiosRequestConfig<any>): Promise<R> => {
-            if (showLoading) dispatch(setLoading(true));
             await _refreshToken();
+            if (showLoading) dispatch(setLoading(true));
             return clientPost(
                 url,
                 data,

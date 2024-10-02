@@ -11,5 +11,8 @@ export const REGISTER: string = '/api/account/register/';
 /** アカウント情報取得 */
 export const FETCH_USER_INFO: string = '/api/account/info/';
 
+/** スクレイピング */
 /** スクレイピング履歴取得 */
+/** スクレイピング履歴取得 */
+export const SCRAPING: string = '/api/scraping/';
 export const FETCH_SCRAPING_HISTORY: string = '/api/scraping/scraping-history/';

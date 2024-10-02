@@ -25,7 +25,7 @@ export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
         }
     
         if (props.url) {
-            get(props.url, true).then(({ data }) => {
+            get(props.url).then(({ data }) => {
                 setOptions((data as MenuItemProps[]).map((option) => option.children as string));
             });
         }
@@ -83,6 +83,7 @@ export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
                         autoSelect
                         id={props.id}
                         open={open}
+                        sx={props.sx}
                         onOpen={() => {
                             setOpen(true);
                         }}
@@ -107,14 +108,16 @@ export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
                                 label={props.label}
                                 margin={props.margin}
                                 required={props.required}
-                                InputProps={{
-                                    ...params.InputProps,
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                          {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                          {params.InputProps.endAdornment}
-                                        </InputAdornment>
-                                    ),
+                                slotProps={{
+                                    input: {
+                                        ...params.InputProps,
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                              {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                              {params.InputProps.endAdornment}
+                                            </InputAdornment>
+                                        ),
+                                    }
                                 }}
                                 error={errors[props.name] ? true : props.error}
                                 helperText={errors[props.name]?.message as string ?? props.helperText}

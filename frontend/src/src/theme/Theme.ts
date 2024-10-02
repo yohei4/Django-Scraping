@@ -128,7 +128,7 @@ const customTheme = createTheme({
             },
             styleOverrides: {
                 root: {
-                    minWidth: '6rem',
+                    // minWidth: '6rem',
                 }
             },
         },

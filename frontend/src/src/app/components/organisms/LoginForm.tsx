@@ -3,7 +3,7 @@ import { OutlinedTextField } from "@components/atoms/OutlineTextField";
 import { PasswordTextField } from "@components/atoms/PasswordTextField";
 
 export interface LoginFormProps {
-    onSubmit?: React.FormEventHandler<HTMLFormElement>,
+    onSubmit?: React.FormEventHandler<HTMLFormElement>;
 };
 
 export const LoginForm = (props: LoginFormProps) => {    

@@ -10,7 +10,7 @@ class UserImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserImage
-        fields = ('id', 'path', 'filename', 'token', 'origin_link')
+        fields = ['id', 'path', 'filename', 'token', 'origin_link']
 
     def get_token(self, obj):
         hash_input = f"{obj.id}{obj.user_id}{obj.filename}{obj.created_at}".encode('utf-8')
@@ -54,7 +54,7 @@ class UserImageKeywordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserImageKeyword
-        fields = ('origin_link', 'keyword')
+        fields = ['origin_link', 'keyword']
     
     def create(self, validated_data: dict[str, any]):
         validated_data.pop('origin_link')
