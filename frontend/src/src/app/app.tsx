@@ -5,6 +5,7 @@ import { router } from '@app/routes/Routes';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
+import '@assets/style.scss';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container!);

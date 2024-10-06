@@ -12,7 +12,7 @@ export const REGISTER: string = '/api/account/register/';
 export const FETCH_USER_INFO: string = '/api/account/info/';
 
 /** スクレイピング */
-/** スクレイピング履歴取得 */
-/** スクレイピング履歴取得 */
+/** スクレイピング実行 */
 export const SCRAPING: string = '/api/scraping/';
+/** スクレイピング履歴取得 */
 export const FETCH_SCRAPING_HISTORY: string = '/api/scraping/scraping-history/';

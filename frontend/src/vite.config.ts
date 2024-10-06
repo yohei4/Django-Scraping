@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
     resolve: {
         alias: {
+            '@assets': path.join(__dirname, './src/assets'),
             '@app': path.join(__dirname, './src/app'),
             '@components': path.join(__dirname, './src/components'),
             '@constants': path.join(__dirname, './src/constants'),

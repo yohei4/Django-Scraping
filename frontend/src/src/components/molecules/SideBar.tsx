@@ -45,7 +45,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const CustomSideBar = (props: SideBarProps) => {
     return (
         <React.Fragment>
-            <Drawer {...props} variant="permanent" onClick={undefined} open={props.open}>
+            <Drawer
+                {...props}
+                variant="permanent"
+                onClick={undefined}
+                open={props.open}
+                sx={(theme) => ({
+                    '& .MuiPaper-root': {
+                        zIndex: (theme) => theme.zIndex.drawer - 200,
+                    }
+                })}
+            >
                 <DrawerHeader>
                     <Box>
                         <IconButton>
@@ -67,7 +77,7 @@ const CustomSideBar = (props: SideBarProps) => {
             </Drawer>
             <Backdrop
                 sx={[
-                    { zIndex: (theme) => theme.zIndex.drawer - 1,},
+                    { zIndex: (theme) => theme.zIndex.drawer - 201,},
                     ((theme) => ({
                         [theme.breakpoints.up('md')]: {
                             display: 'none',

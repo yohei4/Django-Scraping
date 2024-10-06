@@ -19,7 +19,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         self.fields['email'] = serializers.EmailField(required=True, max_length=255)
         self.fields['password'] = serializers.CharField(required=True, write_only=True, max_length=128, min_length=8)
 
-    def create(self, validated_data):
+    def create(self, validated_data: dict[str, any]):
         return User.objects.create_user(validated_data)
     
     def validate_email(self, value):

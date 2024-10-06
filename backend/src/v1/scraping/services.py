@@ -7,10 +7,11 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 class ScarpingImage():
-    search_num:int = 0
-    timeout:float = 0.5
-    safe:bool = False
+    search_num: int = 0
+    timeout: float = 0.5
+    safe: bool = False
     driver: webdriver.Chrome | None = None
+    url: str | None = None
 
     _options: Options = None
     _width: int = 0
@@ -34,6 +35,7 @@ class ScarpingImage():
         self._width = width
         self._height = height
         self.safe = safe
+        self.url = ''
         self.driver = None
         self._options = None
 
@@ -71,13 +73,13 @@ class ScarpingImage():
                 "safe": "on" if self.safe else "off",
                 "start": (page - 1) * self.search_num,
             }
-            url = f"https://www.google.com/search?{urllib.parse.urlencode(query_params)}"
+            self.url = f"https://www.google.com/search?{urllib.parse.urlencode(query_params)}"
 
             # 指定のURLでブラウザ(Chrome)へアクセス
-            self.driver.get(url)
+            self.driver.get(self.url)
 
             # 適当に下までスクロールしてる
-            for _ in range(5):
+            for _ in range(2):
                 self.driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight)")
                 time.sleep(self.timeout) #サーバーの負荷を軽減するためのもの
 

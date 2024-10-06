@@ -54,7 +54,7 @@ export const AppLayout: React.FC = () => {
                 },
                 {
                     text: 'スクレイピング',
-                    path: '/',
+                    path: '/scraping',
                     icon: 'ImageSearch',
                 },
             ]}

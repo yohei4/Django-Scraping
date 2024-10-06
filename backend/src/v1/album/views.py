@@ -87,7 +87,7 @@ class DeleteImageView(APIView):
             keywords = request.data.get('keyword', '')
             keywords = re.split(r'[ 　]+', keywords.strip()) 
             for keyword in keywords:
-                keyword_serializer = UserImageKeywordSerializer(data={'origin_link': request.data.get('origin_link'), 'keyword': keyword})
+                keyword_serializer = UserImageKeywordSerializer(data={ 'origin_link': request.data.get('origin_link'), 'keyword': keyword })
                 if keyword_serializer.is_valid():
                     keyword_serializer.save(image=image)
                 else:

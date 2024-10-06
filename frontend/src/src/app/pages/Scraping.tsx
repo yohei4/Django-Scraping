@@ -12,10 +12,9 @@ export const Scraping = () => {
 
     // submit 処理
     const submit: SubmitHandler<IScrapingHistory> = async (data: IScrapingHistory) => {
-        console.log(data);
+        setImages([]);
         await post(SCRAPING, data, true)
             .then(({ data }) => {
-                console.log(data);
                 setImages(data);
             });
     };
@@ -23,13 +22,9 @@ export const Scraping = () => {
     return (
         <FormProvider {...methods}>
             <ScrapingTemplate
+                images={images}
                 onSubmit={methods.handleSubmit(submit)}
             />
-            {
-                images.map((src) => (
-                    <img src={src} ></img>
-                ))
-            }
         </FormProvider>
     );
 };
