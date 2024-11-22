@@ -6,7 +6,7 @@ export const HomeLoader = async ({ params }: LoaderFunctionArgs): Promise<CardLi
     return [
         {
             text: '写真一覧',
-            path: '',
+            path: 'album',
             icon: 'PhotoLibrary',
         },
         {
@@ -15,7 +15,7 @@ export const HomeLoader = async ({ params }: LoaderFunctionArgs): Promise<CardLi
             icon: 'ImageSearch',
         },
     ];
-}
+};
 
 export const Home = () => {
     const data = useLoaderData() as CardLinkProps[];

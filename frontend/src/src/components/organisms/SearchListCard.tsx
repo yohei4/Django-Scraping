@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { Box, Card, CardContent, CardHeader, Divider } from "@mui/material";
+import { Box, Card, CardContent, CardHeader, Divider, SxProps, Theme } from "@mui/material";
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
-import { GridInitialStateCommunity } from "@mui/x-data-grid/models/gridStateCommunity";
-import { useInitialSearchConditionContext, useSearchConditionContext, useSearchConditionDispatch } from "@hooks/useSearchConditionContext";
-import { DataGrid } from "@components/organisms/DataGrid";
-import { SearchButton } from "@components/atoms/SearchButton";
+import { SearchButton } from "../atoms/SearchButton";
 import { ResetSerachButton } from "@components/atoms/ResetSerachButton";
 import { SearchFormDialog } from "@components/organisms/SearchFormDialog";
 import { DynamicFormControlProps } from "@components/organisms/DynamicFormControl";
+import { DataGrid } from "@components/organisms/DataGrid";
 import { SearchCondition } from "@components/organisms/SearchCondition";
+import { GridInitialStateCommunity } from "@mui/x-data-grid/models/gridStateCommunity";
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { useInitialSearchConditionContext, useSearchConditionContext, useSearchConditionDispatch } from "@hooks/useSearchConditionContext";
 
 export interface SearchListCardProps {
     dialogOpen: boolean;
@@ -19,6 +19,9 @@ export interface SearchListCardProps {
     dataGirdInitialState?: GridInitialStateCommunity | undefined;
     dataGridACtion?: React.ReactNode;
     columnVisibilityModel?: GridColumnVisibilityModel;
+    sx?: SxProps<Theme>;
+    pageSizeOptions?: readonly (number | { value: number; label: string; })[] | undefined;
+    checkboxSelection?: boolean;
     handleOpen: React.MouseEventHandler<HTMLButtonElement>;
     handleClose: React.MouseEventHandler<HTMLButtonElement>;
     submit: SubmitHandler<any>;
@@ -57,11 +60,12 @@ export const SearchListCard: React.FC<SearchListCardProps> = (props: SearchListC
 
     return (
         <FormProvider {...methods}>
-            <Card>
+            <Card sx={props.sx}>
                 <CardHeader
                     sx={{
                         '& .MuiCardHeader-content': {
                             overflowX: 'scroll',
+                            scrollbarWidth: 'none',
                             '&::-webkit-scrollbar': {
                                 width: 0,
                                 height: 0,
@@ -79,14 +83,13 @@ export const SearchListCard: React.FC<SearchListCardProps> = (props: SearchListC
                 <Divider />
                 <CardContent sx={{ padding: 0, '&:last-child': {paddingBottom: 0} }}>
                     <DataGrid
-                        sx={{ border: 'none' }}
                         columns={props.columns}
                         rows={props.rows}
                         initialState={props.dataGirdInitialState}
                         columnVisibilityModel={props.columnVisibilityModel}
                         action={props.dataGridACtion}
-                        pageSizeOptions={[5, 10, 25]}
-                        checkboxSelection={false}
+                        pageSizeOptions={props.pageSizeOptions ?? [10, 25, 50, 100]}
+                        checkboxSelection={props.checkboxSelection}
                         disableColumnFilter
                         disableColumnMenu
                         disableColumnSelector

@@ -9,8 +9,8 @@ export const ResetPasswordCompleteDialog: React.FC<ResetPasswordCompleteDialogPr
     return (
         <CompleteDefaultDialog
             {...props}
-            dialogTitle='パスワード変更完了'
-            message='パスワード変更が完了しました。'
+            dialogTitle='更新完了'
+            message='パスワードを更新しました。'
             fullWidth
         />
     );

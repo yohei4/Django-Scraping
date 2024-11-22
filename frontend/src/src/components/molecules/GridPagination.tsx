@@ -5,7 +5,6 @@ import { gridPageCountSelector, useGridApiContext, useGridSelector, GridPaginati
 function Pagination({
     page,
     onPageChange,
-    className,
   }: Pick<TablePaginationProps, 'page' | 'onPageChange' | 'className'>) {
     const apiRef = useGridApiContext();
     const pageCount = useGridSelector(apiRef, gridPageCountSelector);

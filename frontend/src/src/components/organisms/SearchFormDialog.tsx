@@ -47,7 +47,7 @@ export const SearchFormDialog = <T extends { [key: string]: any } | undefined = 
             }
             actions={[
                 <DefaultButton variant="outlined" onClick={props.onResetButtonClick}>リセット</DefaultButton>,
-                <DefaultButton type="submit" autoFocus onClick={props.onSearchButtonClick} form={props.formId}>検索</DefaultButton>
+                <DefaultButton type="submit" variant='contained' autoFocus onClick={props.onSearchButtonClick} form={props.formId}>検索</DefaultButton>
             ]}
         />
     );

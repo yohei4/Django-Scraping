@@ -1,5 +1,5 @@
-import React from "react";
 import { ConfirmDefaultDialog, ConfirmDefaultDialogProps } from "@components/molecules/ConfirmDefaultDialog";
+import React from "react";
 
 export interface ResetPasswordConfirmDialogProps extends ConfirmDefaultDialogProps {
 }
@@ -9,8 +9,8 @@ export const ResetPasswordConfirmDialog: React.FC<ResetPasswordConfirmDialogProp
     return (
         <ConfirmDefaultDialog
             {...props}
-            dialogTitle='パスワード変更確認'
-            message='パスワードの変更をしますか？'
+            dialogTitle='更新確認'
+            message='パスワードを更新しますか？'
             fullWidth
         />
     );

@@ -17,7 +17,7 @@ export interface DataGridProps extends MuiDataGridProps {
 export const DataGrid = (props: DataGridProps) => {
 
     const [paginationModel, setPaginationModel] = React.useState(props.paginationModel ?? {
-        pageSize: 5,
+        pageSize: 10,
         page: 0,
     });
   
@@ -38,4 +38,4 @@ export const DataGrid = (props: DataGridProps) => {
             localeText={jaJP.components.MuiDataGrid.defaultProps.localeText}
         />
     );
-};
+  }

@@ -42,7 +42,7 @@ export const DangerDialog: React.FC<DangerDialogProps> = (props) => {
     return (
         <BootstrapDialog
             open={props.open}
-            onClose={props.onCloseButtonClick}
+            onClose={props.onClose}
             aria-labelledby="bootstrap-danger-dialog-title"
             fullWidth={props.fullWidth}
             sx={props.sx}

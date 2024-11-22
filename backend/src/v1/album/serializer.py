@@ -1,20 +1,28 @@
 import hashlib
 import random, string
 from urllib.request import urlopen
+from django.urls import reverse
 from django.core.files.base import ContentFile
 from rest_framework import serializers
 from .models import UserImage, UserImageKeyword
 
 class UserImageSerializer(serializers.ModelSerializer):
     token = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
 
     class Meta:
         model = UserImage
-        fields = ['id', 'path', 'filename', 'token', 'origin_link']
+        fields = ['id', 'path', 'filename', 'token', 'origin_link', 'url']
 
     def get_token(self, obj):
         hash_input = f"{obj.id}{obj.user_id}{obj.filename}{obj.created_at}".encode('utf-8')
         return hashlib.sha256(hash_input).hexdigest()
+    
+    def get_url(self, obj):
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(reverse('serve_image', kwargs={'token': self.get_token(obj), 'id': obj.id}))
+        return None
     
     def create(self, validated_data: dict[str, any]):
         img_link = validated_data.get('origin_link')

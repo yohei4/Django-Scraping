@@ -3,7 +3,7 @@ from rest_framework import routers
 from .views import ScrapingView, ScrapingHistoryViewSet
 
 router = routers.DefaultRouter()
-router.register("scraping-history", ScrapingHistoryViewSet, basename="scraping-history")
+router.register("scraping-history", ScrapingHistoryViewSet, basename="scraping_history")
 
 urlpatterns = [
     path("", ScrapingView.as_view(), name="scraping"),

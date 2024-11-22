@@ -1,8 +1,10 @@
 import React from "react";
+import dayjs from "dayjs";
+import { NumericFormat } from "react-number-format";
 import { Box, Chip, SxProps, Theme } from "@mui/material";
 import { DynamicFormControlProps } from "./DynamicFormControl";
 import { useSearchConditionContext } from "@hooks/useSearchConditionContext";
-import moment from "moment";
+import { OutlinedNumberFieldProps } from "@components/atoms/OutlinedNumberField";
 
 export interface SearchConditionProps {
     formControls: DynamicFormControlProps[][];
@@ -16,11 +18,19 @@ const putSearchLabel = (key: string, value: any, formControls: DynamicFormContro
     if(control) {
         switch(control.type) {
             case 'text':
+                node = (
+                    <React.Fragment>
+                        <Box component='span'>{control.startAdornmentInner}</Box>
+                        <Box component='span'>{value}</Box>
+                        <Box component='span'>{control.endAdornmentInner}</Box>
+                    </React.Fragment>
+                );
+                break;
             case 'number':
                 node = (
                     <React.Fragment>
                         <Box component='span'>{control.startAdornmentInner}</Box>
-                        <Box component='span'>{String(value)}</Box>
+                        <Box component='span'><NumericFormat thousandSeparator={(control as OutlinedNumberFieldProps).thousandSeparator} displayType='text' value={value} /></Box>
                         <Box component='span'>{control.endAdornmentInner}</Box>
                     </React.Fragment>
                 );
@@ -32,13 +42,13 @@ const putSearchLabel = (key: string, value: any, formControls: DynamicFormContro
                 node = control.options?.filter(x => value.includes(x.value)).map((item) => item.children).join(',');
                 break;
             case 'date':
-                node = moment(value).format(control.format ?? 'YYYY/MM/DD');
+                node = dayjs(value).format(control.format ?? 'YYYY/MM/DD');
                 break;
             case 'time':
-                node = moment(value).format(control.format ?? 'HH:mm:ss');
+                node = dayjs(value).format(control.format ?? 'HH:mm:ss');
                 break;
             case 'datetime-local':
-                node = moment(value).format(control.format ?? 'YYYY/MM/DD HH:mm:ss');
+                node = dayjs(value).format(control.format ?? 'YYYY/MM/DD HH:mm:ss');
                 break;
             default:
                 node = String(value);

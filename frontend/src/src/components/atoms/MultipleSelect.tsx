@@ -57,13 +57,13 @@ export const MultipleSelect = (props: MultipleSelectProps) => {
                             {...field}
                             multiple
                             onChange={handleChange}
-                            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                            input={<OutlinedInput id="select_multiple_chip" label="Chip" />}
                             MenuProps={MenuProps}
                             readOnly={props.readOnly}
                             renderValue={(selected) => {
                                 return (<Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                                     {
-                                        (selected as (string | number)[]).map((value, index) => (
+                                        (selected as (string | number)[]).sort((a, b) => (a as any) - (b as any)).map((value, index) => (
                                             <Chip
                                                 key={index}
                                                 label={props.options?.find(x => x.value === value)?.children}

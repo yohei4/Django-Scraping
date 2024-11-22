@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Box, BoxProps, Input, InputLabel, InputLabelProps, MenuItemProps, styled } from "@mui/material";
+import { BaseTextFieldProps, Box, BoxProps, FormControl, FormHelperText, Input, InputLabel, InputLabelProps, MenuItemProps, styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { Controller, ControllerProps, UseControllerProps, useFormContext } from "react-hook-form";
 
-export interface BoxRadioProps extends UseControllerProps {
+export type BoxRadioProps = UseControllerProps & BaseTextFieldProps & {
     type?: 'radio';
     label?: React.ReactNode;
     value?: string | number;
@@ -12,54 +12,6 @@ export interface BoxRadioProps extends UseControllerProps {
     options?: MenuItemProps[];
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
-
-const BoxRadioLabel = styled(InputLabel)<InputLabelProps>
-    (({ theme }) => ({
-        position: 'static',
-        width: '100%',
-        maxWidth: '12rem',
-        minWidth: 'auto',
-        margin: 0,
-        padding: theme.spacing(2, 1.75),
-        color: theme.palette.default.main,
-        border: `1px solid ${theme.palette.default.main}`,
-        boxShadow: 'inset 0 0 0 transparent',
-        textAlign: 'center',
-        borderRight: 'none',
-        cursor: 'pointer',
-        transition: theme.transitions.create(['background-color'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-        '&:first-of-type': {
-            borderTopLeftRadius: '.3rem',
-            borderBottomLeftRadius: '.3rem',
-        },
-        '&:last-of-type': {
-            borderTopRightRadius: '.3rem',
-            borderBottomRightRadius: '.3rem',
-            borderRight: `1px solid ${theme.palette.default.main}`,
-        },
-    }));
-
-const BoxRadioWrapper = styled(Box)<BoxProps>
-    (({ theme }) => ({
-        display: 'flex',
-        alignItems: 'center',
-        width: '100%',
-        '& input[type="radio"]:checked + .MuiInputLabel-root': {
-            backgroundColor: theme.palette.default.main,
-            color: theme.palette.default.contrastText,
-        },
-        '& input[type="radio"]:focus + .MuiInputLabel-root, & input[type="radio"]:focus-visible + .MuiInputLabel-root': {
-            borderColor: theme.palette.default.main,
-            boxShadow: 'inset 0 0 0 transparent',
-            outline: 0,
-        },
-        '& input[type="radio"]': {
-            width: 0,
-        },
-    }));
 
 export const BoxRadio: React.FC<BoxRadioProps> = (props) => {
     const control = useFormContext();
@@ -73,24 +25,44 @@ export const BoxRadio: React.FC<BoxRadioProps> = (props) => {
             defaultValue={props.defaultValue}
             render={({ field, formState: { errors } }) => {
 
-                const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-                    field.onChange(event);
-                    if(props.onChange) props.onChange(event);
+                const handleChange = (event: React.MouseEvent<HTMLElement>, value: any) => {
+                    if (value !== null) {
+                        const changeEvent = {
+                            target: {
+                                name: props.name,
+                                value: value,
+                            },
+                        } as unknown as ChangeEvent<HTMLInputElement>;
+                        field.onChange(changeEvent);
+                        props.onChange?.(changeEvent);
+                    }
                 };
 
                 return (
-                    <BoxRadioWrapper>
-                        {
-                            props.options?.map((option, index) => {
-                                return (
-                                    <React.Fragment key={index}>
-                                        <input required={props.required} type={props.type} value={option.value} name={props.name} id={`${props.name}_${option.value}`} checked={field.value == option.value} onChange={handleChange} />
-                                        <BoxRadioLabel htmlFor={`${props.name}_${option.value}`}>{option.children}</BoxRadioLabel>
-                                    </React.Fragment>
-                                );
-                            })
-                        }
-                    </BoxRadioWrapper>
+                    <FormControl variant="outlined" fullWidth >
+                        <ToggleButtonGroup
+                            fullWidth
+                            exclusive
+                            color="default"
+                            orientation="horizontal"
+                            onChange={handleChange}
+                            value={field.value}
+                            disabled={field.disabled}
+                        >
+                            {
+                                props.options?.map((option, index) => {
+                                    return (
+                                        <ToggleButton key={index} value={option.value ?? ''} aria-label={`${props.name} ${option.value}`} sx={{ width: '100%', maxWidth: '12rem', minWidth: 'auto' }} disabled={option.disabled}>
+                                            {option.children}
+                                        </ToggleButton>
+                                    );
+                                })
+                            }
+                        </ToggleButtonGroup>
+                        <FormHelperText error={errors[props.name] ? true : props.error}>
+                            {errors[props.name]?.message as string ?? props.helperText}
+                        </FormHelperText>
+                    </FormControl>
                 );
             }}
         />

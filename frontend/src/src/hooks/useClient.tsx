@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import { AxiosRequestConfig, AxiosResponse, HttpStatusCode } from "axios";
 import { client, get as clientGet, post as clientPost } from "@utils/client";
 import { setLoading } from "@features/loading/loading.slice";
-import { REFRESH_TOKEN } from "@app/constants/ApiUrls";
+import { REFRESH_TOKEN } from "@constants";
 
 interface UseClientResult {
     get: <T = any, R = AxiosResponse<T>>(url: string, showLoading?: boolean, config?: AxiosRequestConfig<any>) => Promise<R>;
@@ -53,8 +53,8 @@ export const useClient = (errorPage: boolean = false): UseClientResult => {
             if (cookies.access) {
                 await clientPost(REFRESH_TOKEN, { refresh: cookies.refresh }, config)
                     .then(({ data }) => {
-                        setCookie('access', data.access);
-                        setCookie('refresh', data.refresh);
+                        setCookie('access', data.access, { path: '/', sameSite: 'none', secure: true });
+                        setCookie('refresh', data.refresh, { path: '/', sameSite: 'none', secure: true });
                     })
                     .catch(() => {
                         navigate(`/error/${HttpStatusCode.Unauthorized}`);

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { DefaultValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { Box, Typography } from "@mui/material";
-import { DangerDialog, DangerDialogProps } from "@components/atoms/DangerDialog";
-import { DangerButton } from "@components/atoms/DangerButton";
-import { DynamicRangeFormControl } from "@components/organisms/DynamicRangeFormControl";
 import { DynamicFormControlProps } from "./DynamicFormControl";
+import { DangerButton } from "@components/atoms/DangerButton";
+import { DangerDialog, DangerDialogProps } from "@components/atoms/DangerDialog";
+import { DynamicRangeFormControl } from "@components/organisms/DynamicRangeFormControl";
 
 export type DynamicFormDangerFieldValues = Record<string, any>;
 export interface DynamicFormDangerDialogProps<TFieldValues extends DynamicFormDangerFieldValues = DynamicFormDangerFieldValues> extends DangerDialogProps {
@@ -95,7 +95,7 @@ export const DynamicFormDangerDialog = <TFieldValues extends DynamicFormDangerFi
             }
             actions={[
                 <DangerButton autoFocus variant="outlined" onClick={props.onNoButtonClick}>いいえ</DangerButton>,
-                <DangerButton type='submit' onClick={props.onYesButtonClick} form={props.formId}>はい</DangerButton>
+                <DangerButton type='submit' variant='contained' onClick={props.onYesButtonClick} form={props.formId}>はい</DangerButton>
             ]}
         />
     );

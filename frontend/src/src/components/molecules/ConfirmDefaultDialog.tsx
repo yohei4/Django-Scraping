@@ -26,8 +26,8 @@ export const ConfirmDefaultDialog: React.FC<ConfirmDefaultDialogProps> = (props)
                 </Box>
             }
             actions={[
-                <DefaultButton autoFocus variant="outlined" onClick={props.onNoButtonClick} sx={{minWidth: '6rem'}}>いいえ</DefaultButton>,
-                <DefaultButton type='submit' onClick={props.onYesButtonClick} form={props.formId} sx={{minWidth: '6rem'}}>はい</DefaultButton>
+                <DefaultButton type={props.formId ? 'submit' : 'button'} variant='contained' onClick={props.onYesButtonClick} form={props.formId} sx={{minWidth: '6rem'}}>はい</DefaultButton>,
+                <DefaultButton autoFocus variant="outlined" onClick={props.onNoButtonClick} sx={{minWidth: '6rem'}}>いいえ</DefaultButton>
             ]}
         />
     );

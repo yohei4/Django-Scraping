@@ -95,7 +95,7 @@ export const DynamicFormDefaultDialog = <TFieldValues extends DynamicFormDefault
             }
             actions={[
                 <DefaultButton autoFocus variant="outlined" onClick={props.onNoButtonClick}>いいえ</DefaultButton>,
-                <DefaultButton type='submit' onClick={props.onYesButtonClick} form={props.formId}>はい</DefaultButton>
+                <DefaultButton type='submit' variant='contained' onClick={props.onYesButtonClick} form={props.formId}>はい</DefaultButton>
             ]}
         />
     );

@@ -1,1 +1,5 @@
 @import '/node_modules/lightgallery/css/lightgallery-bundle.min.css';
+
+.lg-save::after {
+    content: '\e0f2';
+}

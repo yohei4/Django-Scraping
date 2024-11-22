@@ -1,21 +1,24 @@
-import { FC, useEffect, useMemo } from 'react';
+import { FC, memo, useCallback, useEffect, useMemo, useRef } from 'react';
+import { InitDetail } from 'lightgallery/lg-events';
 import LightGallery, { LightGalleryProps } from 'lightgallery/react';
-import lgZoom from 'lightgallery/plugins/zoom';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import fjGallery from 'flickr-justified-gallery';
 import { Box, Link } from '@mui/material';
+import lgSave from '@plugins/lightgallery/save/lg-save';
 
 export interface ImagesGalleryProps extends LightGalleryProps {
-    images?: string[];
+    items?: string[];
 }
 
-export const ImagesGallery: FC<ImagesGalleryProps> = (props) => {
-    const { images } = props;
+const ImagesGallery: FC<ImagesGalleryProps> = (props) => {
+    const lightGallery = useRef<any>(null);
+    const { elementClassNames, items, onSaveClick } = props;
 
     useEffect(() => {
-        if (0 < (images?.length ?? 0)) {
-            fjGallery(document.querySelectorAll('.gallery'), {
-                itemSelector: '.gallery__item',
+        lightGallery.current.refresh();
+        if (0 < (items?.length ?? 0)) {
+            fjGallery(document.querySelectorAll(elementClassNames ?? '.gallery'), {
+                itemSelector: '.gallery-item',
                 rowHeight: 180,
                 lastRow: 'start',
                 gutter: 10,
@@ -23,17 +26,24 @@ export const ImagesGallery: FC<ImagesGalleryProps> = (props) => {
                 calculateItemsHeight: false,
             });
         } else {
-            fjGallery(document.querySelectorAll('.gallery'), 'destroy');
+            fjGallery(document.querySelectorAll(elementClassNames ?? '.gallery'), 'destroy');
         }
-        return () => {
-            fjGallery(document.querySelectorAll('.gallery'), 'destroy');
-        };
-    }, [images]);
 
-    const imageList = useMemo(() => images?.map((src, i) => (
+        return () => {
+            fjGallery(document.querySelectorAll(elementClassNames ?? '.gallery'), 'destroy');
+        };
+    }, [items]);
+
+    const onInit = useCallback((detail: InitDetail) => {
+        if (detail) {
+            lightGallery.current = detail.instance;
+        }
+    }, []);
+
+    const imageList = useMemo(() => items?.map((src, i) => (
         <Link
             key={i}
-            className='gallery__item'
+            className='gallery-item'
             data-src={src}
             sx={{
                 position: 'relative',
@@ -46,17 +56,19 @@ export const ImagesGallery: FC<ImagesGalleryProps> = (props) => {
                 style={{width: '100%'}}
             />
         </Link>
-    )), [images])
-
+    )), [items]);
+    
     return (
         <LightGallery
             {...props}
-            plugins={[lgZoom, lgThumbnail]}
-            elementClassNames='gallery'
+            plugins={[lgSave, lgThumbnail]}
+            elementClassNames={elementClassNames ?? 'gallery'}
             mode='lg-fade'
             pager={false}
             thumbnail={true}
             autoplayFirstVideo={false}
+            onInit={onInit}
+            onSaveClick={onSaveClick}
             mobileSettings={{
                 controls: false,
                 showCloseIcon: false,
@@ -68,3 +80,9 @@ export const ImagesGallery: FC<ImagesGalleryProps> = (props) => {
         </LightGallery>
     );
 };
+
+export default memo(ImagesGallery, (prevProps, nextProps) => {
+    return (
+        prevProps.items === nextProps.items
+    );
+});

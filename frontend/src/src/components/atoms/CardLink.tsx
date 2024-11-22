@@ -1,7 +1,7 @@
 import { Icon } from "@components/atoms/Icon";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography, useTheme } from "@mui/material";
 import * as Icons from '@mui/icons-material';
-import { Link } from "react-router-dom";
+import { Link } from "./Link";
 
 export interface CardLinkProps {
     text?: string;
@@ -36,7 +36,7 @@ export const CardLink = (props: CardLinkProps) => {
                         null
                     }
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '.2rem' }}>
-                        <Typography variant="body1" fontWeight='bold' justifyContent='center' >{props.text}</Typography>
+                        <Typography variant="h6" fontWeight='bold' justifyContent='center' >{props.text}</Typography>
                     </Box>
                 </CardContent>
             </Card>

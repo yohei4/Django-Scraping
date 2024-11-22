@@ -4,17 +4,20 @@ import { Box } from "@mui/material";
 import { AsyncFreeSolo } from "@components/atoms/AsyncFreeSolo";
 import { Icon } from "@components/atoms/Icon";
 import { DefaultButton } from "@components/atoms/DefaultButton";
-import { ImagesGallery } from "@components/atoms/ImagesCallery";
 import { FETCH_SCRAPING_HISTORY } from "@app/constants/ApiUrls";
+import { LgSaveClickEventHandler } from "@plugins/lightgallery/save";
+import ImagesGallery from "@components/atoms/ImagesCallery";
 
 export interface ScrapingTemplateProps {
-    images: string[];
+    items: string[];
     onSubmit?: React.FormEventHandler<HTMLFormElement>;
+    onSaveClick?: LgSaveClickEventHandler<HTMLButtonElement>;
 };
 
 export const ScrapingTemplate :React.FC<ScrapingTemplateProps> = ({
-    images,
-    onSubmit
+    items,
+    onSubmit,
+    onSaveClick
 }) => {
     return (
         <React.Fragment>
@@ -30,6 +33,7 @@ export const ScrapingTemplate :React.FC<ScrapingTemplateProps> = ({
                 }}
             >
                 <AsyncFreeSolo
+                    type='async-free-solo'
                     name='keyword'
                     url={FETCH_SCRAPING_HISTORY}
                     sx={(theme) => ({
@@ -44,7 +48,10 @@ export const ScrapingTemplate :React.FC<ScrapingTemplateProps> = ({
             <Box>
                 <ImagesGallery
                     galleryId='scraping'
-                    images={images}
+                    download={false}
+                    items={items}
+                    save={true}
+                    onSaveClick={onSaveClick}
                 />
             </Box>
         </React.Fragment>

@@ -1,11 +1,11 @@
-import { Autocomplete, AutocompleteChangeDetails, AutocompleteChangeReason, CircularProgress, InputAdornment, MenuItemProps, TextField } from "@mui/material";
+import { Autocomplete, AutocompleteChangeDetails, AutocompleteChangeReason, AutocompleteValue, CircularProgress, InputAdornment, MenuItemProps, TextField } from "@mui/material";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useClient } from "@hooks/useClient";
 import { FreeSoloProps } from "./FreeSolo";
 import { Controller, useFormContext } from "react-hook-form";
 
 export type AsyncFreeSoloProps = FreeSoloProps & {
-    type?: 'async-free-solo';
+    type: 'async-free-solo';
     url?: string;
     readOnly?: boolean;
 }
@@ -52,7 +52,7 @@ export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
 
                 const handleChange = (
                     event: React.SyntheticEvent<Element, Event>,
-                    value: string,
+                    value: AutocompleteValue<unknown, unknown, unknown, unknown>,
                     reason: AutocompleteChangeReason,
                     details?: AutocompleteChangeDetails<unknown> | undefined) => {
                     const changeEvent = {
@@ -83,7 +83,6 @@ export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
                         autoSelect
                         id={props.id}
                         open={open}
-                        sx={props.sx}
                         onOpen={() => {
                             setOpen(true);
                         }}
@@ -93,6 +92,7 @@ export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
                         onChange={handleChange}
                         onInput={handleInput}
                         options={options}
+                        sx={props.sx}
                         getOptionLabel={(option) => {
                             if (typeof option === 'string') return option;
                             else return '';
@@ -108,16 +108,14 @@ export const AsyncFreeSolo = (props: AsyncFreeSoloProps) => {
                                 label={props.label}
                                 margin={props.margin}
                                 required={props.required}
-                                slotProps={{
-                                    input: {
-                                        ...params.InputProps,
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                              {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                              {params.InputProps.endAdornment}
-                                            </InputAdornment>
-                                        ),
-                                    }
+                                InputProps={{
+                                    ...params.InputProps,
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                          {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                          {params.InputProps.endAdornment}
+                                        </InputAdornment>
+                                    ),
                                 }}
                                 error={errors[props.name] ? true : props.error}
                                 helperText={errors[props.name]?.message as string ?? props.helperText}

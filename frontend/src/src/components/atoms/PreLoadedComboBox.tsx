@@ -13,8 +13,9 @@ export const PreLoadedComboBox = (props: PreLoadedComboBoxProps) => {
     const { get } = useClient();
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [value, setValue] = useState<MenuItemProps | undefined | null>(null);
     const [options, setOptions] = useState<readonly MenuItemProps[]>([]);
+    const [value, setValue] = useState<MenuItemProps | undefined | null>(null);
+    const watcher = control.watch(props.name);
 
     useEffect(() => {
         if (loading) {
@@ -29,7 +30,7 @@ export const PreLoadedComboBox = (props: PreLoadedComboBoxProps) => {
 
     useEffect(() => {
         setValue(options.find(x => x.value == control.getValues()[props.name]) ?? null);
-    }, [options]);
+    }, [options, watcher]);
 
     return (
         <Controller

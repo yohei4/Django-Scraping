@@ -1,6 +1,6 @@
-import { Box, Grid2 as Grid } from "@mui/material";
-import { CardLink, CardLinkProps } from "../atoms/CardLink";
 import React from "react";
+import { Box, Grid2 as Grid } from "@mui/material";
+import { CardLink, CardLinkProps } from "@components/atoms/CardLink";
 
 export interface CardLinksProps {
     cards?: CardLinkProps[];

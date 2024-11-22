@@ -26,8 +26,8 @@ export const ConfirmDangerDialog: React.FC<ConfirmDangerDialogProps> = (props) =
                 </Box>
             }
             actions={[
+                <DangerButton type={props.formId ? 'submit' : 'button'} variant='contained' onClick={props.onYesButtonClick} form={props.formId} sx={{minWidth: '6rem'}}>はい</DangerButton>,
                 <DangerButton autoFocus variant="outlined" onClick={props.onNoButtonClick} sx={{minWidth: '6rem'}}>いいえ</DangerButton>,
-                <DangerButton type='submit' onClick={props.onYesButtonClick} form={props.formId} sx={{minWidth: '6rem'}}>はい</DangerButton>
             ]}
         />
     );

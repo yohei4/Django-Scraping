@@ -1,8 +1,8 @@
 import React from "react";
-import { Drawer, DrawerProps, Divider, styled, List, CSSObject, Theme, Box, IconButton, Typography, Backdrop } from "@mui/material";
 import * as Icons from '@mui/icons-material';
-import { Icon } from '@components/atoms/Icon';
+import { Drawer, DrawerProps, Divider, styled, List, CSSObject, Theme, Box, IconButton, Typography, Backdrop } from "@mui/material";
 import { SideBarTree, SideBarTreeProps } from "@components/molecules/SideBarTree";
+import { Icon } from '@components/atoms/Icon';
 
 interface SideBarProps extends DrawerProps {
     open: boolean;
@@ -45,17 +45,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const CustomSideBar = (props: SideBarProps) => {
     return (
         <React.Fragment>
-            <Drawer
-                {...props}
-                variant="permanent"
-                onClick={undefined}
-                open={props.open}
-                sx={(theme) => ({
-                    '& .MuiPaper-root': {
-                        zIndex: (theme) => theme.zIndex.drawer - 200,
-                    }
-                })}
-            >
+            <Drawer {...props} variant="permanent" onClick={undefined} open={props.open}>
                 <DrawerHeader>
                     <Box>
                         <IconButton>
@@ -77,7 +67,7 @@ const CustomSideBar = (props: SideBarProps) => {
             </Drawer>
             <Backdrop
                 sx={[
-                    { zIndex: (theme) => theme.zIndex.drawer - 201,},
+                    { zIndex: (theme) => theme.zIndex.drawer - 1,},
                     ((theme) => ({
                         [theme.breakpoints.up('md')]: {
                             display: 'none',

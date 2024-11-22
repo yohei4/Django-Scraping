@@ -2,7 +2,7 @@ import { ListItemButton, ListItemIcon, ListItemText, Collapse, List } from "@mui
 import * as Icons from '@mui/icons-material';
 import { Icon } from "./Icon";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "./Link";
 
 export interface SideBarTreeItemProps {
     text?: string;

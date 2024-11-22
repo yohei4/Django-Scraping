@@ -1,11 +1,13 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { BaseTextFieldProps, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { Controller, UseControllerProps, useFormContext } from "react-hook-form";
+import { Controller, ControllerProps, UseControllerProps, useFormContext } from "react-hook-form";
 
 export type PasswordTextFieldProps = BaseTextFieldProps & UseControllerProps & {
     onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
     readOnly?: boolean;
+    maxLength?: number;
+    minLength?: number;
 };
 
 export const PasswordTextField = (props: PasswordTextFieldProps) => {
@@ -31,7 +33,7 @@ export const PasswordTextField = (props: PasswordTextFieldProps) => {
                     if (props.onChange) props.onChange(event);
                 };
                 return (
-                    <FormControl variant="outlined" margin={props.margin} fullWidth={props.fullWidth} >
+                    <FormControl variant="outlined" margin={props.margin} fullWidth={props.fullWidth} sx={props.sx} >
                         {
                             props.label ?
                             <InputLabel error={errors[props.name] ? true : props.error} htmlFor={props.id} required={props.required}>{props.label}</InputLabel> :
@@ -66,7 +68,11 @@ export const PasswordTextField = (props: PasswordTextFieldProps) => {
                                     </IconButton>
                                 </InputAdornment>
                             }
-                             />
+                            inputProps={{
+                                maxLength: props.maxLength,
+                                minLength: props.minLength,
+                            }}
+                        />
                         <FormHelperText error={errors[props.name] ? true : props.error}>
                             {errors[props.name]?.message as string ?? props.helperText}
                         </FormHelperText>

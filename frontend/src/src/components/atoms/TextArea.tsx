@@ -10,6 +10,8 @@ const StyledOutlinedInput = styled(OutlinedInput)(({ size }) => {
 export type TextAreaProps = BaseTextFieldProps & UseControllerProps & {
     label?: React.ReactNode;
     readOnly?: boolean;
+    maxLength?: number;
+    minLength?: number;
     onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
 }
 
@@ -52,6 +54,10 @@ export const TextArea: React.FC<TextAreaProps> = (props) => {
                             maxRows={props.maxRows}
                             required={props.required}
                             onChange={handleChange}
+                            inputProps={{
+                                maxLength: props.maxLength,
+                                minLength: props.minLength,
+                            }}
                         />
                         <FormHelperText error={errors[props.name] ? true : props.error}>
                             {errors[props.name]?.message as string ?? props.helperText}

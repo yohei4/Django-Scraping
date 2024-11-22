@@ -1,10 +1,10 @@
 import { TextFieldProps } from "@mui/material";
 import { TimeView, LocalizationProvider, TimePicker as MuiTimePicker } from "@mui/x-date-pickers";
-import moment, { Moment } from "moment";
 import { ChangeEvent } from "react";
-import { Controller, ControllerProps, UseControllerProps, useFormContext } from "react-hook-form";
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import 'moment/locale/ja';
+import { Controller, UseControllerProps, useFormContext } from "react-hook-form";
+import dayjs, { Dayjs } from "dayjs";
+import 'dayjs/locale/ja';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 export type TimePickerProps = TextFieldProps & UseControllerProps & {
     id?: string;
@@ -26,7 +26,7 @@ export const TimePicker = (props: TimePickerProps) => {
             disabled={props.disabled}
             defaultValue=''
             render={({ field, formState: { errors } }) => {
-                const handleChange = (value: Moment | null) => {
+                const handleChange = (value: Dayjs | null) => {
                     const event = {
                         target: {
                             name: field.name,
@@ -38,7 +38,7 @@ export const TimePicker = (props: TimePickerProps) => {
                 };
 
                 return (
-                    <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale='ja'>
+                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='ja' localeText={{ datePickerToolbarTitle: '時刻選択' }}>
                         <MuiTimePicker
                             {...field}
                             name={props.name}
@@ -47,15 +47,17 @@ export const TimePicker = (props: TimePickerProps) => {
                             readOnly={props.readOnly}
                             onChange={handleChange}
                             timeSteps={{ minutes: 1 }}
-                            value={field.value ? moment(field.value) : null}
-                            format={props.format}
-                            views={props.views}
+                            value={field.value ? dayjs(field.value) : null}
+                            format={props.format ?? 'HH:mm:ss'}
+                            views={props.views ?? ['hours', 'minutes', 'seconds']}
                             ampm={false}
+                            sx={props.sx}
                             slotProps={{
                                 textField: {
                                     id: props.id,
-                                    helperText: props.helperText,
-                                    error: props.error,
+                                    required: props.required,
+                                    helperText: errors[props.name]?.message as string ?? props.helperText,
+                                    error: errors[props.name] ? true : props.error,
                                 },
                                 field: {
                                     clearable: props.clearable,

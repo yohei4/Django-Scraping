@@ -49,7 +49,7 @@ export const AppLayout: React.FC = () => {
                 },
                 {
                     text: '写真一覧',
-                    path: '/',
+                    path: '/album',
                     icon: 'PhotoLibrary',
                 },
                 {

@@ -1,8 +1,8 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableProps, TableRow, Toolbar } from "@mui/material";
 import { GridValidRowModel } from "@mui/x-data-grid";
-import { GridBaseColDef } from "@mui/x-data-grid/internals";
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableProps, TableRow, Toolbar } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { GridBaseColDef } from "@mui/x-data-grid/internals";
 import { DangerButton } from "@components/atoms/DangerButton";
 import { DefaultButton } from "@components/atoms/DefaultButton";
 import { DynamicFormControl, DynamicFormControlProps } from "./DynamicFormControl";
@@ -110,7 +110,7 @@ export const EditDataTable = (props: EditDataTableProps) => {
                             key={field.id}
                         >
                             <TableCell align="center">
-                                <DangerButton aria-label="delete" sx={{ minWidth: 'auto' }} onClick={() => {handleDeleteRow(fieldIndex)}}>
+                                <DangerButton aria-label="delete" variant='contained' sx={{ minWidth: 'auto' }} onClick={() => {handleDeleteRow(fieldIndex)}}>
                                     <DeleteIcon />
                                 </DangerButton>
                             </TableCell>
@@ -158,7 +158,7 @@ export const EditDataTable = (props: EditDataTableProps) => {
                     <TableRow>
                         <Toolbar component='td'>
                             <Box>
-                                <DefaultButton startIconName='AddCircleOutline' sx={{ width: 'max-content' }} onClick={handleAppendRow}>行追加</DefaultButton>
+                                <DefaultButton startIconName='AddCircleOutline' variant='contained' sx={{ width: 'max-content' }} onClick={handleAppendRow}>行追加</DefaultButton>
                             </Box>
                         </Toolbar>
                     </TableRow>

@@ -1,7 +1,7 @@
-import { DynamicFormDangerDialog, DynamicFormDangerDialogProps, DynamicFormDangerFieldValues } from "@components/organisms/DynamicFormDangerDialog";
 import React, { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { CompleteDangerDialog } from "@components/molecules/CompleteDangerDialog";
+import { DynamicFormDangerDialog, DynamicFormDangerDialogProps, DynamicFormDangerFieldValues } from "@components/organisms/DynamicFormDangerDialog";
 
 export interface DeleteFormDialogProps<TFieldValues extends DynamicFormDangerFieldValues = DynamicFormDangerFieldValues> extends DynamicFormDangerDialogProps<TFieldValues> {
     open: boolean;

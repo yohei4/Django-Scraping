@@ -79,7 +79,7 @@ class ScarpingImage():
             self.driver.get(self.url)
 
             # 適当に下までスクロールしてる
-            for _ in range(2):
+            for _ in range(5):
                 self.driver.execute_script(f"window.scrollTo(0, document.body.scrollHeight)")
                 time.sleep(self.timeout) #サーバーの負荷を軽減するためのもの
 

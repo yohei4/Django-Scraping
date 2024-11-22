@@ -20,7 +20,6 @@ class UserImageView(APIView):
     def get(self, request: Request, token, id):
         user = request.user
         image = UserImage.objects.get(user=user, id=id)
-        headers = {key: value for key, value in request.headers.items()}
 
         # トークンチェック
         hash_input = f"{image.id}{user.id}{image.filename}{image.created_at}".encode('utf-8')

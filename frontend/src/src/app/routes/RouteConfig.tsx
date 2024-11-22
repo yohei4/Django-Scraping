@@ -6,6 +6,7 @@ import { ErrorHandle } from "@app/pages/ErrorHandle";
 import { AppLayout, AppLayoutLoader } from "@app/layout/AppLayout";
 import { Home, HomeLoader } from "@app/pages/Home";
 import { Scraping } from "@app/pages/Scraping";
+import { Album, AlbumLoader } from "@app/pages/Album";
 
 /**
  * ルート定義
@@ -58,12 +59,22 @@ export const routes: RouteObject[] = [
                 loader: HomeLoader,
             },
             {
+                id: 'Album',
+                path: '/album',
+                element: <Album />,
+                meta: {
+                    text: '画像一覧',
+                    icon: 'PhotoLibrary',
+                },
+                loader: AlbumLoader,
+            },
+            {
                 id: 'Scraping',
                 path: '/scraping',
                 element: <Scraping />,
                 meta: {
                     text: 'スクレイピング',
-                    icon: 'Home',
+                    icon: 'ImageSearch',
                 },
             },
         ]

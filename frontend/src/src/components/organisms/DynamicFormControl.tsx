@@ -1,9 +1,9 @@
 import React from "react";
-import { Control, FieldValues } from "react-hook-form";
+import { Control, FieldValues, UseFormReturn } from "react-hook-form";
 import { TimeView } from "@mui/x-date-pickers";
 import { CheckboxLabelProps } from "@components/atoms/CheckboxLabel";
-import { OutlinedTextFieldProps, OutlinedTextField } from "@components/atoms/OutlineTextField";
-import { MenuItemProps } from "@mui/material";
+import { OutlinedTextFieldProps, OutlinedTextField } from "@components/atoms/OutlinedTextField";
+import { MenuItemProps, TextFieldProps } from "@mui/material";
 import { Select, SelectProps } from "@components/atoms/Select";
 import { MultipleSelect, MultipleSelectProps } from "@components/atoms/MultipleSelect";
 import { PasswordTextField, PasswordTextFieldProps } from "@components/atoms/PasswordTextField";
@@ -16,11 +16,14 @@ import { TextArea, TextAreaProps } from "@components/atoms/TextArea";
 import { AsyncSelect, AsyncSelectProps } from "@components/atoms/AsyncSelect";
 import { LazyLoadedComboBox, LazyLoadedComboBoxProps } from "@components/atoms/LazyLoadedComboBox";
 import { ComboBox, ComboBoxProps } from "@components/atoms/ComboBox";
+import { PreLoadedComboBox, PreLoadedComboBoxProps } from "@components/atoms/PreLoadedComboBox";
+import { ReferenceField, ReferenceFieldProps } from "@components/organisms/ReferenceField";
+import { OutlinedNumberField, OutlinedNumberFieldProps } from "@components/atoms/OutlinedNumberField";
 
 type BaseFormControlProps<T extends { [key: string]: any } | undefined = any> = {
-    name?: keyof T;
+    name?: T extends undefined ? string : keyof T | (string & {});
     label?: React.ReactNode;
-    type: 'text'| 'password' | 'number' | 'date' | 'datetime-local' | 'time' | 'checkbox' | 'radio' | 'textarea' | 'select' | 'multiple-select' | 'combo-box' | 'lazy-loaded-combo-box' | 'free-solo' | 'async-free-solo' | 'async-select';
+    type: 'text'| 'password' | 'number' | 'date' | 'datetime-local' | 'time' | 'checkbox' | 'radio' | 'textarea' | 'select' | 'multiple-select' | 'combo-box' | 'lazy-loaded-combo-box' | 'pre-loaded-combo-box' | 'free-solo' | 'async-free-solo' | 'async-select';
     options?: MenuItemProps[];
     required?: boolean;
     disabled?: boolean;
@@ -31,7 +34,9 @@ type BaseFormControlProps<T extends { [key: string]: any } | undefined = any> = 
     startAdornmentInner?: React.ReactNode;
     endAdornmentInner?: React.ReactNode;
     helperText?: React.ReactNode;
+    reference?: boolean;
     onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
+    onBlur?: (event: React.FocusEvent<HTMLInputElement, Element>, methods?: UseFormReturn<any, any, undefined>) => void;
 }
 
 export type TextDynamicFormControlProps<T extends { [key: string]: any } | undefined = any> = BaseFormControlProps<T> & OutlinedTextFieldProps & {
@@ -42,7 +47,7 @@ export type PasswordDynamicFormControlProps<T extends { [key: string]: any } | u
     type: 'password';
 }
 
-export type NumberDynamicFormControlProps<T extends { [key: string]: any } | undefined = any> = BaseFormControlProps<T> & OutlinedTextFieldProps & {
+export type NumberDynamicFormControlProps<T extends { [key: string]: any } | undefined = any> = BaseFormControlProps<T> & OutlinedNumberFieldProps & {
     type: 'number';
 }
 
@@ -89,6 +94,10 @@ export type LazyLoadedComboBoxDynamicFormControlProps<T extends { [key: string]:
     type: 'lazy-loaded-combo-box';
 }
 
+export type PreLoadedComboBoxDynamicFormControlProps<T extends { [key: string]: any } | undefined = any> = BaseFormControlProps<T> & PreLoadedComboBoxProps & {
+    type: 'pre-loaded-combo-box';
+}
+
 export type AsyncFreeSoloDynamicFormControlProps<T extends { [key: string]: any } | undefined = any> = BaseFormControlProps<T> & AsyncFreeSoloProps & {
     type: 'async-free-solo';
 }
@@ -112,11 +121,17 @@ export type DynamicFormControlProps<T extends { [key: string]: any } | undefined
     MultipleSelectDynamicFormControlProps<T> |
     ComboBoxDynamicFormControlProps<T> |
     LazyLoadedComboBoxDynamicFormControlProps<T> |
+    PreLoadedComboBoxDynamicFormControlProps<T> |
     AsyncFreeSoloDynamicFormControlProps<T> |
     AsyncSelectDynamicFormControlProps<T>;
 
 export const DynamicFormControl = <T extends { [key: string]: any } | undefined = any>(props: DynamicFormControlProps<T>) => {
     const FormControls = () => {
+        if (props.reference) { // 参照の場合
+            const referenceFieldProps = props as ReferenceFieldProps;
+            return (<ReferenceField {...referenceFieldProps} />);
+        }
+
         switch(props.type) {
             case 'password':
                 const passwordProps = props as PasswordTextFieldProps;
@@ -145,6 +160,9 @@ export const DynamicFormControl = <T extends { [key: string]: any } | undefined 
             case 'lazy-loaded-combo-box':
                 const lazyLoadedComboBoxProps = props as LazyLoadedComboBoxProps;
                 return (<LazyLoadedComboBox {...lazyLoadedComboBoxProps} fullWidth />);
+            case 'pre-loaded-combo-box':
+                const preLoadedComboBoxProps = props as PreLoadedComboBoxProps;
+                return (<PreLoadedComboBox {...preLoadedComboBoxProps} fullWidth />);
             case 'multiple-select':
                 const multipleSelectProps = props as MultipleSelectProps;
                 return (<MultipleSelect {...multipleSelectProps} fullWidth />);
@@ -154,6 +172,9 @@ export const DynamicFormControl = <T extends { [key: string]: any } | undefined 
             case 'async-select':
                 const asyncSelectProps = props as AsyncSelectProps;
                 return (<AsyncSelect {...asyncSelectProps} fullWidth />);
+            case 'number':
+                const numberProps = props as OutlinedNumberFieldProps;
+                return (<OutlinedNumberField {...numberProps} type='text' fullWidth />);
             default:
                 const textProps = props as OutlinedTextFieldProps;
                 return (<OutlinedTextField {...textProps} fullWidth />);

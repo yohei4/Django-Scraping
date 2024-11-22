@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { DataGrid, DataGridProps, GridFooterContainer, GridRenderCellParams, GridRenderEditCellParams, GridTreeNodeWithRender, GridValidRowModel, useGridApiRef } from "@mui/x-data-grid";
 import { Box, Button } from "@mui/material";
+import { DataGrid, DataGridProps, GridFooterContainer, GridRenderCellParams, GridRenderEditCellParams, GridTreeNodeWithRender, GridValidRowModel, useGridApiRef } from "@mui/x-data-grid";
 import { GridBaseColDef, GridSlotsComponentsProps } from "@mui/x-data-grid/internals";
 import { DynamicFormControl, DynamicFormControlProps } from "./DynamicFormControl";
 
@@ -31,7 +31,7 @@ declare module '@mui/x-data-grid' {
     }
 }
 
-const footer = (props: NonNullable<GridSlotsComponentsProps['footer']>) => {
+const A = (props: NonNullable<GridSlotsComponentsProps['footer']>) => {
     return (
         <GridFooterContainer>
             <Box>
@@ -58,7 +58,7 @@ export const EditDataGrid = (props: EditDataGridProps) => {
     const control = useFormContext();
     const apiRef = useGridApiRef();
 
-    const { fields, append, remove } = useFieldArray({
+    const { fields, append, remove, update } = useFieldArray({
         control: control.control,
         name: props.name,
     });
@@ -146,7 +146,7 @@ export const EditDataGrid = (props: EditDataGridProps) => {
                 ...props.sx,
             }}
             slots={{
-                footer: footer,
+                footer: A,
             }}
             slotProps={{
                 footer: { onAppendRowClick: handleAppendRow, onDeleteRowClick: handleDeleteRow }

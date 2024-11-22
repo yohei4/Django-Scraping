@@ -32,8 +32,8 @@ export const Login = () => {
         setMessage(undefined);
         await post(LOGIN, data)
             .then((res) => {
-                setCookie('access', res.data.access);
-                setCookie('refresh', res.data.refresh);
+                setCookie('access', res.data.access, { path: '/', sameSite: 'none', secure: true });
+                setCookie('refresh', res.data.refresh, { path: '/', sameSite: 'none', secure: true });
                 navigate('/');
             })
             .catch(({ response: res }) => {

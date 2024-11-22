@@ -1,4 +1,3 @@
-// src/types/flickr-justified-gallery.d.ts
 declare module 'flickr-justified-gallery' {
     export interface fjGalleryOptions {
         itemSelector?: string;
